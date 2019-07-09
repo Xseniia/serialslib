@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>myapp</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <style media="screen">
+      nav {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+      }
+      .nav-link {
+        font-size: 25px;
+        width: 160px;
+        height: 50px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <nav>
+      <div class="nav-link">
+        <%= link_to 'Serials', serials_path, class: 'nav-link' %>
+      </div>
+      <div class="nav-link">
+        <%= link_to 'Users', users_path, class: 'nav-link' %>
+      </div>    
+    </nav>
+    <%= yield %>
+  </body>
+</html>
