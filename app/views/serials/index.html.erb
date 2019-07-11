@@ -17,8 +17,10 @@
         <td><%= serial.title %></td>
         <td><%= serial.since %></td>
         <td><%= link_to 'Show', serial %></td>
-        <td><%= link_to 'Edit', edit_serial_path(serial) %></td>
-        <td><%= link_to 'Destroy', serial, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if current_user && current_user.admin %>
+          <td><%= link_to 'Edit', edit_serial_path(serial) %></td>
+          <td><%= link_to 'Destroy', serial, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
