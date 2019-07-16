@@ -1,0 +1,11 @@
+<h4><%= @season.serial.title %></h4>
+<h2>Season <%= @season.season_count %></h2>
+
+<strong>Episodes:</strong>
+<ul>
+  <% @season.episodes.each do |episode| %>
+    <li>Episode <%= episode.count %> <%= link_to 'Show', serial_episode_path(episode) %></li>
+  <% end %>
+</ul>
+
+<%= link_to 'Back', @season.serial %>

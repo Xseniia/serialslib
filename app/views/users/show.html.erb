@@ -23,5 +23,29 @@
   <%= @user.email %>
 </p>
 
+<% if current_user && current_user.admin == true %>
+  <p>
+    <strong>Admin:</strong>
+    <%= @user.admin %>
+  </p>
+<% end %>
+
+<br>
+
+<p>
+  <strong>Favourite serials:</strong>
+  <ul>
+    <% @user.serials.each do |serial| %>
+      <li>
+        <%= link_to serial do %>
+          <%= serial.title %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</p>
+
+<br>
+
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

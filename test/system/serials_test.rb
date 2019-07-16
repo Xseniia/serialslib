@@ -14,7 +14,7 @@ class SerialsTest < ApplicationSystemTestCase
     visit serials_url
     click_on "New Serial"
 
-    fill_in "Since", with: @serial.since
+    fill_in "Year of premiere", with: @serial.year_of_premiere
     fill_in "Title", with: @serial.title
     click_on "Create Serial"
 
@@ -26,7 +26,7 @@ class SerialsTest < ApplicationSystemTestCase
     visit serials_url
     click_on "Edit", match: :first
 
-    fill_in "Since", with: @serial.since
+    fill_in "Year of premiere", with: @serial.year_of_premiere
     fill_in "Title", with: @serial.title
     click_on "Update Serial"
 

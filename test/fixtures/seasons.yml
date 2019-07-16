@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  serial_id: one
+  title: MyString
+  is_full: false
+
+two:
+  serial_id: two
+  title: MyString
+  is_full: false

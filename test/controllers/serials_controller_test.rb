@@ -17,7 +17,7 @@ class SerialsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create serial" do
     assert_difference('Serial.count') do
-      post serials_url, params: { serial: { since: @serial.since, title: @serial.title } }
+      post serials_url, params: { serial: { year_of_premiere: @serial.year_of_premiere, title: @serial.title } }
     end
 
     assert_redirected_to serial_url(Serial.last)
@@ -34,7 +34,7 @@ class SerialsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update serial" do
-    patch serial_url(@serial), params: { serial: { since: @serial.since, title: @serial.title } }
+    patch serial_url(@serial), params: { serial: { year_of_premiere: @serial.year_of_premiere, title: @serial.title } }
     assert_redirected_to serial_url(@serial)
   end
 

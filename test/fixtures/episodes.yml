@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  season: one
+  count: 1
+  title: MyString
+  likes: 1
+  dislikes: 1
+
+two:
+  season: two
+  count: 1
+  title: MyString
+  likes: 1
+  dislikes: 1

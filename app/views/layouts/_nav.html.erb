@@ -11,6 +11,7 @@
   </div>
   <div class="nav-user-options">
     <% if current_user %>
+      <%= link_to 'My account', current_user %>
       <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
     <% else %>
       <%= link_to 'Sign in', new_user_session_path %>

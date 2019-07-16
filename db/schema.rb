@@ -10,18 +10,46 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_11_090530) do
+ActiveRecord::Schema.define(version: 2019_07_15_122113) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
 
-  create_table "serials", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "episodes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "season_id"
+    t.integer "count"
     t.string "title"
-    t.integer "since"
+    t.integer "likes"
+    t.integer "dislikes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["season_id"], name: "index_episodes_on_season_id"
+  end
+
+  create_table "favourites", id: false, force: :cascade do |t|
+    t.uuid "serial_id", null: false
+    t.uuid "user_id", null: false
+    t.index ["serial_id"], name: "index_favourites_on_serial_id"
+    t.index ["user_id"], name: "index_favourites_on_user_id"
+  end
+
+  create_table "seasons", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "serial_id"
+    t.integer "season_count"
+    t.boolean "is_full"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["serial_id"], name: "index_seasons_on_serial_id"
+  end
+
+  create_table "serials", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "title"
+    t.integer "year_of_premiere"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "description"
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -41,4 +69,8 @@ ActiveRecord::Schema.define(version: 2019_07_11_090530) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "episodes", "seasons"
+  add_foreign_key "favourites", "serials"
+  add_foreign_key "favourites", "users"
+  add_foreign_key "seasons", "serials"
 end

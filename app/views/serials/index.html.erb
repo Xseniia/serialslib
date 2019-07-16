@@ -1,12 +1,11 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Serials</h1>
 
 <table>
   <thead>
     <tr>
       <th>Title</th>
-      <th>Since</th>
+      <th>Year of premiere</th>
+      <th>Description</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -15,7 +14,8 @@
     <% @serials.each do |serial| %>
       <tr>
         <td><%= serial.title %></td>
-        <td><%= serial.since %></td>
+        <td><%= serial.year_of_premiere %></td>
+        <td><%= truncate(serial.description, :length => 70) %></td>
         <td><%= link_to 'Show', serial %></td>
         <% if current_user && current_user.admin %>
           <td><%= link_to 'Edit', edit_serial_path(serial) %></td>

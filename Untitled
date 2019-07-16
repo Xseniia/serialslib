@@ -1,0 +1,1 @@
+insert into seasons (serial_id, season_count, is_full, created_at, updated_at) values ('a97756e9-4193-4f03-8e7a-cea4bbefe648', 6, true, current_timestamp, current_timestamp);

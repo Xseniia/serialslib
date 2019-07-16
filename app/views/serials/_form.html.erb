@@ -17,8 +17,13 @@
   </div>
 
   <div class="field">
-    <%= form.label :since %>
-    <%= form.number_field :since %>
+    <%= form.label :year_of_premiere %>
+    <%= form.number_field :year_of_premiere %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description, size: '85x8'  %>
   </div>
 
   <div class="actions">

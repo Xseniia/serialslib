@@ -1,0 +1,4 @@
+<h4>Season <%= @episode.season.season_count %></h4>
+<h2>Episode <%= @episode.count %>. <%= @episode.title %></h2>
+
+<%= link_to 'Back', serial_season_path(@episode.season) %>
