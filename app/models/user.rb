@@ -5,6 +5,9 @@ class User < ApplicationRecord
   has_many :favourites
   has_many :serials, through: :favourites
 
+  has_many :comments
+  has_many :episodes, through: :comments
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   require 'date'

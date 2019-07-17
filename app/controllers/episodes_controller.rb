@@ -7,6 +7,6 @@ class EpisodesController < ApplicationController
   private
 
   def set_episode
-    @episode = Episode.find(params[:serial_id])
+    @episode = Episode.find(params[:id])
   end
 end

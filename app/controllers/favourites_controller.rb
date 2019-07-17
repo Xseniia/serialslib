@@ -6,12 +6,14 @@ class FavouritesController < ApplicationController
     @fav.serial_id = params[:serial_id]
     @fav.user_id = current_user.id
 
+    @serial = Serial.find_by id: params[:serial_id]
+
     respond_to do |format|
       if @fav.save
-        format.html { redirect_to current_user, notice: 'Serial was successfully added to your favourites.' }
+        format.html { redirect_to @serial, notice: 'Serial was successfully added to your favourites.' }
         format.json { render :show, status: :created, location: current_user }
       else
-        format.html { redirect_to current_user, alert: 'Serial is already in your favourites list.' }
+        format.html { rredirect_to @serial, alert: 'Serial is already in your favourites list.' }
         format.json { render json: @fav.errors, status: :unprocessable_entity }
       end
     end
@@ -22,7 +24,7 @@ class FavouritesController < ApplicationController
     current_user.serials.delete(@serial)
 
     respond_to do |format|
-      format.html { redirect_to current_user, notice: 'Serial was successfully removed from favourites.' }
+      format.html { redirect_to @serial, notice: 'Serial was successfully removed from favourites.' }
       format.json { head :no_content }
     end
   end

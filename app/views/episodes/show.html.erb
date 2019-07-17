@@ -1,4 +1,36 @@
 <h4>Season <%= @episode.season.season_count %></h4>
 <h2>Episode <%= @episode.count %>. <%= @episode.title %></h2>
+<br>
 
-<%= link_to 'Back', serial_season_path(@episode.season) %>
+<h3>Comments:</h3>
+
+<% comments = Comment.where(episode_id: @episode.id) %>
+<% if comments == [] %>
+  <p>No comments.</p>
+<% else %>
+  <% comments.each do |comment| %>
+    <div class="comment">
+      <h5>
+        <%= User.where(id: comment.user_id).first.email %>
+      </h5>
+      <p>
+        <%= comment.content %>
+      </p>
+      <p>
+        <%= comment.created_at.strftime("%F") %>
+        <br>
+        <%= comment.created_at.strftime("%T") %>
+      </p>
+    </div>
+    <% if current_user && current_user.admin %>
+      <%= link_to 'Delete comment', episode_comment_path(@episode, comment), method: :delete, data: { confirm: 'Are you sure?' }  %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<br>
+<h3>Add a comment</h3>
+
+<%= render partial: "episodes/comments/form"  %>
+
+<%= link_to 'Back', serial_season_path(@episode.season.serial.id, @episode.season.id) %>

@@ -5,8 +5,15 @@ Rails.application.routes.draw do
 
   resources :serials do
     resources :seasons
-    resources :episodes
     resources :favourites, except: [:index]
+  end
+
+  resources :seasons, only: [:show] do
+    resources :episodes
+  end
+
+  resources :episodes, only: [:show] do
+    resources :comments
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
