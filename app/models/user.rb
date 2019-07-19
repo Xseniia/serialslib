@@ -20,4 +20,7 @@ class User < ApplicationRecord
       errors.add(:date_of_birth, "Date of birth musn't be greater than the current date.")
     end
   end
+
+  scope :admin, -> { where is_admin: true }
+  scope :user, -> { where is_admin: false }
 end

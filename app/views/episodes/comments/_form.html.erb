@@ -1,15 +1,18 @@
+
+
 <%= form_for([@episode, @episode.comments.build]) do |f| %>
 
   <%= f.hidden_field :user_id, value: current_user.id %>
   <%= f.hidden_field :episode_id, value: @episode.id %>
 
-  <%= current_user.first_name %> <%= current_user.last_name %>
+  <label for="create-comment-text-area">
+    <%= current_user.email %>
+  </label>
   <p>
-    <% f.label :content %>
-    <%= f.text_area :content, size: '85x4' %>
+    <%= f.text_area :content, size: '85x4', class: "form-control", id: "create-comment-text-area" %>
   </p>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class: "btn btn-light" %>
   </div>
 <% end %>

@@ -1,3 +1,31 @@
 // Place all the styles related to the Serials controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.serials-container {
+
+  display: flex;
+  flex-direction: row;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+
+  .card {
+    margin: 15px;
+  }
+
+}
+
+.serial-container {
+
+  .title-block {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .btn {
+      line-height: 40px;
+    }
+
+  }
+
+}

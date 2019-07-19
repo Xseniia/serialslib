@@ -1,11 +1,17 @@
-<h4><%= @season.serial.title %></h4>
-<h2>Season <%= @season.season_count %></h2>
+<div class="serial-container">
+    <h4><%= @season.serial.title %></h4>
+    <h2 class="display-5">Season <%= @season.season_count %></h2>
+    <br>
+    <strong>Episodes:</strong>
+    <ul class="list">
+      <% @season.episodes.each do |episode| %>
+        <li class="list-item">
+          <%= link_to season_episode_path(@season, episode), class: "badge badge-light" do%>
+            Episode <%= episode.count %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+</div>
 
-<strong>Episodes:</strong>
-<ul>
-  <% @season.episodes.each do |episode| %>
-    <li>Episode <%= episode.count %> <%= link_to 'Show', season_episode_path(@season, episode) %></li>
-  <% end %>
-</ul>
-
-<%= link_to 'Back', @season.serial %>
+<%= link_to 'Back', @season.serial, class: "btn btn-light" %>
