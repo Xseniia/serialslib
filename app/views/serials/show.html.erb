@@ -3,13 +3,17 @@
     <h2 class="display-5"><%= @serial.title %></h2>
 
     <% if current_user %>
-      <% favourite = Favourite.where(user_id: current_user.id, serial_id: @serial.id) %>
-      <% if favourite == [] %>
-        <%= link_to 'Add to favourites', serial_favourites_path(@serial), method: :create, class: "btn btn-light"  %>
-      <% else %>
-        <%= link_to 'Remove from favourites', serial_favourite_path(@serial, current_user), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-light" %>
+    <div class="">
+      <div class="">
+        <% favourite = Favourite.where(user_id: current_user.id, serial_id: @serial.id) %>
+        <% if favourite == [] %>
+          <%= link_to 'Add to favourites', serial_favourites_path(@serial), method: :create, class: "btn btn-light"  %>
+        <% else %>
+          <%= link_to 'Remove from favourites', serial_favourite_path(@serial, current_user), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-light" %>
+        <% end %>
+      </div>
       <% end %>
-    <% end %>
+    </div>
 
   </div>
 
@@ -18,20 +22,24 @@
     <%= @serial.year_of_premiere %>
   </p>
 
-  <p><%= @serial.description %></p>
-  <hr class="my-4">
   <p>
-    <h3>Seasons:</h3>
-    <ul class="list">
-      <% @serial.seasons.each do |season| %>
-        <li class="list-item">
-          <%= link_to serial_season_path(@serial, season), class: "badge badge-light" do %>
-            Season <%= season.season_count %>
-          <% end %>
-        </li>
-      <% end %>
-    </ul>
+    <strong>County of origin:</strong>
+    <%= Country.where(id: @serial.country_id)[0].country_name %>
   </p>
+
+  <p><%= @serial.description %></p>
+
+  <hr class="my-4">
+  <h3>Seasons:</h3>
+  <ul class="list">
+    <% @serial.seasons.ordered_by_count.each do |season| %>
+      <li class="list-item">
+        <%= link_to serial_season_path(@serial, season), class: "badge badge-light" do %>
+          Season <%= season.season_count %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
   <%= link_to 'Edit', edit_serial_path(@serial), class: "btn btn-light" %>
   <%= link_to 'Back', serials_path, class: "btn btn-light" %>
 </div>

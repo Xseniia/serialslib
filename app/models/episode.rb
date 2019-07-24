@@ -3,4 +3,6 @@ class Episode < ApplicationRecord
 
   has_many :comments
   has_many :users, through: :comments
+
+  scope :ordered_by_count, -> { order(count: :asc) }
 end

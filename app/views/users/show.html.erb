@@ -23,6 +23,15 @@
   <%= @user.email %>
 </p>
 
+<p>
+  <strong>Country:</strong>
+  <%= Country.where(id: @user.country_id).first.country_name %>
+</p>
+
+<% if current_user && current_user.confirmed_at == nil %>
+  <p>Please confirm your email.</p>
+<% end %>
+
 <% if current_user && current_user.admin == true %>
   <p>
     <strong>Admin:</strong>
@@ -34,15 +43,20 @@
 
 <p>
   <strong>Favourite serials:</strong>
-  <ul>
-    <% @user.serials.each do |serial| %>
-      <li>
-        <%= link_to serial do %>
-          <%= serial.title %>
+    <% if @user.serials != [] %>
+      <ul>
+        <% @user.serials.each do |serial| %>
+          <li>
+            <%= link_to serial do %>
+              <%= serial.title %>
+            <% end %>
+          </li>
         <% end %>
-      </li>
+      </ul>
+    <% else %>
+      <p>Nothing was added to favourites yet. </p>
     <% end %>
-  </ul>
+
 </p>
 
 <br>

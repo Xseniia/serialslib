@@ -4,7 +4,7 @@
     <br>
     <strong>Episodes:</strong>
     <ul class="list">
-      <% @season.episodes.each do |episode| %>
+      <% @season.episodes.ordered_by_count.each do |episode| %>
         <li class="list-item">
           <%= link_to season_episode_path(@season, episode), class: "badge badge-light" do%>
             Episode <%= episode.count %>

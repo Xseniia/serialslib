@@ -1,11 +1,21 @@
-<h1>Serials</h1>
+<div class="">
+  <div class="">
+    <h1>Serials</h1>
+  </div>
+  <div class="">
+    
+  </div>
+</div>
+
 
 <br>
 
 <div class="serials-container">
   <% @serials.each do |serial| %>
   <div class="card" style="width: 20rem;">
-    <img src="#" class="card-img-top" alt="<%= serial.title %>" >
+    <% if image_tag("#{serial.id}.png") != nil %>
+      <%= image_tag("#{serial.id}.png", class: "card-img-top", width: '100%', alt: serial.title) %>
+    <% end %>
     <div class="card-body">
       <h5 class="card-title"><%= serial.title %></h5>
       <h6 class="card-subtitle mb-2 text-muted"><%= serial.year_of_premiere %></h6>
@@ -22,4 +32,6 @@
 
 <br>
 
-<%= link_to 'New Serial', new_serial_path, class: "btn btn-light" %>
+<% if current_user && current_user.admin %>
+  <%= link_to 'New Serial', new_serial_path, class: "btn btn-light" %>
+<% end %>

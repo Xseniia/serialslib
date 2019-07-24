@@ -8,11 +8,13 @@ class User < ApplicationRecord
   has_many :comments
   has_many :episodes, through: :comments
 
-  devise :database_authenticatable, :registerable,
+  belongs_to :countries, :optional => true
+
+  devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :validatable
   require 'date'
 
-  validates :gender, acceptance: { accept: ['Male', 'Female', 'male', 'female'], case_sensitive: false, message: "can only be 'Male' or 'Female'."  }
+  validates :gender, acceptance: { accept: ['Male', 'Female'], case_sensitive: false, message: "can only be 'Male' or 'Female'."  }
   validate :date_validation
 
   def date_validation
@@ -21,6 +23,10 @@ class User < ApplicationRecord
     end
   end
 
-  scope :admin, -> { where is_admin: true }
-  scope :user, -> { where is_admin: false }
+  scope :is_admin, -> { where admin: true }
+  scope :is_user, -> { where admin: false }
+
+  scope :ordered_by_first_name, -> { order(first_name: :asc) }
+  scope :ordered_by_last_name, -> { order(last_name: :asc) }
+
 end

@@ -6,7 +6,13 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    if params[:need] == 'adm'
+      @users = User.is_admin
+    elsif params[:need] == 'usr'
+      @users = User.is_user
+    else
+      @users = User.all
+    end
   end
 
   # GET /users/1
