@@ -3,7 +3,7 @@
 3. docker-compose build
 4. docker-compose up
 
-In docker rails bash: 
-  rake db:create 
-  rake db:migrate
-  rake db:setup
+5. In docker rails bash: 
+  1) rake db:create 
+  2) rake db:migrate
+  3) rake db:setup
