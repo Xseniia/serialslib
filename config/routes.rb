@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root to: 'serials#index'
-  devise_for :users, controllers: { confirmations: 'confirmations' }
+  devise_for :users, controllers: { confirmations: 'confirmations', omniauth_callbacks: 'omniauth_callbacks' }
   resources :users
 
   resources :serials do

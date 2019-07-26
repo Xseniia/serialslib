@@ -32,6 +32,10 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
+# Use omniauth for authentication through Github
+gem 'omniauth'
+gem 'omniauth-github'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
