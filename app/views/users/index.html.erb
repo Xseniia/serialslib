@@ -4,7 +4,6 @@
 <% if current_user && current_user.admin %>
   <%= link_to 'All', users_path, class: "btn btn-light" %>
   <%= link_to 'Admins', users_path(need: 'adm'), class: "btn btn-light" %>
-  <%= link_to 'Users', users_path(need: 'usr'), class: "btn btn-light" %>
 <% end %>
 
 <br><br>

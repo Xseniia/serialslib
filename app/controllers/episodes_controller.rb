@@ -1,8 +1,9 @@
-class EpisodesController < ApplicationController
-  before_action :set_episode, only: [:show, :destroy]
+# frozen_string_literal: true
 
-  def show
-  end
+class EpisodesController < ApplicationController # :nodoc:
+  before_action :set_episode, only: %i[show destroy]
+
+  def show; end
 
   private
 

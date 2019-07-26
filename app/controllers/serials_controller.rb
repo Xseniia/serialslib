@@ -1,5 +1,7 @@
-class SerialsController < ApplicationController
-  before_action :set_serial, only: [:show, :edit, :update, :destroy]
+# frozen_string_literal: true
+
+class SerialsController < ApplicationController # :nodoc:
+  before_action :set_serial, only: %i[show edit update destroy]
 
   # GET /serials
   # GET /serials.json
@@ -9,8 +11,7 @@ class SerialsController < ApplicationController
 
   # GET /serials/1
   # GET /serials/1.json
-  def show
-  end
+  def show; end
 
   # GET /serials/new
   def new
@@ -18,8 +19,7 @@ class SerialsController < ApplicationController
   end
 
   # GET /serials/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /serials
   # POST /serials.json
@@ -62,13 +62,14 @@ class SerialsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_serial
-      @serial = Serial.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def serial_params
-      params.require(:serial).permit(:title, :year_of_premiere, :description, :country_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_serial
+    @serial = Serial.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def serial_params
+    params.require(:serial).permit(:title, :year_of_premiere, :description, :country_id)
+  end
 end

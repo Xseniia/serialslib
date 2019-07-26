@@ -1,8 +1,9 @@
-class SeasonsController < ApplicationController
-  before_action :set_season, only: [:show, :destroy]
+# frozen_string_literal: true
 
-  def show
-  end
+class SeasonsController < ApplicationController # :nodoc:
+  before_action :set_season, only: %i[show destroy]
+
+  def show; end
 
   private
 
