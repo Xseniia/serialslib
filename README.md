@@ -7,3 +7,4 @@
   1) rake db:create 
   2) rake db:migrate
   3) rake db:setup
+  4) rake db:seed
