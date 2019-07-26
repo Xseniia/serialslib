@@ -15,7 +15,6 @@ ActiveRecord::Schema.define(version: 2019_07_24_092958) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
-  enable_extension "uuid-ossp"
 
   create_table "comments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id", null: false
@@ -61,13 +60,6 @@ ActiveRecord::Schema.define(version: 2019_07_24_092958) do
     t.index ["serial_id"], name: "index_seasons_on_serial_id"
   end
 
-  create_table "serial_countries", id: false, force: :cascade do |t|
-    t.uuid "serial_id", null: false
-    t.uuid "country_id", null: false
-    t.index ["country_id"], name: "index_serial_countries_on_country_id"
-    t.index ["serial_id"], name: "index_serial_countries_on_serial_id"
-  end
-
   create_table "serials", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "title"
     t.integer "year_of_premiere"
@@ -90,7 +82,7 @@ ActiveRecord::Schema.define(version: 2019_07_24_092958) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.boolean "admin", default: false
-    t.uuid "country_id", null: false
+    t.uuid "country_id"
     t.string "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
@@ -107,7 +99,5 @@ ActiveRecord::Schema.define(version: 2019_07_24_092958) do
   add_foreign_key "favourites", "serials"
   add_foreign_key "favourites", "users"
   add_foreign_key "seasons", "serials"
-  add_foreign_key "serial_countries", "countries"
-  add_foreign_key "serial_countries", "serials"
   add_foreign_key "users", "countries"
 end

@@ -24,7 +24,7 @@
 
   <p>
     <strong>County of origin:</strong>
-    <%= Country.where(id: @serial.country_id)[0].country_name %>
+    <%= @serial.country_id.blank? ? 'Wasn\'t mentioned.' : Country.where(id: @serial.country_id)[0].country_name %>
   </p>
 
   <p><%= @serial.description %></p>
