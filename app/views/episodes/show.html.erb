@@ -7,8 +7,7 @@
 
   <br>
 
-  <% comments = Comment.where(episode_id: @episode.id) %>
-  <% if comments == [] %>
+  <% if Comment.where(episode_id: @episode.id) == [] %>
     <p>No comments.</p>
   <% else %>
     <% comments.each do |comment| %>
@@ -17,7 +16,7 @@
       <div class="card-body">
         <div class="card-user-info">
           <h5 class="card-title"><%= User.where(id: comment.user_id).first.email %></h5>
-          <% if current_user && current_user.admin %>
+          <% if current_user&.admin %>
             <%= link_to 'Delete comment', episode_comment_path(@episode, comment), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-light"  %>
           <% end %>
         </div>

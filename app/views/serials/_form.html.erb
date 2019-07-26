@@ -1,15 +1,5 @@
 <%= form_with(model: serial, local: true) do |form| %>
-  <% if serial.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(serial.errors.count, "error") %> prohibited this serial from being saved:</h2>
-
-      <ul>
-      <% serial.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render "layouts/errors", resource: serial %>
 
   <div class="field">
     <%= form.label :title %>
