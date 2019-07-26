@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: 'pages#home'
+  root to: 'serials#index'
   devise_for :users, controllers: { confirmations: 'confirmations' }
   resources :users
 

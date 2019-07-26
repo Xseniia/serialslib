@@ -23,10 +23,12 @@
   <%= @user.email %>
 </p>
 
-<p>
-  <strong>Country:</strong>
-  <%= Country.where(id: @user.country_id).first.country_name %>
-</p>
+<% if @user&.country_id %>
+  <p>
+    <strong>Country:</strong>
+    <%= Country.where(id: @user.country_id).first.country_name %>
+  </p>
+<% end %>
 
 <% if current_user && current_user.confirmed_at == nil %>
   <p>Please confirm your email.</p>

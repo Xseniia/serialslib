@@ -3,7 +3,7 @@
     <h1>Serials</h1>
   </div>
   <div class="">
-    
+
   </div>
 </div>
 
@@ -13,8 +13,8 @@
 <div class="serials-container">
   <% @serials.each do |serial| %>
   <div class="card" style="width: 20rem;">
-    <% if image_tag("#{serial.id}.png") != nil %>
-      <%= image_tag("#{serial.id}.png", class: "card-img-top", width: '100%', alt: serial.title) %>
+    <% if image_tag("#{serial.title}.png") != nil %>
+      <%= image_tag("#{serial.title}.png", class: "card-img-top", width: '100%', alt: serial.title) %>
     <% end %>
     <div class="card-body">
       <h5 class="card-title"><%= serial.title %></h5>
