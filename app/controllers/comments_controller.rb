@@ -1,5 +1,6 @@
-class CommentsController < ApplicationController
+# frozen_string_literal: true
 
+class CommentsController < ApplicationController # :nodoc:
   def new
     @comment = Comment.new
   end
@@ -13,7 +14,6 @@ class CommentsController < ApplicationController
   def destroy
     @episode = Episode.find_by id: params[:episode_id]
     @comment = Comment.find_by id: params[:id]
-
     @episode.comments.delete(@comment)
 
     respond_to do |format|
@@ -21,5 +21,4 @@ class CommentsController < ApplicationController
       format.json { head :no_content }
     end
   end
-
 end

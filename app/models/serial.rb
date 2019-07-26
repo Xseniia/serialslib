@@ -1,4 +1,6 @@
-class Serial < ApplicationRecord
+# frozen_string_literal: true
+
+class Serial < ApplicationRecord # :nodoc:
   require 'date'
 
   has_many :seasons, dependent: :destroy
@@ -14,5 +16,5 @@ class Serial < ApplicationRecord
 
   scope :order_by_year, -> { order(year_of_premiere, asc) }
   scope :order_by_title, -> { order(title, asc) }
-  scope :search_by_country, -> (id) { where country_id: id } 
+  scope :search_by_country, ->(id) { where country_id: id }
 end

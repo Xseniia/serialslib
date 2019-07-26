@@ -1,4 +1,6 @@
-class Episode < ApplicationRecord
+# frozen_string_literal: true
+
+class Episode < ApplicationRecord # :nodoc:
   belongs_to :season
 
   has_many :comments

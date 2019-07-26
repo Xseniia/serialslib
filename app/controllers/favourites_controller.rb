@@ -1,12 +1,11 @@
-class FavouritesController < ApplicationController
-  before_action only: [:show, :destroy]
+# frozen_string_literal: true
+
+class FavouritesController < ApplicationController # :nodoc:
+  before_action only: %i[show destroy]
 
   def create
-    @fav = Favourite.new
-    @fav.serial_id = params[:serial_id]
-    @fav.user_id = current_user.id
-
     @serial = Serial.find_by id: params[:serial_id]
+    @fav = Favourite.new(serial_id: params[:serial_id], user_id: current_user.id)
 
     respond_to do |format|
       if @fav.save
@@ -28,5 +27,4 @@ class FavouritesController < ApplicationController
       format.json { head :no_content }
     end
   end
-
 end

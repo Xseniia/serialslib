@@ -1,4 +1,6 @@
-class Season < ApplicationRecord
+# frozen_string_literal: true
+
+class Season < ApplicationRecord # :nodoc:
   belongs_to :serial
   has_many :episodes, dependent: :destroy
 
