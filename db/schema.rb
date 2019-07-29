@@ -10,17 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_26_090127) do
+ActiveRecord::Schema.define(version: 2019_07_29_095006) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
-  create_table "comments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "user_id", null: false
-    t.uuid "episode_id", null: false
+  create_table "comments", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "episode_id", null: false
     t.text "content", null: false
-    t.uuid "comment_id"
+    t.bigint "comment_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["comment_id"], name: "index_comments_on_comment_id"
@@ -28,14 +28,13 @@ ActiveRecord::Schema.define(version: 2019_07_26_090127) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-  create_table "countries", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "countries", force: :cascade do |t|
     t.string "country_name", null: false
     t.string "shortcut", limit: 2, null: false
   end
 
-  create_table "episodes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "season_id"
-    t.integer "count"
+  create_table "episodes", force: :cascade do |t|
+    t.bigint "season_id"
     t.string "title"
     t.integer "likes"
     t.integer "dislikes"
@@ -45,31 +44,42 @@ ActiveRecord::Schema.define(version: 2019_07_26_090127) do
   end
 
   create_table "favourites", id: false, force: :cascade do |t|
-    t.uuid "serial_id", null: false
-    t.uuid "user_id", null: false
+    t.bigint "serial_id", null: false
+    t.bigint "user_id", null: false
     t.index ["serial_id"], name: "index_favourites_on_serial_id"
     t.index ["user_id"], name: "index_favourites_on_user_id"
   end
 
-  create_table "seasons", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "serial_id"
-    t.integer "season_count"
+  create_table "genres", force: :cascade do |t|
+    t.string "title", null: false
+  end
+
+  create_table "seasons", force: :cascade do |t|
+    t.bigint "serial_id"
     t.boolean "is_full"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["serial_id"], name: "index_seasons_on_serial_id"
   end
 
-  create_table "serials", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "serial_genres", id: false, force: :cascade do |t|
+    t.bigint "serial_id", null: false
+    t.bigint "genre_id", null: false
+    t.index ["genre_id"], name: "index_serial_genres_on_genre_id"
+    t.index ["serial_id"], name: "index_serial_genres_on_serial_id"
+  end
+
+  create_table "serials", force: :cascade do |t|
     t.string "title"
     t.integer "year_of_premiere"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "description"
-    t.uuid "country_id"
+    t.bigint "country_id"
+    t.index ["country_id"], name: "index_serials_on_country_id"
   end
 
-  create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
     t.string "gender"
@@ -82,7 +92,7 @@ ActiveRecord::Schema.define(version: 2019_07_26_090127) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.boolean "admin", default: false
-    t.uuid "country_id"
+    t.bigint "country_id"
     t.string "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
@@ -101,5 +111,7 @@ ActiveRecord::Schema.define(version: 2019_07_26_090127) do
   add_foreign_key "favourites", "serials"
   add_foreign_key "favourites", "users"
   add_foreign_key "seasons", "serials"
+  add_foreign_key "serial_genres", "genres"
+  add_foreign_key "serial_genres", "serials"
   add_foreign_key "users", "countries"
 end
