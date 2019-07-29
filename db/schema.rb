@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 2019_07_29_095006) do
-=======
-ActiveRecord::Schema.define(version: 2019_07_26_143001) do
->>>>>>> fb73890d6693f73cb907afeb158534cd208ce4ec
+ActiveRecord::Schema.define(version: 2019_07_29_115742) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -66,7 +62,6 @@ ActiveRecord::Schema.define(version: 2019_07_26_143001) do
     t.index ["serial_id"], name: "index_seasons_on_serial_id"
   end
 
-<<<<<<< HEAD
   create_table "serial_genres", id: false, force: :cascade do |t|
     t.bigint "serial_id", null: false
     t.bigint "genre_id", null: false
@@ -74,8 +69,6 @@ ActiveRecord::Schema.define(version: 2019_07_26_143001) do
     t.index ["serial_id"], name: "index_serial_genres_on_serial_id"
   end
 
-=======
->>>>>>> fb73890d6693f73cb907afeb158534cd208ce4ec
   create_table "serials", force: :cascade do |t|
     t.string "title"
     t.integer "year_of_premiere"
@@ -105,6 +98,7 @@ ActiveRecord::Schema.define(version: 2019_07_26_143001) do
     t.datetime "confirmation_sent_at"
     t.string "provider"
     t.string "uid"
+    t.string "avatar"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["country_id"], name: "index_users_on_country_id"
     t.index ["email"], name: "index_users_on_email", unique: true

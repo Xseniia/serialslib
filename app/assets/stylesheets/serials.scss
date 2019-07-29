@@ -17,6 +17,16 @@
 
 .serial-container {
 
+  .serial-img-description-container {
+    display: flex;
+    flex-direction: row;
+
+    .serial-body {
+      padding-left: 20px;
+    }
+
+  }
+
   .title-block {
     display: flex;
     flex-direction: row;

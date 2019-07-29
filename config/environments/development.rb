@@ -35,16 +35,16 @@ Rails.application.configure do
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_deliveries = true
-  config.action_mailer.default_url_options = { address: 'localhost', port: 3000 }
+  config.action_mailer.default_url_options = { host: 'localhost:3000' }
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     address: 'smtp.gmail.com',
     port: 587,
-    domain: 'example.com',
+    domain: 'smtp.gmail.com',
     user_name: 'holygerardscake@gmail.com',
     password: '2612023555',
-    authentication: :plain,
+    authentication: :login,
     enable_starttls_auto: true
   }
 

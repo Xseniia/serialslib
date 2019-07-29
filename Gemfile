@@ -36,6 +36,9 @@ gem 'jbuilder', '~> 2.5'
 gem 'omniauth'
 gem 'omniauth-github'
 
+# Gem for storing pictures
+gem 'carrierwave', '>= 2.0.0.rc', '< 3.0'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
