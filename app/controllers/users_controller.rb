@@ -71,6 +71,6 @@ class UsersController < ApplicationController # :nodoc:
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :gender, :date_of_birth)
+    params.require(:user).permit(:first_name, :last_name, :gender, :date_of_birth, :country_id)
   end
 end

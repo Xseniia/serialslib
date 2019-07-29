@@ -35,7 +35,7 @@
     <% @serial.seasons.ordered_by_count.each do |season| %>
       <li class="list-item">
         <%= link_to serial_season_path(@serial, season), class: "badge badge-light" do %>
-          Season <%= season.season_count %>
+          Season <%= season.id %>
         <% end %>
       </li>
     <% end %>
