@@ -1,0 +1,20 @@
+Action
+Adventure
+Comedy
+Crime
+Drama
+Fantasy
+Historical
+Historical fiction
+Horror
+Mystery
+Philosophical
+Political
+Romance
+Saga
+Satire
+Science fiction
+Social
+Speculative
+Thriller
+Western

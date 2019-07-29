@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
+ActiveRecord::Schema.define(version: 2019_07_29_095006) do
+=======
 ActiveRecord::Schema.define(version: 2019_07_26_143001) do
+>>>>>>> fb73890d6693f73cb907afeb158534cd208ce4ec
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -62,6 +66,16 @@ ActiveRecord::Schema.define(version: 2019_07_26_143001) do
     t.index ["serial_id"], name: "index_seasons_on_serial_id"
   end
 
+<<<<<<< HEAD
+  create_table "serial_genres", id: false, force: :cascade do |t|
+    t.bigint "serial_id", null: false
+    t.bigint "genre_id", null: false
+    t.index ["genre_id"], name: "index_serial_genres_on_genre_id"
+    t.index ["serial_id"], name: "index_serial_genres_on_serial_id"
+  end
+
+=======
+>>>>>>> fb73890d6693f73cb907afeb158534cd208ce4ec
   create_table "serials", force: :cascade do |t|
     t.string "title"
     t.integer "year_of_premiere"
@@ -104,5 +118,7 @@ ActiveRecord::Schema.define(version: 2019_07_26_143001) do
   add_foreign_key "favourites", "serials"
   add_foreign_key "favourites", "users"
   add_foreign_key "seasons", "serials"
+  add_foreign_key "serial_genres", "genres"
+  add_foreign_key "serial_genres", "serials"
   add_foreign_key "users", "countries"
 end
