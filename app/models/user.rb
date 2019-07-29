@@ -4,6 +4,8 @@ class User < ApplicationRecord # :nodoc:
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
 
+  mount_uploader :avatar, AvatarUploader
+
   has_many :favourites
   has_many :serials, through: :favourites
 
