@@ -1,8 +1,7 @@
 class CreateSeasons < ActiveRecord::Migration[5.2]
   def change
-    create_table :seasons, id: :uuid do |t|
-      t.references :serial, type: :uuid, foreign_key: true
-      t.integer :season_count
+    create_table :seasons do |t|
+      t.references :serial, foreign_key: true
       t.boolean :is_full
 
       t.timestamps
