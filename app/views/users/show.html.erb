@@ -1,67 +1,80 @@
-<%= image_tag @user.avatar.url(:thumb) if @user.avatar? %>
+<div class="user-card">
 
-<p>
-  <strong>First name:</strong>
-  <%= @user.first_name %>
-</p>
+  <div class="user-avatar">
+    <%= image_tag @user.avatar.url(:thumb) if @user.avatar? %>
+  </div>
 
-<p>
-  <strong>Last name:</strong>
-  <%= @user.last_name %>
-</p>
+  <div class="user-body">
+    
+    <p>
+      <strong>First name:</strong>
+      <%= @user.first_name %>
+    </p>
 
-<p>
-  <strong>Gender:</strong>
-  <%= @user.gender %>
-</p>
+    <p>
+      <strong>Last name:</strong>
+      <%= @user.last_name %>
+    </p>
 
-<p>
-  <strong>Date of birth:</strong>
-  <%= @user.date_of_birth %>
-</p>
+    <p>
+      <strong>Gender:</strong>
+      <%= @user.gender %>
+    </p>
 
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
+    <p>
+      <strong>Date of birth:</strong>
+      <%= @user.date_of_birth %>
+    </p>
 
-<% if @user&.country_id %>
-  <p>
-    <strong>Country:</strong>
-    <%= Country.where(id: @user.country_id).first.country_name %>
-  </p>
-<% end %>
+    <p>
+      <strong>Email:</strong>
+      <%= @user.email %>
+    </p>
 
-<% if current_user && current_user.confirmed_at == nil %>
-  <p>Please confirm your email.</p>
-<% end %>
-
-<% if current_user&.admin? %>
-  <p>
-    <strong>Admin:</strong>
-    <%= @user.admin %>
-  </p>
-<% end %>
-
-<br>
-
-<p>
-  <strong>Favourite serials:</strong>
-    <% if @user.serials != [] %>
-      <ul>
-        <% @user.serials.each do |serial| %>
-          <li>
-            <%= link_to serial do %>
-              <%= serial.title %>
-            <% end %>
-          </li>
-        <% end %>
-      </ul>
-    <% else %>
-      <p>Nothing was added to favourites yet. </p>
+    <% if @user&.country_id %>
+      <p>
+        <strong>Country:</strong>
+        <%= Country.where(id: @user.country_id).first.country_name %>
+      </p>
     <% end %>
 
-</p>
+    <% if current_user && current_user.confirmed_at == nil %>
+      <p>Please confirm your email.</p>
+      <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(@user) %><br />
+    <% end %>
+
+
+    <% if current_user&.admin? %>
+      <p>
+        <strong>Admin:</strong>
+        <%= @user.admin %>
+      </p>
+    <% end %>
+
+    <br>
+
+      <strong>Favourite serials:</strong>
+        <% if @user.serials != [] %>
+          <ul>
+            <% @user.serials.each do |serial| %>
+              <li>
+                <%= link_to serial do %>
+                  <%= serial.title %>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <p>Nothing was added to favourites yet. </p>
+        <% end %>
+
+  </div>
+
+</div>
+
+
+
+
 
 <br>
 
