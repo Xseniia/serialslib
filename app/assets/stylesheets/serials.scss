@@ -21,6 +21,10 @@
     display: flex;
     flex-direction: row;
 
+    .serial-preview {
+      min-width: 325px;
+    }
+
     .serial-body {
       padding-left: 20px;
     }

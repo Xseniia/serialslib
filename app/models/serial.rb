@@ -3,6 +3,8 @@
 class Serial < ApplicationRecord # :nodoc:
   require 'date'
 
+  mount_uploader :image, SerialImageUploader
+
   has_many :seasons, dependent: :destroy
 
   has_many :favourites
