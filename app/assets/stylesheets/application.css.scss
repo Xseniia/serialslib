@@ -18,8 +18,8 @@
 @import "font-awesome";
 
 @mixin content-margin {
-  margin-left: 8%;
-  margin-right: 8%;
+  margin-left: 13%;
+  margin-right: 13%;
 }
 
 nav {
@@ -54,4 +54,8 @@ main {
 
 footer {
   height: 200px;
+}
+
+.col-md-6, .col-md-7 {
+  padding: 0;
 }

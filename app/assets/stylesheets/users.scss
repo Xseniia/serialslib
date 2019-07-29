@@ -2,9 +2,35 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@mixin colors {
+  background-color: #f8f9fa;
+  color: rgba(0, 0, 0, 0.7);
+}
+
 .user-container {
   display: flex !important;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+}
+
+.new_user {
+  max-width: 600px;
+  padding: 30px;
+  @include colors;
+}
+
+#user_country_id {
+  width: 100%;
+}
+
+.user-card {
+
+  display: flex;
+  flex-direction: row;
+  max-width: 600px;
+  justify-content: space-between;
+  padding: 30px;
+  @include colors;
+
 }
