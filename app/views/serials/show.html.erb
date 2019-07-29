@@ -1,9 +1,7 @@
 <div class="serial-container">
   <div class="serial-img-description-container">
     <div class="serial-preview">
-      <% if image_tag("#{@serial.title}.png") != nil %>
-        <%= image_tag("#{@serial.title}.png", class: "card-img-top", alt: @serial.title) %>
-      <% end %>
+      <%= image_tag @serial.image.url(:thumb), class: "card-img-top", alt: @serial.title if @serial.image? %>
     </div>
     <div class="serial-body">
       <div class="title-block">

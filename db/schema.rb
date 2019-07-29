@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_29_115742) do
+ActiveRecord::Schema.define(version: 2019_07_29_133115) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(version: 2019_07_29_115742) do
     t.datetime "updated_at", null: false
     t.text "description"
     t.bigint "country_id"
+    t.string "image"
     t.index ["country_id"], name: "index_serials_on_country_id"
   end
 
