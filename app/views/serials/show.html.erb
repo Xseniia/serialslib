@@ -38,21 +38,13 @@
         <p>Genres</p>
         <ul>
           <% @serial.genres.each do |genre| %>
-            <li><%= genre.title %></li>
+            <li><%= genre.title %> <span><%= link_to('delete', delete_genre_serial_path(genre_id: genre.id), method: :delete) %></span></li>
           <% end %>
         </ul>
       <% end %>
 
       <% if current_user.admin?  %>
-        <%= form_for @serial, url: { action: 'add_genre' } do |f| %>
-          <%= f.fields_for :serial_genres do |fsg| %>
-            <%= fsg.fields_for :genres do |fg| %>
-              <%= select_tag 'genre_select', options_from_collection_for_select(Genre.all, :id, :title), id: 'genre_select', prompt: 'Select' %>
-            <% end %>
-          <% end %>
-
-          <%= f.submit 'Add genre' %>
-        <% end %>
+        <%= render 'add_genre_to_serial' %>
       <% end %>
 
     </div>
