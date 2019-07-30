@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :serials do
     member do
       patch :add_genre
+      delete :delete_genre
     end
   end
 

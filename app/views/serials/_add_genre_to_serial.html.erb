@@ -1,0 +1,9 @@
+<%= form_for @serial, url: { action: 'add_genre' } do |f| %>
+  <%= f.fields_for :serial_genres do |fsg| %>
+    <%= fsg.fields_for :genres do |fg| %>
+      <%= select_tag 'genre_select', options_from_collection_for_select(Genre.all, :id, :title), id: 'genre_select', prompt: 'Select' %>
+    <% end %>
+  <% end %>
+
+  <%= f.submit 'Add genre' %>
+<% end %>

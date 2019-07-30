@@ -52,6 +52,12 @@ class SerialsController < ApplicationController # :nodoc:
     end
   end
 
+  def delete_genre
+    @serial = Serial.find_by_id(params[:id])
+    @serial.genres.delete(Genre.find_by_id(params[:genre_id]))
+    redirect_to @serial
+  end
+
   # PATCH/PUT /serials/1
   # PATCH/PUT /serials/1.json
   def update
