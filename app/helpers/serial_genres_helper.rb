@@ -1,0 +1,2 @@
+module SerialGenresHelper
+end

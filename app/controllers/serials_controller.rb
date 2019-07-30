@@ -37,6 +37,21 @@ class SerialsController < ApplicationController # :nodoc:
     end
   end
 
+  # PATCH /serial/:id/add_genre
+  def add_genre
+    @sgenre = SerialGenre.new(serial_id: params[:id], genre_id: params[:genre_select])
+    @serial = Serial.find_by_id(params[:id])
+
+    respond_to do |format|
+      if @sgenre.save
+        format.json { render :show, status: :created, location: @serial }
+      else
+        format.json { render json: @sgenre.errors, status: :unprocessable_entity }
+      end
+      format.html { redirect_to @serial }
+    end
+  end
+
   # PATCH/PUT /serials/1
   # PATCH/PUT /serials/1.json
   def update
@@ -70,6 +85,6 @@ class SerialsController < ApplicationController # :nodoc:
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def serial_params
-    params.require(:serial).permit(:title, :year_of_premiere, :description, :country_id, :image)
+    params.require(:serial).permit(:id, :title, :year_of_premiere, :description, :country_id, :image)
   end
 end
