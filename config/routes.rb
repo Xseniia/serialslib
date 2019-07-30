@@ -9,6 +9,13 @@ Rails.application.routes.draw do
     resources :seasons
     resources :favourites, except: [:index]
     resources :serial_countries
+    resources :serial_genres
+  end
+
+  resources :serials do
+    member do
+      patch :add_genre
+    end
   end
 
   resources :seasons, only: [:show] do

@@ -1,0 +1,2 @@
+class SerialGenresController < ApplicationController
+end

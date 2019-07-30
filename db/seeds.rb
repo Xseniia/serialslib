@@ -40,7 +40,6 @@ end
 sql = File.read('db/resources/serials.sql')
 serials = sql.split(/;$/)
 serials.pop
-
 ActiveRecord::Base.transaction do
   serials.each do |serial|
     connection.execute(serial)
