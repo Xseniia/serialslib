@@ -43,8 +43,18 @@
         </ul>
       <% end %>
 
+      <% if @serial.actors.any? %>
+        <p>Cast</p>
+        <ul>
+          <% @serial.actors.each do |actor| %>
+            <li><%= actor.first_name %> <%= actor.last_name %> <span><%= link_to('delete', delete_actor_serial_path(actor_id: actor.id), method: :delete) %></span></li>
+          <% end %>
+        </ul>
+      <% end %>
+
       <% if current_user.admin?  %>
         <%= render 'add_genre_to_serial' %>
+        <%= render 'add_actor_to_serial' %>
       <% end %>
 
     </div>

@@ -13,6 +13,7 @@ connection = ActiveRecord::Base.connection
 Country.delete_all
 Serial.delete_all
 Genre.delete_all
+Actor.delete_all
 
 sql = File.read('db/resources/restart_seq.sql')
 restart_seq = sql.split(/;$/)
@@ -26,7 +27,7 @@ end
 File.open('db/resources/countries.txt') do |countries|
   countries.read.each_line do |country|
     country_name, shortcut = country.chomp.split(',')
-    Country.create(country_name: country_name, shortcut: shortcut) unless country_name.blank? || shortcut.blank?
+    Country.create(country_name: country_name, shortcut: shortcut) unless country.blank?
   end
 end
 
@@ -34,6 +35,13 @@ File.open('db/resources/genres.txt') do |genres|
   genres.read.each_line do |genre|
     genre_name = genre.chomp
     Genre.create(title: genre_name) unless genre_name.blank?
+  end
+end
+
+File.open('db/resources/actors.txt') do |actors|
+  actors.read.each_line do |actor|
+    actor_fname, actor_lname = actor.chomp.split(',')
+    Actor.create(first_name: actor_fname, last_name: actor_lname) unless actor.blank?
   end
 end
 

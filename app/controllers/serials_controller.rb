@@ -58,6 +58,26 @@ class SerialsController < ApplicationController # :nodoc:
     redirect_to @serial
   end
 
+  def add_actor
+    @sactor = SerialActor.new(serial_id: params[:id], actor_id: params[:actor_select])
+    @serial = Serial.find_by_id(params[:id])
+
+    respond_to do |format|
+      if @sactor.save
+        format.json { render :show, status: :created, location: @serial }
+      else
+        format.json { render json: @sactor.errors, status: :unprocessable_entity }
+      end
+      format.html { redirect_to @serial }
+    end
+  end
+
+  def delete_actor
+    @serial = Serial.find_by_id(params[:id])
+    @serial.actors.delete(Actor.find_by_id(params[:actor_id]))
+    redirect_to @serial
+  end
+
   # PATCH/PUT /serials/1
   # PATCH/PUT /serials/1.json
   def update

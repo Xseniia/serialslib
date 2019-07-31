@@ -1,0 +1,9 @@
+<%= form_for @serial, url: { action: 'add_actor' } do |f| %>
+  <%= f.fields_for :serial_actors do |fsg| %>
+    <%= fsg.fields_for :actors do |fg| %>
+      <%= select_tag 'actor_select', options_from_collection_for_select(Actor.all, :id, ->(act){ "#{act.first_name} #{act.last_name}" }), id: 'actor_select', prompt: 'Select' %>
+    <% end %>
+  <% end %>
+
+  <%= f.submit 'Add actor' %>
+<% end %>
