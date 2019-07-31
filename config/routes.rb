@@ -16,6 +16,9 @@ Rails.application.routes.draw do
     member do
       patch :add_genre
       delete :delete_genre
+
+      patch :add_actor
+      delete :delete_actor
     end
   end
 

@@ -13,6 +13,9 @@ class Serial < ApplicationRecord # :nodoc:
   has_many :serial_genres
   has_many :genres, through: :serial_genres
 
+  has_many :serial_actors
+  has_many :actors, through: :serial_actors
+
   belongs_to :country
 
   validates :title, presence: { message: 'must be filled.' }

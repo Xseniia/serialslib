@@ -1,0 +1,19 @@
+<h1>Serials search</h1>
+
+<%= form_for search_path, method: :get do |f| %>
+  <p>
+    <%= f.label 'Serach for' %>
+    <%= f.text_field :query, params[:query] %>
+    <%= f.submit 'search' %>
+  </p>
+<% end %>
+
+<ul>
+  <%= @serials.each do |serial| %>
+    <li>
+      <h3>
+        <%= link_to serial.title %>
+      </h3>
+    </li>
+  <% end %>
+</ul>
