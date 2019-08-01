@@ -2,8 +2,12 @@
 
 Rails.application.routes.draw do
   root to: 'serials#index'
+  get '/users/:user_id/ratings(.:format)', to: 'ratings#create'
+
   devise_for :users, controllers: { confirmations: 'confirmations', omniauth_callbacks: 'omniauth_callbacks' }
-  resources :users
+  resources :users do
+    resources :ratings
+  end
 
   resources :serials do
     resources :seasons

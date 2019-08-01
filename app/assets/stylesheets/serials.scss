@@ -27,6 +27,21 @@
 
     .serial-body {
       padding-left: 20px;
+
+      .serial-info {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .serial-rating {
+
+          .rating-div {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+          }
+        }
+      }
     }
 
   }
@@ -37,4 +52,12 @@
     justify-content: space-between;
   }
 
+}
+
+.star-btn {
+  border: none;
+  padding: 0;
+  :focus {
+    outline: none;
+  }
 }

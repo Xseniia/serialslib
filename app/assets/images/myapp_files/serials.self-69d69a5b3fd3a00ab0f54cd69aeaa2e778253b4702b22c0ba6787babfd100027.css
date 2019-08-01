@@ -1,0 +1,72 @@
+/* line 5, app/assets/stylesheets/serials.scss */
+.serials-container {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+          flex-direction: row;
+  flex-wrap: wrap;
+}
+
+/* line 12, app/assets/stylesheets/serials.scss */
+.serials-container .card {
+  margin: 15px;
+}
+
+/* line 20, app/assets/stylesheets/serials.scss */
+.serial-container .serial-img-description-container {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+          flex-direction: row;
+}
+
+/* line 24, app/assets/stylesheets/serials.scss */
+.serial-container .serial-img-description-container .serial-preview {
+  min-width: 325px;
+}
+
+/* line 28, app/assets/stylesheets/serials.scss */
+.serial-container .serial-img-description-container .serial-body {
+  padding-left: 20px;
+}
+
+/* line 31, app/assets/stylesheets/serials.scss */
+.serial-container .serial-img-description-container .serial-body .serial-info {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+          justify-content: space-between;
+}
+
+/* line 36, app/assets/stylesheets/serials.scss */
+.serial-container .serial-img-description-container .serial-body .serial-info .serial-rating {
+  text-align: right;
+}
+
+/* line 44, app/assets/stylesheets/serials.scss */
+.serial-container .title-block {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+          justify-content: space-between;
+}
+
+/* line 52, app/assets/stylesheets/serials.scss */
+.star-btn {
+  border: none;
+  padding: 0;
+}
+
+/* line 55, app/assets/stylesheets/serials.scss */
+.star-btn :active {
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}

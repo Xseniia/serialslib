@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_31_104422) do
+ActiveRecord::Schema.define(version: 2019_07_31_112817) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -57,6 +57,14 @@ ActiveRecord::Schema.define(version: 2019_07_31_104422) do
 
   create_table "genres", force: :cascade do |t|
     t.string "title", null: false
+  end
+
+  create_table "ratings", id: false, force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "serial_id", null: false
+    t.integer "value", null: false
+    t.index ["serial_id"], name: "index_ratings_on_serial_id"
+    t.index ["user_id"], name: "index_ratings_on_user_id"
   end
 
   create_table "seasons", force: :cascade do |t|
@@ -124,6 +132,8 @@ ActiveRecord::Schema.define(version: 2019_07_31_104422) do
   add_foreign_key "episodes", "seasons"
   add_foreign_key "favourites", "serials"
   add_foreign_key "favourites", "users"
+  add_foreign_key "ratings", "serials"
+  add_foreign_key "ratings", "users"
   add_foreign_key "seasons", "serials"
   add_foreign_key "serial_actors", "actors"
   add_foreign_key "serial_actors", "serials"

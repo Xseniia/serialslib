@@ -1,0 +1,40 @@
+/* line 10, app/assets/stylesheets/users.scss */
+.user-container {
+  display: -webkit-box !important;
+  display: flex !important;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+          align-items: center;
+}
+
+/* line 17, app/assets/stylesheets/users.scss */
+.new_user {
+  max-width: 600px;
+  padding: 30px;
+  background-color: #f8f9fa;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+/* line 23, app/assets/stylesheets/users.scss */
+#user_country_id {
+  width: 100%;
+}
+
+/* line 27, app/assets/stylesheets/users.scss */
+.user-card {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+          flex-direction: row;
+  max-width: 600px;
+  -webkit-box-pack: justify;
+          justify-content: space-between;
+  padding: 30px;
+  background-color: #f8f9fa;
+  color: rgba(0, 0, 0, 0.7);
+}
