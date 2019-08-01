@@ -12,6 +12,9 @@ class User < ApplicationRecord # :nodoc:
   has_many :comments
   has_many :episodes, through: :comments
 
+  has_many :ratings
+  has_many :serials, through: :ratings
+
   belongs_to :countries, optional: true
 
   devise :database_authenticatable, :registerable, :confirmable,

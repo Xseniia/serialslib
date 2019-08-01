@@ -34,29 +34,62 @@
 
       <p><%= @serial.description %></p>
 
-      <% if @serial.genres.any? %>
-        <p>Genres</p>
-        <ul>
-          <% @serial.genres.each do |genre| %>
-            <li><%= genre.title %> <span><%= link_to('delete', delete_genre_serial_path(genre_id: genre.id), method: :delete) %></span></li>
+      <div class="serial-info">
+        <div class="">
+          <% if @serial.genres.any? %>
+            <p>Genres</p>
+            <ul>
+              <% @serial.genres.each do |genre| %>
+                <li><%= genre.title %> <span><%= link_to('delete', delete_genre_serial_path(genre_id: genre.id), method: :delete) %></span></li>
+              <% end %>
+            </ul>
           <% end %>
-        </ul>
-      <% end %>
 
-      <% if @serial.actors.any? %>
-        <p>Cast</p>
-        <ul>
-          <% @serial.actors.each do |actor| %>
-            <li><%= actor.first_name %> <%= actor.last_name %> <span><%= link_to('delete', delete_actor_serial_path(actor_id: actor.id), method: :delete) %></span></li>
+          <% if @serial.actors.any? %>
+            <p>Cast</p>
+            <ul>
+              <% @serial.actors.each do |actor| %>
+                <li><%= actor.first_name %> <%= actor.last_name %> <span><%= link_to('delete', delete_actor_serial_path(actor_id: actor.id), method: :delete) %></span></li>
+              <% end %>
+            </ul>
           <% end %>
-        </ul>
-      <% end %>
 
-      <% if current_user.admin?  %>
-        <%= render 'add_genre_to_serial' %>
-        <%= render 'add_actor_to_serial' %>
-      <% end %>
+          <% if current_user.admin?  %>
+            <%= render 'add_genre_to_serial' %>
+            <%= render 'add_actor_to_serial' %>
+          <% end %>
+        </div>
 
+        <div class="serial-rating">
+          <div class = 'rating-div'>
+            <p>Overall rating </p>
+            <% @serial.filled_stars.times do %>
+              <span><%= icon('fas', 'star') %></span>
+            <% end %>
+            <% @serial.empty_stars.times do %>
+              <span><%= icon('far', 'star') %></span>
+            <% end %>
+          </div>
+          <% if current_user %>
+            <div class = 'rating-div'>
+                <p>My rating </p>
+                <% counter = 0 %>
+                <% @serial.current_user_stars(current_user).times do |i| %>
+                <% counter += 1 %>
+                  <%= button_to user_ratings_path(user_id: current_user.id, serial_id: @serial.id, value: counter), method: :post, class: 'star-btn', value: "#{ counter }" do %>
+                    <%= icon('fas', 'star', class: 'rating-star', id: "#{ counter }") %>
+                  <% end %>
+                <% end %>
+                <% @serial.current_user_empty_stars(current_user).times do |i| %>
+                <% counter += 1 %>
+                  <%= button_to user_ratings_path(user_id: current_user, serial_id: @serial, value: counter), method: :post, action: 'create', class: 'star-btn', value: "#{ counter }" do %>
+                    <%= icon('far', 'star', class: 'rating-star', id: "#{ counter }") %>
+                  <% end %>
+                <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 
