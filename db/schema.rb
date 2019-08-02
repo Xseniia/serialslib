@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_31_112817) do
+ActiveRecord::Schema.define(version: 2019_08_01_145408) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 2019_07_31_112817) do
     t.integer "dislikes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "release_date"
     t.index ["season_id"], name: "index_episodes_on_season_id"
   end
 
@@ -69,7 +70,6 @@ ActiveRecord::Schema.define(version: 2019_07_31_112817) do
 
   create_table "seasons", force: :cascade do |t|
     t.bigint "serial_id"
-    t.boolean "is_full"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["serial_id"], name: "index_seasons_on_serial_id"

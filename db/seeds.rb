@@ -14,6 +14,7 @@ Country.delete_all
 Serial.delete_all
 Genre.delete_all
 Actor.delete_all
+Season.delete_all!
 
 sql = File.read('db/resources/restart_seq.sql')
 restart_seq = sql.split(/;$/)
@@ -52,4 +53,8 @@ ActiveRecord::Base.transaction do
   serials.each do |serial|
     connection.execute(serial)
   end
+end
+
+Dir[File.join(Rails.root, 'db', 'resources', '*.rb')].sort.each do |seed|
+  load seed
 end
