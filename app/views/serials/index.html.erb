@@ -29,7 +29,7 @@
   <div class="tags_cloud">
     <p>Tags</p>
     <% Tag.all.each do |tag| %>
-      <p><%= tag.tag_name %></p>
+      <p class="badge badge-light"><%= tag.tag_name %></p>
     <% end %>
   </div>
 </div>
