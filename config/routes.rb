@@ -23,6 +23,8 @@ Rails.application.routes.draw do
 
       patch :add_actor
       delete :delete_actor
+
+      patch :add_tag
     end
   end
 
