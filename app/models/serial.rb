@@ -8,10 +8,10 @@ class Serial < ApplicationRecord # :nodoc:
   has_many :seasons, dependent: :destroy
 
   has_many :favourites
-  has_many :users, through: :favourites, class_name: 'favourite'
+  has_many :users_fav, through: :favourites, source: :user
 
   has_many :ratings
-  has_many :users, through: :ratings, class_name: 'rating'
+  has_many :users_rating, through: :ratings, source: :user
 
   has_many :serial_genres
   has_many :genres, through: :serial_genres

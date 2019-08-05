@@ -54,9 +54,9 @@
     <br>
 
       <strong>Favourite serials:</strong>
-        <% if @user.serials != [] %>
+        <% if @user.serials_fav.any? %>
           <ul>
-            <% @user.serials.each do |serial| %>
+            <% @user.serials_fav.each do |serial| %>
               <li>
                 <%= link_to serial do %>
                   <%= serial.title %>
