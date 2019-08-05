@@ -37,31 +37,41 @@
       <div class="serial-info">
         <div class="">
           <% if @serial.genres.any? %>
-            <p>Genres</p>
-            <ul>
+            <p class="serial-info-header">Genres</p>
               <% @serial.genres.each do |genre| %>
-                <li><%= genre.title %> <span><%= link_to('delete', delete_genre_serial_path(genre_id: genre.id), method: :delete) %></span></li>
+                <span class="badge badge-light">
+                  <%= genre.title %>
+                  <% if current_user&.admin? %>
+                    <%= link_to('delete', delete_genre_serial_path(genre_id: genre.id), method: :delete) %>
+                  <% end %>
+                </span>
               <% end %>
-            </ul>
+
           <% end %>
 
           <% if @serial.tags.any? %>
-            <p>Tags</p>
-            <ul>
+            <p class="serial-info-header">Tags</p>
               <% @serial.tags.each do |tag| %>
-                <li><%= tag.tag_name %></li>
+                <span class="badge badge-light"><%= tag.tag_name %></span>
               <% end %>
-            </ul>
           <% end %>
 
           <% if @serial.actors.any? %>
-            <p>Cast</p>
-            <ul>
+            <p class="serial-info-header">Cast</p>
               <% @serial.actors.each do |actor| %>
-                <li><%= actor.first_name %> <%= actor.last_name %> <span><%= link_to('delete', delete_actor_serial_path(actor_id: actor.id), method: :delete) %></span></li>
+                <span class="badge badge-light">
+                  <%= actor.first_name %>
+                  <%= actor.last_name %>
+                  <% if current_user&.admin? %>
+                    <%= link_to('delete', delete_actor_serial_path(actor_id: actor.id), method: :delete) %>
+                  <% end %>
+                </span>
               <% end %>
-            </ul>
           <% end %>
+
+          <br>
+          <br>
+          <br>
 
           <% if current_user&.admin?  %>
             <%= render 'add_genre_to_serial' %>

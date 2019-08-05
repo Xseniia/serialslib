@@ -15,6 +15,9 @@
 
 }
 
+.serial-form {
+  width: 600px;
+}
 
 .serial-container {
 
@@ -33,6 +36,11 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+
+        .serial-info-header {
+          margin: 2px;
+          margin-top: 5px;
+        }
 
         .serial-rating {
 

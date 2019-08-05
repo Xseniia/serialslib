@@ -7,6 +7,11 @@
   color: rgba(0, 0, 0, 0.7);
 }
 
+@mixin sizes {
+  max-width: 600px;
+  padding: 30px;
+}
+
 .user-container {
   display: flex !important;
   flex-direction: row;
@@ -14,9 +19,8 @@
   align-items: center;
 }
 
-.new_user {
-  max-width: 600px;
-  padding: 30px;
+.new_user, .edit-user {
+  @include sizes;
   @include colors;
 }
 
