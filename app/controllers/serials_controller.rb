@@ -37,7 +37,7 @@ class SerialsController < ApplicationController # :nodoc:
     end
   end
 
-  # PATCH /serial/:id/add_genre
+  # GENRES
   def add_genre
     @sgenre = SerialGenre.new(serial_id: params[:id], genre_id: params[:genre_select])
     @serial = Serial.find_by_id(params[:id])
@@ -58,6 +58,7 @@ class SerialsController < ApplicationController # :nodoc:
     redirect_to @serial
   end
 
+  # ACTORS
   def add_actor
     @sactor = SerialActor.new(serial_id: params[:id], actor_id: params[:actor_select])
     @serial = Serial.find_by_id(params[:id])
@@ -76,6 +77,24 @@ class SerialsController < ApplicationController # :nodoc:
     @serial = Serial.find_by_id(params[:id])
     @serial.actors.delete(Actor.find_by_id(params[:actor_id]))
     redirect_to @serial
+  end
+
+  # TAGS
+  def add_tag
+    tag = params[:serial][:serial_tags][:tags][:tag]
+    Tag.create(tag_name: tag) unless Tag.find_by_tag_name(tag)
+    tag_id = Tag.find_by_tag_name(tag).id
+    @stag = SerialTag.new(serial_id: params[:id], tag_id: tag_id)
+    @serial = Serial.find_by_id(params[:id])
+
+    respond_to do |format|
+      if @stag.save
+        format.json { render :show, status: :created, location: @serial }
+      else
+        format.json { render json: @stag.errors, status: :unprocessable_entity }
+      end
+      format.html { redirect_to @serial }
+    end
   end
 
   # PATCH/PUT /serials/1

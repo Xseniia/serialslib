@@ -45,6 +45,15 @@
             </ul>
           <% end %>
 
+          <% if @serial.tags.any? %>
+            <p>Tags</p>
+            <ul>
+              <% @serial.tags.each do |tag| %>
+                <li><%= tag.tag_name %></li>
+              <% end %>
+            </ul>
+          <% end %>
+
           <% if @serial.actors.any? %>
             <p>Cast</p>
             <ul>
@@ -57,6 +66,7 @@
           <% if current_user&.admin?  %>
             <%= render 'add_genre_to_serial' %>
             <%= render 'add_actor_to_serial' %>
+            <%= render 'add_tag_to_serial' %>
           <% end %>
         </div>
 

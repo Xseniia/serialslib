@@ -16,6 +16,9 @@ class Serial < ApplicationRecord # :nodoc:
   has_many :serial_actors
   has_many :actors, through: :serial_actors
 
+  has_many :serial_tags
+  has_many :tags, through: :serial_tags
+
   has_many :ratings
   has_many :users, through: :ratings
 

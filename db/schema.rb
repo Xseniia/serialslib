@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_01_145408) do
+ActiveRecord::Schema.define(version: 2019_08_05_081450) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -89,6 +89,13 @@ ActiveRecord::Schema.define(version: 2019_08_01_145408) do
     t.index ["serial_id"], name: "index_serial_genres_on_serial_id"
   end
 
+  create_table "serial_tags", id: false, force: :cascade do |t|
+    t.bigint "serial_id", null: false
+    t.bigint "tag_id", null: false
+    t.index ["serial_id"], name: "index_serial_tags_on_serial_id"
+    t.index ["tag_id"], name: "index_serial_tags_on_tag_id"
+  end
+
   create_table "serials", force: :cascade do |t|
     t.string "title"
     t.integer "year_of_premiere"
@@ -98,6 +105,10 @@ ActiveRecord::Schema.define(version: 2019_08_01_145408) do
     t.bigint "country_id"
     t.string "image"
     t.index ["country_id"], name: "index_serials_on_country_id"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "tag_name", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -139,5 +150,7 @@ ActiveRecord::Schema.define(version: 2019_08_01_145408) do
   add_foreign_key "serial_actors", "serials"
   add_foreign_key "serial_genres", "genres"
   add_foreign_key "serial_genres", "serials"
+  add_foreign_key "serial_tags", "serials"
+  add_foreign_key "serial_tags", "tags"
   add_foreign_key "users", "countries"
 end

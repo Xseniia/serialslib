@@ -1,0 +1,9 @@
+<%= form_for @serial, url: { action: 'add_tag' } do |f| %>
+  <%= f.fields_for :serial_tags do |fsg| %>
+    <%= fsg.fields_for :tags do |fg| %>
+      <%= fg.text_field 'tag', id: 'actor_select', prompt: 'Select' %>
+    <% end %>
+  <% end %>
+
+  <%= f.submit 'Add tag' %>
+<% end %>

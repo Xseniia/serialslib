@@ -2,30 +2,36 @@
   <div class="">
     <h1>Serials</h1>
   </div>
-  <div class="">
-
-  </div>
 </div>
 
 
 <br>
 
-<div class="serials-container">
-  <% @serials.each do |serial| %>
-  <div class="card" style="width: 20rem;">
-    <%= image_tag serial.image.url(:thumb), class: "card-img-top", alt: serial.title if serial.image? %>
-    <div class="card-body">
-      <h5 class="card-title"><%= serial.title %></h5>
-      <h6 class="card-subtitle mb-2 text-muted"><%= serial.year_of_premiere %></h6>
-      <p class="card-text"><%= truncate(serial.description, :length => 120) %></p>
-      <%= link_to 'Show', serial, class: "btn btn-light" %>
-      <% if current_user && current_user.admin %>
-        <%= link_to 'Edit', edit_serial_path(serial), class: "btn btn-light" %>
-        <%= link_to 'Destroy', serial, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-light" %>
-      <% end %>
+<div class="serials-body">
+  <div class="serials-container">
+    <% @serials.each do |serial| %>
+    <div class="card" style="width: 20rem;">
+      <%= image_tag serial.image.url(:thumb), class: "card-img-top", alt: serial.title if serial.image? %>
+      <div class="card-body">
+        <h5 class="card-title"><%= serial.title %></h5>
+        <h6 class="card-subtitle mb-2 text-muted"><%= serial.year_of_premiere %></h6>
+        <p class="card-text"><%= truncate(serial.description, :length => 120) %></p>
+        <%= link_to 'Show', serial, class: "btn btn-light" %>
+        <% if current_user && current_user.admin %>
+          <%= link_to 'Edit', edit_serial_path(serial), class: "btn btn-light" %>
+          <%= link_to 'Destroy', serial, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-light" %>
+        <% end %>
+      </div>
     </div>
+    <% end %>
   </div>
-  <% end %>
+
+  <div class="tags_cloud">
+    <p>Tags</p>
+    <% Tag.all.each do |tag| %>
+      <p><%= tag.tag_name %></p>
+    <% end %>
+  </div>
 </div>
 
 <br>
