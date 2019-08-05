@@ -1,32 +1,38 @@
-<%= form_with(model: serial, local: true) do |form| %>
+<%= form_with(model: serial, local: true, class: 'serial-form') do |form| %>
   <%= render "layouts/errors", resource: serial %>
 
-  <div class="field">
-    <%= form.file_field :image %>
+  <div class="form-group col-md-6">
+    <div class="field">
+      <%= form.file_field :image %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <%= form.label :title %>
+      <%= form.text_field :title, class: 'form-control' %>
+    </div>
+
+    <div class="form-group col-md-6">
+      <%= form.label :year_of_premiere %>
+      <%= form.number_field :year_of_premiere, class: 'form-control' %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :year_of_premiere %>
-    <%= form.number_field :year_of_premiere %>
-  </div>
-
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description, size: '85x8'  %>
-  </div>
-
-  <div class="field">
+  <div class="form-group col-md-6">
     <%= form.label :country_id, "Country of origin" %><br />
-    <%= form.collection_select(:country_id, Country.all, :id, :country_name, prompt: 'Select') %>
+    <%= form.collection_select(:country_id, Country.all, :id, :country_name, prompt: 'Select')  %>
+  </div>
+
+  <div class="form-group">
+    <div class="field">
+      <%= form.label :description %>
+      <%= form.text_area :description, size: '85x8', class: "form-control"  %>
+    </div>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class: "btn btn-secondary" %>
   </div>
 
 <% end %>
