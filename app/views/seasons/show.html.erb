@@ -1,13 +1,13 @@
 <div class="serial-container">
     <h4><%= @season.serial.title %></h4>
-    <h2 class="display-5">Season <%= @season.id %></h2>
+    <h2 class="display-5">Season <%= @season.season_number %></h2>
     <br>
     <strong>Episodes:</strong>
     <ul class="list">
-      <% @season.episodes.ordered_by_count.each do |episode| %>
+      <% @season.episodes.each do |episode| %>
         <li class="list-item">
           <%= link_to season_episode_path(@season, episode), class: "badge badge-light" do%>
-            Episode <%= episode.count %>
+            Episode <%= episode.episode_number %>
           <% end %>
         </li>
       <% end %>

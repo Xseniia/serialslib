@@ -1,6 +1,7 @@
 <div class="serial-container">
-  <h4>Season <%= @episode.season.id %></h4>
-  <h2>Episode <%= @episode.count %>. <%= @episode.title %></h2>
+  <h4>Season <%= @episode.season.season_number %></h4>
+  <h2>Episode <%= @episode.episode_number %>. <%= @episode.title %></h2>
+  <p>Release date: <%= @episode.release_date %></p>
   <br>
 
   <h4>What people think of this episode?</h4>

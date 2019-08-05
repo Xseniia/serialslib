@@ -14,7 +14,7 @@ Country.delete_all
 Serial.delete_all
 Genre.delete_all
 Actor.delete_all
-Season.delete_all!
+Season.delete_all
 
 sql = File.read('db/resources/restart_seq.sql')
 restart_seq = sql.split(/;$/)
