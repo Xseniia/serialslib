@@ -2,10 +2,12 @@
 
 class Episode < ApplicationRecord # :nodoc:
   belongs_to :season
-  belongs_to :serial
 
   has_many :comments
   has_many :users, through: :comments
 
-  scope :ordered_by_count, -> { order(count: :asc) }
+  def episode_number
+    num = id.to_s.remove(season_id.to_s)
+    num.empty? ? season_id : num
+  end
 end

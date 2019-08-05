@@ -6,7 +6,6 @@ class Serial < ApplicationRecord # :nodoc:
   mount_uploader :image, SerialImageUploader
 
   has_many :seasons, dependent: :destroy
-  has_many :episodes, through: :seasons
 
   has_many :favourites
   has_many :users, through: :favourites
