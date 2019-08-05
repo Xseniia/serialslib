@@ -8,7 +8,10 @@ class Serial < ApplicationRecord # :nodoc:
   has_many :seasons, dependent: :destroy
 
   has_many :favourites
-  has_many :users, through: :favourites
+  has_many :users_fav, through: :favourites, source: :user
+
+  has_many :ratings
+  has_many :users_rating, through: :ratings, source: :user
 
   has_many :serial_genres
   has_many :genres, through: :serial_genres
@@ -18,9 +21,6 @@ class Serial < ApplicationRecord # :nodoc:
 
   has_many :serial_tags
   has_many :tags, through: :serial_tags
-
-  has_many :ratings
-  has_many :users, through: :ratings
 
   belongs_to :country
 
@@ -55,5 +55,9 @@ class Serial < ApplicationRecord # :nodoc:
 
   def current_user_empty_stars(user)
     5 - current_user_stars(user)
+  end
+
+  def not_favourite?(user_id)
+    Favourite.where(user_id: user_id, serial_id: id).empty?
   end
 end

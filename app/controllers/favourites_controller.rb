@@ -20,7 +20,7 @@ class FavouritesController < ApplicationController # :nodoc:
 
   def destroy
     @serial = Serial.find_by id: params[:serial_id]
-    current_user.serials.delete(@serial)
+    current_user.serials_fav.delete(@serial)
 
     respond_to do |format|
       format.html { redirect_to @serial, notice: 'Serial was successfully removed from favourites.' }
