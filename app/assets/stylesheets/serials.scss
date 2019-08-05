@@ -10,7 +10,60 @@
   flex-wrap: wrap;
 
   .card {
+
     margin: 15px;
+
+  }
+
+}
+
+.serial-container {
+
+  .serial-img-description-container {
+
+    display: flex;
+    flex-direction: row;
+
+    .serial-preview {
+
+      min-width: 325px;
+
+    }
+
+    .serial-body {
+
+      padding-left: 20px;
+
+      .serial-info {
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .serial-rating {
+
+          .rating-div {
+
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+
+          }
+
+        }
+
+      }
+
+    }
+
+  }
+
+  .title-block {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
   }
 
 }
@@ -19,54 +72,24 @@
   display: flex;
   flex-direction: row;
 
-  .serial-container {
-
-    .serial-img-description-container {
-      display: flex;
-      flex-direction: row;
-
-      .serial-preview {
-        min-width: 325px;
-      }
-
-      .serial-body {
-        padding-left: 20px;
-
-        .serial-info {
-          display: flex;
-          flex-direction: row;
-          justify-content: space-between;
-
-          .serial-rating {
-
-            .rating-div {
-              display: flex;
-              flex-direction: row;
-              justify-content: flex-end;
-            }
-          }
-        }
-      }
-
-    }
-
-    .title-block {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-    }
-
-  }
-
   .tags_cloud {
+
     width: 330px;
+
   }
+
 }
 
+
 .star-btn {
+
   border: none;
   padding: 0;
+
   :focus {
+
     outline: none;
+
   }
+
 }
