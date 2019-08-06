@@ -3,7 +3,7 @@ class RatingsController < ApplicationController
     @serial = Serial.find_by_id(params[:serial_id])
 
     if Rating.where(user_id: params[:user_id], serial_id: params[:serial_id]).any?
-      @serial.users.destroy(current_user)
+      @serial.users_rating.destroy(current_user)
     end
 
     @rating = Rating.new(user_id: params[:user_id], serial_id: params[:serial_id], value: params[:value])

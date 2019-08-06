@@ -7,13 +7,13 @@ class User < ApplicationRecord # :nodoc:
   mount_uploader :avatar, AvatarUploader
 
   has_many :favourites
-  has_many :serials, through: :favourites
+  has_many :serials_fav, through: :favourites, source: :serial
+
+  has_many :ratings
+  has_many :serials_rating, through: :ratings, source: :serial
 
   has_many :comments
   has_many :episodes, through: :comments
-
-  has_many :ratings
-  has_many :serials, through: :ratings
 
   belongs_to :countries, optional: true
 

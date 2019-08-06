@@ -9,17 +9,14 @@
 
         <% if current_user %>
         <div class="">
-          <div class="">
-            <% favourite = Favourite.where(user_id: current_user.id, serial_id: @serial.id) %>
-            <% if favourite == [] %>
-              <%= link_to 'Add to favourites', serial_favourites_path(@serial), method: :create, class: "btn btn-light"  %>
-            <% else %>
-              <%= link_to 'Remove from favourites', serial_favourite_path(@serial, current_user), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-light" %>
-            <% end %>
-          </div>
+          <% favourite = Favourite.where(user_id: current_user.id, serial_id: @serial.id) %>
+          <% if favourite == [] %>
+            <%= link_to 'Add to favourites', serial_favourites_path(@serial), method: :create, class: "btn btn-light"  %>
+          <% else %>
+            <%= link_to 'Remove from favourites', serial_favourite_path(@serial, current_user), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-light" %>
+          <% end %>
         </div>
         <% end %>
-
       </div>
 
       <p>
