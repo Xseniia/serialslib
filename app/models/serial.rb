@@ -60,4 +60,8 @@ class Serial < ApplicationRecord # :nodoc:
   def not_favourite?(user_id)
     Favourite.where(user_id: user_id, serial_id: id).empty?
   end
+
+  def self.tagged_with(name)
+    Tag.find_by_tag_name(name).serials
+  end
 end
