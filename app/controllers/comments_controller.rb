@@ -14,7 +14,7 @@ class CommentsController < ApplicationController # :nodoc:
   def destroy
     @episode = Episode.find_by id: params[:episode_id]
     @comment = Comment.find_by id: params[:id]
-    @episode.comments.delete(@comment)
+    @episode.comments.destroy(@comment)
 
     respond_to do |format|
       format.html { redirect_to season_episode_path(@episode.season, @episode), notice: 'Comment was successfully destroyed.' }

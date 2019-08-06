@@ -8,25 +8,24 @@
 
   <br>
 
-  <% if Comment.where(episode_id: @episode.id) == [] %>
+  <% if Comment.where(episode_id: @episode.id).empty? %>
     <p>No comments.</p>
   <% else %>
-    <% comments.each do |comment| %>
-
-    <div class="card">
-      <div class="card-body">
-        <div class="card-user-info">
-          <h5 class="card-title"><%= User.where(id: comment.user_id).first.email %></h5>
-          <% if current_user&.admin %>
-            <%= link_to 'Delete comment', episode_comment_path(@episode, comment), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-light"  %>
-          <% end %>
+    <% Comment.where(episode_id: @episode.id).each do |comment| %>
+      <div class="card">
+        <div class="card-body">
+          <div class="card-user-info">
+            <h5 class="card-title"><%= User.where(id: comment.user_id).first.email %></h5>
+            <% if current_user&.admin %>
+              <%= link_to 'Delete comment', episode_comment_path(@episode, comment), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-light"  %>
+            <% end %>
+          </div>
+          <p class="card-text"><%= comment.content %></p>
+          <p>
+            <%= comment.created_at.strftime("%F") %> <%= comment.created_at.strftime("%T") %>
+          </p>
         </div>
-        <p class="card-text"><%= comment.content %></p>
-        <p>
-          <%= comment.created_at.strftime("%F") %> <%= comment.created_at.strftime("%T") %>
-        </p>
       </div>
-    </div>
     <% end %>
   <% end %>
 
