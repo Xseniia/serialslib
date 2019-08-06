@@ -10,7 +10,7 @@
 <div class="serials-body">
   <div class="serials-container">
     <% @serials.each do |serial| %>
-    <div class="card" style="width: 20rem;">
+    <div class="card serial-card">
       <%= image_tag serial.image.url(:thumb), class: "card-img-top", alt: serial.title if serial.image? %>
       <div class="card-body">
         <h5 class="card-title"><%= serial.title %></h5>
@@ -29,9 +29,7 @@
   <div class="tags_cloud">
     <p>Tags</p>
     <% Tag.all.each do |tag| %>
-
-      <p class="badge badge-light"><%= tag.tag_name %></p>
-
+      <%=raw tag_links(tag) %>
     <% end %>
   </div>
 </div>

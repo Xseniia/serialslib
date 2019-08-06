@@ -6,7 +6,9 @@ class SerialsController < ApplicationController # :nodoc:
   # GET /serials
   # GET /serials.json
   def index
-    @serials = Serial.all
+    return @serials = Serial.all unless params[:tag]
+
+    @serials = Serial.tagged_with(params[:tag])
   end
 
   # GET /serials/1
