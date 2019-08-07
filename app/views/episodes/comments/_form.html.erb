@@ -2,6 +2,9 @@
 
   <%= f.hidden_field :user_id, value: current_user.id %>
   <%= f.hidden_field :episode_id, value: @episode.id %>
+  <%= f.hidden_field :comment_id, value: local_assigns[:comment_id] %>
+
+  <p><%= local_assigns[:comment] %></p>
 
   <label for="create-comment-text-area">
     <%= current_user.email %>

@@ -1,13 +1,15 @@
 # frozen_string_literal: true
 
 class CommentsController < ApplicationController # :nodoc:
+  before_action :find_commentable, only: :create
+
   def new
     @comment = Comment.new
   end
 
   def create
-    @episode = Episode.find(params[:episode_id])
-    @comment = @episode.comments.create(params[:comment].permit(:user_id, :episode_id, :content, :comment_id, :created_at))
+    @comment = @commentable.comments.create(comment_params)
+    @episode = Episode.find_by id: params[:episode_id]
     redirect_to season_episode_path(@episode.season, @episode)
   end
 
@@ -19,6 +21,20 @@ class CommentsController < ApplicationController # :nodoc:
     respond_to do |format|
       format.html { redirect_to season_episode_path(@episode.season, @episode), notice: 'Comment was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  private
+
+  def comment_params
+    params[:comment].permit(:user_id, :episode_id, :content, :comment_id, :created_at)
+  end
+
+  def find_commentable
+    if params[:comment_id]
+      @commentable = Comment.find_by_id(params[:comment_id])
+    else
+      @commentable = Episode.find_by_id(params[:episode_id])
     end
   end
 end
