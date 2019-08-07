@@ -45,9 +45,11 @@
               </p>
             </div>
           <% end %>
-          <div class="card reply-card">
-            <%= render "episodes/comments/form", comment_id: comment.id %>
-          </div>
+          <% if current_user %>
+            <div class="card reply-card">
+              <%= render "episodes/comments/form", comment_id: comment.id %>
+            </div>
+          <% end %>
       </div>
     <% end %>
   <% end %>
@@ -59,7 +61,6 @@
     <%= render partial: "episodes/comments/form"  %>
   <% else %>
     <p class="comments-disabled">Only authorised users can add comments.</p>
-    <br>
   <% end %>
 
 </div>
