@@ -7,16 +7,9 @@
       <div class="title-block">
         <h2 class="display-5"><%= @serial.title %></h2>
 
-        <% if current_user %>
-        <div class="">
-          <% favourite = Favourite.where(user_id: current_user.id, serial_id: @serial.id) %>
-          <% if favourite == [] %>
-            <%= link_to 'Add to favourites', serial_favourites_path(@serial), method: :create, class: "btn btn-light"  %>
-          <% else %>
-            <%= link_to 'Remove from favourites', serial_favourite_path(@serial, current_user), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-light" %>
-          <% end %>
+        <div class="title-fav">
+          <%= fav_button %>
         </div>
-        <% end %>
       </div>
 
       <p>
@@ -26,13 +19,13 @@
 
       <p>
         <strong>County of origin:</strong>
-        <%= @serial.country_id.blank? ? 'Wasn\'t mentioned.' : Country.where(id: @serial.country_id)[0].country_name %>
+        <%= country_of_origin %>
       </p>
 
       <p><%= @serial.description %></p>
 
       <div class="serial-info">
-        <div class="">
+        <div>
           <% if @serial.genres.any? %>
             <p class="serial-info-header">Genres</p>
               <% @serial.genres.each do |genre| %>
@@ -43,7 +36,6 @@
                   <% end %>
                 </span>
               <% end %>
-
           <% end %>
 
           <% if @serial.tags.any? %>
