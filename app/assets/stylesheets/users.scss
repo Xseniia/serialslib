@@ -37,3 +37,25 @@
   @include colors;
 
 }
+
+.user-dropdown {
+  max-width: 185px;
+}
+
+.user-button {
+  width: 95px;
+  font-size: 15px !important;
+}
+
+.info-div {
+  min-width: 350px;
+}
+
+.edit_serial {
+  display: flex;
+  flex-direction: row;
+}
+
+#tag_select {
+  margin: 0;
+}

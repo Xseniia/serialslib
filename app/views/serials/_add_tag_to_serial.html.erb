@@ -1,9 +1,9 @@
 <%= form_for @serial, class: 'form-row', url: { action: 'add_tag' } do |f| %>
   <%= f.fields_for :serial_tags do |fsg| %>
     <%= fsg.fields_for :tags do |fg| %>
-      <%= fg.text_field 'tag', id: 'tag_select', prompt: 'Select', class: "form-group col-md-6" %>
+      <%= fg.text_field 'tag', id: 'tag_select', prompt: 'Select', class: 'user-dropdown' %>
     <% end %>
   <% end %>
 
-  <%= f.submit 'Add tag', class: "btn btn-light" %>
+  <%= f.submit 'Add tag', class: "btn btn-light user-button" %>
 <% end %>
