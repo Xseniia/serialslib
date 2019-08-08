@@ -8,16 +8,14 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { confirmations: 'confirmations', omniauth_callbacks: 'omniauth_callbacks' }
   resources :users do
     resources :ratings
+    resources :view_statuses
   end
 
   resources :serials do
     resources :seasons
     resources :favourites, except: [:index]
     resources :serial_countries
-    resources :serial_genres
-  end
 
-  resources :serials do
     member do
       patch :add_genre
       delete :delete_genre
@@ -26,6 +24,9 @@ Rails.application.routes.draw do
       delete :delete_actor
 
       patch :add_tag
+
+      patch :add_view_status
+      patch :update_view_status
     end
   end
 

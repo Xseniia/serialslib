@@ -12,6 +12,9 @@ class User < ApplicationRecord # :nodoc:
   has_many :ratings
   has_many :serials_rating, through: :ratings, source: :serial
 
+  has_many :view_statuses
+  has_many :serials_status, through: :view_statuses, source: :serial
+
   has_many :comments
   has_many :episodes, through: :comments
 
@@ -43,4 +46,17 @@ class User < ApplicationRecord # :nodoc:
 
   scope :ordered_by_first_name, -> { order(first_name: :asc) }
   scope :ordered_by_last_name, -> { order(last_name: :asc) }
+
+  def self.user_serials(need, user_id)
+    case need
+    when 'will'
+      Serial.joins(:view_statuses).where(view_statuses: { user_id: user_id, status: 'Will be watching' })
+    when 'now'
+      Serial.joins(:view_statuses).where(view_statuses: { user_id: user_id, status: 'Watching right now' })
+    when 'done'
+      Serial.joins(:view_statuses).where(view_statuses: { user_id: user_id, status: 'Finished watching' })
+    else
+      Serial.joins(:view_statuses).where(view_statuses: { user_id: user_id })
+    end
+  end
 end

@@ -54,19 +54,38 @@
     <br>
 
       <strong>Favourite serials:</strong>
-        <% if @user.serials_fav.any? %>
-          <ul>
-            <% @user.serials_fav.each do |serial| %>
-              <li>
-                <%= link_to serial do %>
-                  <%= serial.title %>
-                <% end %>
-              </li>
+      <% if @user.serials_fav.any? %>
+        <ul>
+          <% @user.serials_fav.each do |serial| %>
+            <li>
+              <%= link_to serial do %>
+                <%= serial.title %>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p>Nothing was added to favourites yet. </p>
+      <% end %>
+
+      <div class="">
+        <%= link_to 'Will watch', user_path(@user, need: 'will'), class: "btn btn-secondary" %>
+        <%= link_to 'Watching', user_path(@user, need: 'now'), class: "btn btn-secondary" %>
+        <%= link_to 'Completed', user_path(@user, need: 'done'), class: "btn btn-secondary" %>
+        <%= link_to 'All', @user, class: "btn btn-secondary" %>
+      </div>
+
+      <br>
+
+      <ul>
+        <% @user_serials.each do |serial| %>
+          <li>
+            <%= link_to serial do %>
+              <%= serial.title %>
             <% end %>
-          </ul>
-        <% else %>
-          <p>Nothing was added to favourites yet. </p>
+          </li>
         <% end %>
+      </ul>
 
   </div>
 
