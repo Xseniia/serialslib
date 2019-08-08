@@ -1,0 +1,6 @@
+<%= form_for @serial, class: 'form-row', url: { action: 'add_view_status', controller: 'serials' } do |f| %>
+  <%= hidden_field_tag :user_id, current_user.id %>
+  <%= select_tag 'view_status', options_for_select(['Will be watching', 'Watching right now', 'Finished watching']), prompt: 'Select', class: "form-group col-md-6" %>
+
+  <%= f.submit 'Add status', class: "btn btn-light" %>
+<% end %>

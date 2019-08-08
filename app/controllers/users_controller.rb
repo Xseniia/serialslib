@@ -12,7 +12,9 @@ class UsersController < ApplicationController # :nodoc:
 
   # GET /users/1
   # GET /users/1.json
-  def show; end
+  def show
+    @user_serials = User.user_serials(params[:need], @user.id)
+  end
 
   # GET /users/new
   def new

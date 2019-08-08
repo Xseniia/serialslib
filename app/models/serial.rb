@@ -13,6 +13,11 @@ class Serial < ApplicationRecord # :nodoc:
   has_many :ratings
   has_many :users_rating, through: :ratings, source: :user
 
+  has_many :view_statuses
+  has_many :users_status, through: :view_statuses, source: :user
+
+  delegate :users_status, to: :view_statuses
+
   has_many :serial_genres
   has_many :genres, through: :serial_genres
 
@@ -60,4 +65,5 @@ class Serial < ApplicationRecord # :nodoc:
   def not_favourite?(user_id)
     Favourite.where(user_id: user_id, serial_id: id).empty?
   end
+
 end

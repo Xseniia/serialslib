@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_05_081450) do
+ActiveRecord::Schema.define(version: 2019_08_08_101640) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -137,6 +137,14 @@ ActiveRecord::Schema.define(version: 2019_08_05_081450) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "view_statuses", id: false, force: :cascade do |t|
+    t.bigint "serial_id", null: false
+    t.bigint "user_id", null: false
+    t.string "status", null: false
+    t.index ["serial_id"], name: "index_view_statuses_on_serial_id"
+    t.index ["user_id"], name: "index_view_statuses_on_user_id"
+  end
+
   add_foreign_key "comments", "comments"
   add_foreign_key "comments", "episodes"
   add_foreign_key "comments", "users"
@@ -153,4 +161,6 @@ ActiveRecord::Schema.define(version: 2019_08_05_081450) do
   add_foreign_key "serial_tags", "serials"
   add_foreign_key "serial_tags", "tags"
   add_foreign_key "users", "countries"
+  add_foreign_key "view_statuses", "serials"
+  add_foreign_key "view_statuses", "users"
 end

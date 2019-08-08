@@ -10,7 +10,7 @@ class RatingsController < ApplicationController
 
     respond_to do |format|
       if @rating.save
-        format.html { redirect_to @serial, notice: 'Rating was successfully added.' }
+        format.html { redirect_to @serial }
         format.json { render :show, status: :ok, location: @serial }
       else
         format.html { redirect_to @serial }
