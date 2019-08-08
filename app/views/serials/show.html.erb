@@ -25,7 +25,7 @@
       <p><%= @serial.description %></p>
 
       <div class="serial-info">
-        <div>
+        <div class="main-info info-div">
           <% if @serial.genres.any? %>
             <p class="serial-info-header">Genres</p>
               <% @serial.genres.each do |genre| %>
@@ -69,7 +69,7 @@
           <% end %>
         </div>
 
-        <div class="serial-rating-status">
+        <div class="serial-rating-status info-div">
           <div class = 'rating'>
             <p>Overall rating </p>
             <% @serial.filled_stars.times do %>

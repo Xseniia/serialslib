@@ -1,9 +1,9 @@
 <%= form_for @serial, class: 'form-row', url: { action: 'add_genre' } do |f| %>
   <%= f.fields_for :serial_genres do |fsg| %>
     <%= fsg.fields_for :genres do |fg| %>
-      <%= select_tag 'genre_select', options_from_collection_for_select(Genre.all, :id, :title), id: 'genre_select', prompt: 'Select', class: "form-group col-md-6" %>
+      <%= select_tag 'genre_select', options_from_collection_for_select(Genre.all, :id, :title), id: 'genre_select', prompt: 'Select', class: 'user-dropdown' %>
     <% end %>
   <% end %>
 
-  <%= f.submit 'Add genre', class: "btn btn-light" %>
+  <%= f.submit 'Add genre', class: "btn btn-light user-button" %>
 <% end %>

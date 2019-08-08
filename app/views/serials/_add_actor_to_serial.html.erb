@@ -2,9 +2,9 @@
 
   <%= f.fields_for :serial_actors do |fsg| %>
     <%= fsg.fields_for :actors do |fg| %>
-      <%= select_tag 'actor_select', options_from_collection_for_select(Actor.all, :id, ->(act){ "#{act.first_name} #{act.last_name}" }), id: 'actor_select', prompt: 'Select', class: "form-group col-md-6" %>
+      <%= select_tag 'actor_select', options_from_collection_for_select(Actor.all, :id, ->(act){ "#{act.first_name} #{act.last_name}" }), id: 'actor_select', prompt: 'Select', class: 'user-dropdown' %>
     <% end %>
   <% end %>
 
-  <%= f.submit 'Add actor', class: "btn btn-light" %>
+  <%= f.submit 'Add actor', class: "btn btn-light user-button" %>
 <% end %>
