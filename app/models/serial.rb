@@ -16,8 +16,6 @@ class Serial < ApplicationRecord # :nodoc:
   has_many :view_statuses
   has_many :users_status, through: :view_statuses, source: :user
 
-  delegate :users_status, to: :view_statuses
-
   has_many :serial_genres
   has_many :genres, through: :serial_genres
 
