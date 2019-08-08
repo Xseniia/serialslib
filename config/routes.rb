@@ -2,6 +2,8 @@
 
 Rails.application.routes.draw do
   root to: 'serials#index'
+  get '/users/:user_id/ratings(.:format)', to: 'ratings#create'
+  get 'tags/:tag', to: 'serials#index', as: 'tag'
 
   devise_for :users, controllers: { confirmations: 'confirmations', omniauth_callbacks: 'omniauth_callbacks' }
   resources :users do
