@@ -38,6 +38,10 @@ gem 'jbuilder', '~> 2.5'
 gem 'omniauth'
 gem 'omniauth-github'
 
+# elasticsearch
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
+
 # Gem for storing pictures
 gem 'carrierwave', '>= 2.0.0.rc', '< 3.0'
 

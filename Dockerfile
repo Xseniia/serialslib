@@ -3,7 +3,7 @@ FROM ruby:2.5
 # https://github.com/nodesource/distributions#installation-instructions
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - \
         && apt-get install -y nodejs
-        
+
 RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
 RUN mkdir /myapp
 WORKDIR /myapp
@@ -17,6 +17,7 @@ COPY entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]
 EXPOSE 3000
+EXPOSE 9200
 
 # Start the main process.
 CMD ["rails", "server", "-b", "0.0.0.0"]
