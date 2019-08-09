@@ -98,15 +98,20 @@ class SerialsController < ApplicationController # :nodoc:
   # add serial view status
   def add_view_status
     @serial.users_status.destroy(User.find_by_id(params[:user_id])) unless @status.nil?
-    @new_status = ViewStatus.new(serial_id: params[:id], user_id: params[:user_id], status: params[:view_status])
 
-    respond_to do |format|
-      if @new_status.save
-        format.json { render :show, status: :created, location: @serial, notice: 'View status was updated successfully.' }
-        format.html { redirect_to @serial }
-      else
-        format.json { render json: @new_status.errors, status: :unprocessable_entity }
-        format.html { redirect_to @serial }
+    if params[:view_status].empty?
+      redirect_to @serial
+    else
+      @new_status = ViewStatus.new(serial_id: params[:id], user_id: params[:user_id], status: params[:view_status])
+
+      respond_to do |format|
+        if @new_status.save
+          format.json { render :show, status: :created, location: @serial, notice: 'View status was updated successfully.' }
+          format.html { redirect_to @serial }
+        else
+          format.json { render json: @new_status.errors, status: :unprocessable_entity }
+          format.html { redirect_to @serial }
+        end
       end
     end
   end
