@@ -3,8 +3,8 @@
 <%= form_for search_path, method: :get do |f| %>
   <p>
     <%= f.label 'Serach for' %>
-    <%= f.text_field :query, params[:query] %>
-    <%= f.submit 'search' %>
+    <%= text_field_tag :q, params[:q] %>
+    <%= submit_tag 'Search' %>
   </p>
 <% end %>
 
@@ -12,7 +12,7 @@
   <%= @serials.each do |serial| %>
     <li>
       <h3>
-        <%= link_to serial.title %>
+        <%= link_to serial.title, controller: 'serials', action: 'show', id: serial.id %>
       </h3>
     </li>
   <% end %>

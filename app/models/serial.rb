@@ -1,9 +1,15 @@
 # frozen_string_literal: true
+require 'elasticsearch/model'
 
 class Serial < ApplicationRecord # :nodoc:
   require 'date'
 
   mount_uploader :image, SerialImageUploader
+
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
+
+  index_name([Rails.env,base_class.to_s.pluralize.underscore].join('_'))
 
   has_many :seasons, dependent: :destroy
 
@@ -67,5 +73,6 @@ class Serial < ApplicationRecord # :nodoc:
   def self.tagged_with(name)
     Tag.find_by_tag_name(name).serials
   end
-
 end
+
+Serial.import
