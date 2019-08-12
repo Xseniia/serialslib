@@ -19,6 +19,14 @@
     .serial-card {
       max-width: 320px;
       margin: 15px;
+      .card-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        .card-links {
+          margin-top: 10px;
+        }
+      }
     }
 
   }
@@ -90,4 +98,12 @@
 
   }
 
+}
+
+.serials-search-field {
+  margin: 0 !important;
+}
+
+.card-text {
+  margin-top: 10px;
 }
