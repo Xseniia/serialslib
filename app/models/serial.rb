@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'elasticsearch/model'
 
 class Serial < ApplicationRecord # :nodoc:
@@ -9,7 +10,15 @@ class Serial < ApplicationRecord # :nodoc:
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
 
-  index_name([Rails.env,base_class.to_s.pluralize.underscore].join('_'))
+  settings do
+    mappings dynamic: false do
+      indexes :title, type: :string, analyzer: :english
+      indexes :year_of_premiere, type: :integer
+      indexes :description, type: :text, analyzer: :english
+    end
+  end
+
+  index_name([Rails.env, base_class.to_s.pluralize.underscore].join('_'))
 
   has_many :seasons, dependent: :destroy
 
