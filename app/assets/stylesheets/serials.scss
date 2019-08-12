@@ -17,27 +17,42 @@
     flex-wrap: wrap;
 
     .serial-card {
+
       max-width: 320px;
       margin: 15px;
+
       .card-body {
+
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+
         .card-links {
+
           margin-top: 10px;
+
         }
       }
     }
 
   }
 
-  .tags-cloud {
+  .filters {
+
     width: 15%;
+
+    .filter {
+
+      margin-bottom: 20px;
+
+    }
   }
 }
 
 .serial-form {
+
   width: 600px;
+
 }
 
 .serial-container {
@@ -48,25 +63,32 @@
     flex-direction: row;
 
     .serial-preview {
+
       min-width: 325px;
+
     }
 
     .serial-body {
+
       padding-left: 20px;
 
       .serial-info {
+
         display: flex;
         flex-direction: row;
         justify-content: space-between;
 
         .serial-info-header {
+
           margin: 2px;
           margin-top: 5px;
+
         }
 
         .serial-rating-status {
 
           .rating {
+
             display: flex;
             flex-direction: row;
             justify-content: flex-end;
@@ -81,9 +103,11 @@
   }
 
   .title-block {
+
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+
   }
 }
 
@@ -101,9 +125,27 @@
 }
 
 .serials-search-field {
+
   margin: 0 !important;
+
 }
 
 .card-text {
+
   margin-top: 10px;
+
+}
+
+.list-group-flush {
+
+  margin-left: 0 !important;
+
+  .list-group-item{
+
+    .genre-filter-link {
+
+      color: rgba(0, 0, 0, 0.7);
+          
+    }
+  }
 }

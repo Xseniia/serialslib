@@ -11,6 +11,8 @@ class SerialsController < ApplicationController # :nodoc:
       @serials = Serial.tagged_with(params[:tag])
     elsif params[:query].present?
       @serials = Serial.search(params[:query]).records
+    elsif params[:genre].present?
+      @serials = Serial.with_genre_filter(params[:genre])
     else
       @serials = Serial.all
     end
