@@ -2,6 +2,7 @@
   <div class="">
     <h1>Serials</h1>
   </div>
+  <br>
   <div class="serials-search">
     <%= render 'serial_search_form' %>
   </div>
@@ -16,14 +17,24 @@
     <div class="card serial-card">
       <%= image_tag serial.image.url(:thumb), class: "card-img-top", alt: serial.title if serial.image? %>
       <div class="card-body">
-        <h5 class="card-title"><%= serial.title %></h5>
-        <h6 class="card-subtitle mb-2 text-muted"><%= serial.year_of_premiere %></h6>
-        <p class="card-text"><%= truncate(serial.description, :length => 120) %></p>
-        <%= link_to 'Show', serial, class: "btn btn-light" %>
-        <% if current_user && current_user.admin %>
-          <%= link_to 'Edit', edit_serial_path(serial), class: "btn btn-light" %>
-          <%= link_to 'Destroy', serial, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-light" %>
-        <% end %>
+        <div class="card-content">
+          <h5 class="card-title"><%= serial.title %></h5>
+          <h6 class="card-subtitle mb-2 text-muted"><%= serial.year_of_premiere %></h6>
+          <% if serial.tags.any? %>
+              <% serial.tags.each do |tag| %>
+                <span class="badge badge-light serial-tag"><%= tag.tag_name %></span>
+              <% end %>
+          <% end %>
+          <p class="card-text"><%= truncate(serial.description, :length => 120) %></p>
+        </div>
+
+        <div class="card-links">
+          <%= link_to 'Show', serial, class: "btn btn-light" %>
+          <% if current_user && current_user.admin %>
+            <%= link_to 'Edit', edit_serial_path(serial), class: "btn btn-light" %>
+            <%= link_to 'Destroy', serial, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-light" %>
+          <% end %>
+        </div>
       </div>
     </div>
     <% end %>
