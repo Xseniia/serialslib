@@ -26,4 +26,8 @@ module SerialsHelper # :nodoc:
   def tag_links(tag)
     link_to tag.tag_name, tag_path(tag.tag_name), class: 'badge badge-light', id: "#{tag.tag_name} tag"
   end
+
+  def genres_links(genre)
+    link_to genre.title + " (#{genre.serials.count})", genre_path(genre.title), id: "#{genre.title} genre", class: 'genre-filter-link'
+  end
 end

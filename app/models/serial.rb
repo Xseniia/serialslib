@@ -82,6 +82,10 @@ class Serial < ApplicationRecord # :nodoc:
   def self.tagged_with(name)
     Tag.find_by_tag_name(name).serials
   end
+
+  def self.with_genre_filter(name)
+    Genre.find_by_title(name).serials
+  end
 end
 
 Serial.import

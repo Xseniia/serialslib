@@ -12,6 +12,30 @@
 <br>
 
 <div class="serials-body">
+  <div class="filters">
+    <div class="filter tag-filter">
+      <p>Tags</p>
+      <% Tag.all.each do |tag| %>
+        <%=raw tag_links(tag) %>
+      <% end %>
+      <%= link_to 'all', serials_path, class: 'badge badge-light' %>
+    </div>
+
+    <div class="filter genre-filter">
+      <p>Genres</p>
+      <ul class="list-group list-group-flush">
+        <% Genre.all.each do |genre| %>
+          <li class="list-group-item" >
+            <%=raw genres_links(genre) %>
+          </li>
+        <% end %>
+        <li class="list-group-item">
+          <%= link_to 'All', serials_path, class: 'genre-filter-link' %>
+        </li>
+      </ul>
+    </div>
+  </div>
+
   <div class="serials-container">
     <% @serials.each do |serial| %>
     <div class="card serial-card">
@@ -38,14 +62,6 @@
       </div>
     </div>
     <% end %>
-  </div>
-
-  <div class="tags-cloud">
-    <p>Tags</p>
-    <% Tag.all.each do |tag| %>
-      <%=raw tag_links(tag) %>
-    <% end %>
-    <%= link_to 'all', serials_path, class: 'badge badge-light' %>
   </div>
 </div>
 
