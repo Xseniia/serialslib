@@ -24,7 +24,6 @@ class User < ApplicationRecord # :nodoc:
          :recoverable, :rememberable, :validatable, :omniauthable
   require 'date'
 
-  validates :gender, acceptance: { accept: %w[Male Female], case_sensitive: false, message: "can only be 'Male' or 'Female'." }
   validate :date_validation
 
   def date_validation
@@ -38,7 +37,7 @@ class User < ApplicationRecord # :nodoc:
       user.provider = auth.provider
       user.uid = auth.uid
       user.email = auth.info.email
-      user.password = Devise.friendly_token[0, 20]
+      user.password = '123456'
     end
   end
 
