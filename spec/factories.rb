@@ -16,4 +16,14 @@ FactoryBot.define do
     description { 'Serial description' }
     country
   end
+
+  factory :season do
+    serial
+  end
+
+  factory :episode do
+    season
+    title { 'Episode title' }
+    release_date { '2014-07-05' }
+  end
 end

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   before(:all) do
-    @user1 = create(:user)
+    @user1 = create(:user, id: 1)
   end
 
   after(:all) do
@@ -48,11 +48,5 @@ RSpec.describe User, type: :model do
   it 'has correct date of birth.' do
     user2 = build(:user, date_of_birth: Date.today + 1.month)
     expect(user2).not_to be_valid
-  end
-
-  # comments check
-
-  it 'can create comments to episodes.' do
-
   end
 end
