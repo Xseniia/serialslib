@@ -3,12 +3,20 @@
 require 'elasticsearch/model'
 
 class Serial < ApplicationRecord # :nodoc:
+  # requirements
+
   require 'date'
+
+  # image uploader
 
   mount_uploader :image, SerialImageUploader
 
+  # connecting elasticsearch
+
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
+
+  # elasticsearch settings
 
   settings do
     mappings dynamic: false do
@@ -19,6 +27,8 @@ class Serial < ApplicationRecord # :nodoc:
   end
 
   index_name([Rails.env, base_class.to_s.pluralize.underscore].join('_'))
+
+  # associations
 
   has_many :seasons, dependent: :destroy
 
@@ -42,13 +52,19 @@ class Serial < ApplicationRecord # :nodoc:
 
   belongs_to :country
 
+  # validations
+
   validates :title, presence: { message: 'must be filled.' }
   validates :year_of_premiere, length: { is: 4, message: 'can be only 4 digits long.' }, numericality: { only_integer: true, greater_than_or_equal_to: 1933, less_than_or_equal_to: Date.current.year }
   validates :description, presence: { message: 'must be added.' }
 
+  # scopes
+
   scope :order_by_year, -> { order(year_of_premiere, asc) }
   scope :order_by_title, -> { order(title, asc) }
   scope :search_by_country, ->(id) { where country_id: id }
+
+  # methods
 
   def filled_stars
     grades = Rating.where(serial_id: id)
@@ -88,4 +104,4 @@ class Serial < ApplicationRecord # :nodoc:
   end
 end
 
-Serial.import
+# Serial.import

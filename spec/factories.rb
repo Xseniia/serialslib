@@ -1,8 +1,19 @@
 FactoryBot.define do
-
   factory :user do
-    email { "#{8.times do |val| (65 + rand(25)).chr end}}@hotmail.com" }
+    email { 'johndoe@hotmail.com' }
     password { '789456' }
   end
 
+  factory :country do
+    id { 1 }
+    country_name { 'Argentina' }
+    shortcut { 'AR' }
+  end
+
+  factory :serial do
+    title { 'Serial title' }
+    year_of_premiere { '2017' }
+    description { 'Serial description' }
+    country
+  end
 end
