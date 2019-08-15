@@ -17,6 +17,10 @@ FactoryBot.define do
     country
   end
 
+  factory :invalid_serial, parent: :serial do
+    title { nil }
+  end
+
   factory :season do
     serial
   end

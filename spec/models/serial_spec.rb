@@ -9,36 +9,42 @@ RSpec.describe Serial, type: :model do
 
   # validations check
 
-  it 'creates serial with correct parameters.' do
-    expect(@serial).to be_valid
-  end
+  describe 'validations' do
+    context 'with valid attributes' do
+      it 'creates serial.' do
+        expect(@serial).to be_valid
+      end
 
-  it 'does not create serial without serial title.' do
-    serial2 = build(:serial, title: nil)
-    expect(serial2).not_to be_valid
-  end
+      it 'creates serial. - with correct associations(serial-countries)' do
+        country2 = create(:country, id: 2, country_name: 'Austria', shortcut: 'AT')
+        country3 = create(:country, id: 3, country_name: 'Afghanistan', shortcut: 'AF')
+        serial2 = build(:serial, country_id: 2)
+        expect(serial2.country).to eq(country2)
+        expect(serial2.country).not_to eq(country3)
+      end
+    end
 
-  it 'does not create serial with incorrect year of premiere.' do
-    serial2 = build(:serial, year_of_premiere: 3021)
-    expect(serial2).not_to be_valid
-  end
+    context 'with invalid attributes' do
+      it 'does not create serial. - without serial title' do
+        serial2 = build(:serial, title: nil)
+        expect(serial2).not_to be_valid
+      end
 
-  it 'does not create serial with incorrect year of premiere.' do
-    serial2 = build(:serial, year_of_premiere: 1024)
-    expect(serial2).not_to be_valid
-  end
+      it 'does not create serial. - with incorrect year of premiere' do
+        serial2 = build(:serial, year_of_premiere: 3021)
+        expect(serial2).not_to be_valid
+      end
 
-  it 'does not create serial without serial description.' do
-    serial2 = build(:serial, description: nil)
-    expect(serial2).not_to be_valid
-  end
+      it 'does not create serial. - with incorrect year of premiere' do
+        serial2 = build(:serial, year_of_premiere: 1024)
+        expect(serial2).not_to be_valid
+      end
 
-  it 'creates serial with correct associations(with countries).' do
-    country2 = create(:country, id: 2, country_name: 'Austria', shortcut: 'AT')
-    country3 = create(:country, id: 3, country_name: 'Afghanistan', shortcut: 'AF')
-    serial2 = build(:serial, country_id: 2)
-    expect(serial2.country).to eq(country2)
-    expect(serial2.country).not_to eq(country3)
+      it 'does not create serial. - without serial description' do
+        serial2 = build(:serial, description: nil)
+        expect(serial2).not_to be_valid
+      end
+    end
   end
 
   # ability to add comments check
@@ -58,22 +64,28 @@ RSpec.describe Serial, type: :model do
 
   # check rating
 
-  it 'can add rating to serial.' do
-    rating = Rating.new(serial_id: @serial.id, user_id: @user.id, value: 3)
-    expect(rating).to be_valid
-  end
+  describe 'rating' do
+    context 'with valid attributes' do
+      it 'can be added to serial.' do
+        rating = Rating.new(serial_id: @serial.id, user_id: @user.id, value: 3)
+        expect(rating).to be_valid
+      end
+    end
 
-  it 'does not add rating to serial without value.' do
-    rating = Rating.new(serial_id: @serial.id, user_id: @user.id)
-    expect(rating).not_to be_valid
-  end
+    context 'with invalid attributes' do
+      it ' to serial. - no value' do
+        rating = Rating.new(serial_id: @serial.id, user_id: @user.id)
+        expect(rating).not_to be_valid
+      end
 
-  it 'does not add rating to serial without known serial id or user id.' do
-    rating = Rating.new(user_id: @user.id, value: 3)
-    expect(rating).not_to be_valid
+      it 'can not be added to serial. - no known serial id or user id' do
+        rating = Rating.new(user_id: @user.id, value: 3)
+        expect(rating).not_to be_valid
 
-    rating = Rating.new(serial_id: @serial.id, value: 3)
-    expect(rating).not_to be_valid
+        rating = Rating.new(serial_id: @serial.id, value: 3)
+        expect(rating).not_to be_valid
+      end
+    end
   end
 
   it 'can calculate average rating of serial.' do
