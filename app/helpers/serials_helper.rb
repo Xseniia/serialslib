@@ -3,7 +3,7 @@
 module SerialsHelper # :nodoc:
 
   def user_view_status
-    status = ViewStatus.where(serial_id: @serial.id, user_id: current_user.id)[0]
+    status = ViewStatus.find_by(serial_id: @serial.id, user_id: current_user.id)
     return status.status unless status.nil?
 
     "You didn't mention your view status on this serial yet."
@@ -20,11 +20,11 @@ module SerialsHelper # :nodoc:
   def country_of_origin
     return 'Wasn\'t mentioned.' if @serial.country_id.blank?
 
-    Country.where(id: @serial.country_id)[0].country_name
+    Country.find_by(id: @serial.country_id).country_name
   end
 
   def tag_links(tag)
-    link_to tag.tag_name, tag_path(tag.tag_name), class: 'badge badge-light', id: "#{tag.tag_name} tag"
+    link_to tag.tag_name, tag_path(tag: tag.tag_name), class: 'badge badge-light'
   end
 
   def genres_links(genre)

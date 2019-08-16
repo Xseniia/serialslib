@@ -83,16 +83,12 @@ class Serial < ApplicationRecord # :nodoc:
   end
 
   def current_user_stars(user)
-    mark = Rating.where(serial_id: id, user_id: user.id)[0]
+    mark = Rating.find_by(serial_id: id, user_id: user.id)
     mark.nil? ? 0 : mark.value
   end
 
   def current_user_empty_stars(user)
     5 - current_user_stars(user)
-  end
-
-  def not_favourite?(user_id)
-    Favourite.where(user_id: user_id, serial_id: id).empty?
   end
 
   def self.tagged_with(name)

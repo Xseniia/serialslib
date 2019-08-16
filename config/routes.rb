@@ -25,6 +25,7 @@ Rails.application.routes.draw do
       delete :delete_actor
 
       patch :add_tag
+      delete :delete_tag
 
       patch :add_view_status
       patch :update_view_status

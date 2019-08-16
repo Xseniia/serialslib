@@ -54,7 +54,7 @@
 
         <div class="card-links">
           <%= link_to 'Show', serial, class: "btn btn-light" %>
-          <% if current_user && current_user.admin %>
+          <% if current_user&.admin? %>
             <%= link_to 'Edit', edit_serial_path(serial), class: "btn btn-light" %>
             <%= link_to 'Destroy', serial, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-light" %>
           <% end %>
@@ -67,6 +67,6 @@
 
 <br>
 
-<% if current_user && current_user.admin %>
+<% if current_user&.admin? %>
   <%= link_to 'New Serial', new_serial_path, class: "btn btn-light" %>
 <% end %>

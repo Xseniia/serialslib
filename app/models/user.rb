@@ -59,13 +59,13 @@ class User < ApplicationRecord # :nodoc:
 
   # scopes
 
-  scope :admin?, -> { where admin: true }
+  scope :admins, -> { where admin: true }
 
   scope :ordered_by_first_name, -> { order(first_name: :asc) }
   scope :ordered_by_last_name, -> { order(last_name: :asc) }
 
   # methods
-  
+
   def self.user_serials(need, user_id)
     case need
     when 'will'

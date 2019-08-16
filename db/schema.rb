@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_08_101640) do
+ActiveRecord::Schema.define(version: 2019_08_16_105431) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 2019_08_08_101640) do
     t.bigint "serial_id", null: false
     t.bigint "user_id", null: false
     t.index ["serial_id"], name: "index_favourites_on_serial_id"
+    t.index ["user_id", "serial_id"], name: "index_favourites_on_user_id_and_serial_id", unique: true
     t.index ["user_id"], name: "index_favourites_on_user_id"
   end
 
@@ -65,6 +66,7 @@ ActiveRecord::Schema.define(version: 2019_08_08_101640) do
     t.bigint "serial_id", null: false
     t.integer "value", null: false
     t.index ["serial_id"], name: "index_ratings_on_serial_id"
+    t.index ["user_id", "serial_id"], name: "index_ratings_on_user_id_and_serial_id", unique: true
     t.index ["user_id"], name: "index_ratings_on_user_id"
   end
 
@@ -79,6 +81,7 @@ ActiveRecord::Schema.define(version: 2019_08_08_101640) do
     t.bigint "serial_id", null: false
     t.bigint "actor_id", null: false
     t.index ["actor_id"], name: "index_serial_actors_on_actor_id"
+    t.index ["serial_id", "actor_id"], name: "index_serial_actors_on_serial_id_and_actor_id", unique: true
     t.index ["serial_id"], name: "index_serial_actors_on_serial_id"
   end
 
@@ -86,12 +89,14 @@ ActiveRecord::Schema.define(version: 2019_08_08_101640) do
     t.bigint "serial_id", null: false
     t.bigint "genre_id", null: false
     t.index ["genre_id"], name: "index_serial_genres_on_genre_id"
+    t.index ["serial_id", "genre_id"], name: "index_serial_genres_on_serial_id_and_genre_id", unique: true
     t.index ["serial_id"], name: "index_serial_genres_on_serial_id"
   end
 
   create_table "serial_tags", id: false, force: :cascade do |t|
     t.bigint "serial_id", null: false
     t.bigint "tag_id", null: false
+    t.index ["serial_id", "tag_id"], name: "index_serial_tags_on_serial_id_and_tag_id", unique: true
     t.index ["serial_id"], name: "index_serial_tags_on_serial_id"
     t.index ["tag_id"], name: "index_serial_tags_on_tag_id"
   end
@@ -109,6 +114,7 @@ ActiveRecord::Schema.define(version: 2019_08_08_101640) do
 
   create_table "tags", force: :cascade do |t|
     t.string "tag_name", null: false
+    t.index ["tag_name"], name: "index_tags_on_tag_name", unique: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -142,6 +148,7 @@ ActiveRecord::Schema.define(version: 2019_08_08_101640) do
     t.bigint "user_id", null: false
     t.string "status", null: false
     t.index ["serial_id"], name: "index_view_statuses_on_serial_id"
+    t.index ["user_id", "serial_id"], name: "index_view_statuses_on_user_id_and_serial_id", unique: true
     t.index ["user_id"], name: "index_view_statuses_on_user_id"
   end
 

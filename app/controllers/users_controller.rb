@@ -7,7 +7,7 @@ class UsersController < ApplicationController # :nodoc:
   # GET /users
   # GET /users.json
   def index
-    @users = params[:need] == 'adm' ? User.admin? : User.all
+    @users = params[:need] == 'adm' ? User.admins : User.all
   end
 
   # GET /users/1

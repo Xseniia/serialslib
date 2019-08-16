@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class FavouritesController < ApplicationController # :nodoc:
-  before_action only: %i[show destroy]
 
   def create
     @serial = Serial.find_by id: params[:serial_id]

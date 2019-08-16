@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class SerialsController < ApplicationController # :nodoc:
-  before_action :set_serial, only: %i[show edit update destroy add_genre delete_genre add_actor delete_actor add_tag add_view_status]
+  before_action :set_serial, only: %i[show edit update destroy add_genre delete_genre add_actor delete_actor add_tag delete_tag add_view_status]
   before_action :set_view_status, only: %i[add_view_status]
 
   # GET /serials
@@ -48,57 +48,36 @@ class SerialsController < ApplicationController # :nodoc:
 
   # GENRES
   def add_genre
-    @sgenre = SerialGenre.new(serial_id: params[:id], genre_id: params[:genre_select])
-
-    respond_to do |format|
-      if @sgenre.save
-        format.json { render :show, status: :created, location: @serial }
-      else
-        format.json { render json: @sgenre.errors, status: :unprocessable_entity }
-      end
-      format.html { redirect_to @serial }
-    end
+    @serial.genres << Genre.find_by_id(params[:genre_select]) unless SerialGenre.find_by(serial_id: @serial.id, genre_id: params[:genre_select]).present?
+    redirect_to @serial
   end
 
   def delete_genre
-    @serial.genres.delete(Genre.find_by_id(params[:genre_id]))
+    @serial.genres.destroy(Genre.find_by_id(params[:genre_id]))
     redirect_to @serial
   end
 
   # ACTORS
   def add_actor
-    @sactor = SerialActor.new(serial_id: params[:id], actor_id: params[:actor_select])
-
-    respond_to do |format|
-      if @sactor.save
-        format.json { render :show, status: :created, location: @serial }
-      else
-        format.json { render json: @sactor.errors, status: :unprocessable_entity }
-      end
-      format.html { redirect_to @serial }
-    end
+    @serial.actors << Actor.find_by_id(params[:actor_select]) unless SerialActor.find_by(serial_id: @serial.id, actor_id: params[:actor_select]).present?
+    redirect_to @serial
   end
 
   def delete_actor
-    @serial.actors.delete(Actor.find_by_id(params[:actor_id]))
+    @serial.actors.destroy(Actor.find_by_id(params[:actor_id]))
     redirect_to @serial
   end
 
   # TAGS
   def add_tag
-    tag = params[:serial][:serial_tags][:tags][:tag]
-    Tag.create(tag_name: tag) unless Tag.find_by_tag_name(tag)
-    tag_id = Tag.find_by_tag_name(tag).id
-    @stag = SerialTag.new(serial_id: params[:id], tag_id: tag_id)
+    tag = Tag.find_or_create_by(tag_name: params.dig(:serial, :serial_tags, :tags, :tag))
+    @serial.tags << tag unless SerialTag.find_by(serial_id: @serial.id, tag_id: tag.id).present?
+    redirect_to @serial
+  end
 
-    respond_to do |format|
-      if @stag.save
-        format.json { render :show, status: :created, location: @serial }
-      else
-        format.json { render json: @stag.errors, status: :unprocessable_entity }
-      end
-      format.html { redirect_to @serial }
-    end
+  def delete_tag
+    @serial.tags.destroy(Tag.find_by_id(params[:tag_id]))
+    redirect_to @serial
   end
 
   # add serial view status
@@ -108,7 +87,6 @@ class SerialsController < ApplicationController # :nodoc:
     if params[:view_status].empty?
       redirect_to @serial
     else
-      @new_status = ViewStatus.new(serial_id: params[:id], user_id: params[:user_id], status: params[:view_status])
 
       respond_to do |format|
         if @new_status.save
@@ -154,7 +132,7 @@ class SerialsController < ApplicationController # :nodoc:
   end
 
   def set_view_status
-    @status = ViewStatus.where(serial_id: params[:id], user_id: params[:user_id])[0]
+    @status = ViewStatus.find_by(serial_id: params[:id], user_id: params[:user_id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

@@ -7,7 +7,6 @@ class Season < ApplicationRecord # :nodoc:
   scope :full, -> { where is_full: true }
   scope :ordered_by_count, -> { order(id: :asc) }
 
-
   def season_number
     num = id.to_s.remove(serial_id.to_s)
     num.empty? ? serial_id : num

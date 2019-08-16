@@ -41,7 +41,12 @@
           <% if @serial.tags.any? %>
             <p class="serial-info-header">Tags</p>
               <% @serial.tags.each do |tag| %>
-                <span class="badge badge-light"><%= tag.tag_name %></span>
+                <span class="badge badge-light">
+                  <%= tag.tag_name %>
+                  <% if current_user&.admin? %>
+                    <%= link_to('delete', delete_tag_serial_path(tag_id: tag.id), method: :delete) %>
+                  <% end %>
+                </span>
               <% end %>
           <% end %>
 

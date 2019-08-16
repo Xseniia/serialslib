@@ -2,7 +2,7 @@
 
 <br>
 
-<% if current_user && current_user.admin %>
+<% if current_user&.admin? %>
   <%= link_to 'All', users_path, class: "btn btn-light" %>
   <%= link_to 'Admins', users_path(need: 'adm'), class: "btn btn-light" %>
 <% end %>
@@ -20,7 +20,7 @@
         </div>
         <div class="">
           <%= link_to 'Show', user, class: 'btn btn-light' %>
-          <% if current_user && current_user.admin %>
+          <% if current_user&.admin? %>
             <%= link_to 'Edit', edit_user_path(user), class: 'btn btn-light' %>
             <%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-light' %></td>
           <% end %>
