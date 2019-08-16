@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Serial, type: :model do
   before(:all) do
+    DatabaseCleaner.clean
     @episode = create(:episode)
     @serial = @episode.season.serial
     @user = create(:user, email: 'qwerty@asdfg.com')
@@ -16,9 +17,9 @@ RSpec.describe Serial, type: :model do
       end
 
       it 'creates serial. - with correct associations(serial-countries)' do
-        country2 = create(:country, id: 2, country_name: 'Austria', shortcut: 'AT')
-        country3 = create(:country, id: 3, country_name: 'Afghanistan', shortcut: 'AF')
-        serial2 = build(:serial, country_id: 2)
+        country2 = create(:country, country_name: 'Austria', shortcut: 'AT')
+        country3 = create(:country, country_name: 'Afghanistan', shortcut: 'AF')
+        serial2 = build(:serial, country_id: country2.id)
         expect(serial2.country).to eq(country2)
         expect(serial2.country).not_to eq(country3)
       end

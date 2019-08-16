@@ -72,37 +72,37 @@ RSpec.describe SerialsController, type: :controller do
     end
 
     context 'with valid attributes' do
-      it 'located the requested @serial' do
+      it 'located the requested @serial.' do
         put :update, params: { id: @serial, serial: FactoryBot.attributes_for(:serial) }
         assigns(:serial).should eq(@serial)
       end
 
-      it 'changes @serial attributes' do
+      it 'changes @serial attributes.' do
         put :update, params: { id: @serial, serial: FactoryBot.attributes_for(:serial, title: 'New serial title', country_id: 2) }
         @serial.reload
         @serial.title.should eq('New serial title')
         @serial.country_id.should eq(2)
       end
 
-      it 'redirects to the updated serial' do
+      it 'redirects to the updated serial.' do
         put :update, params: { id: @serial, serial: FactoryBot.attributes_for(:serial, title: 'New serial title', country_id: 2) }
         response.should redirect_to @serial
       end
     end
 
     context 'with invalid attributes' do
-      it 'located the requested @serial' do
+      it 'located the requested @serial.' do
         put :update, params: { id: @serial, serial: FactoryBot.attributes_for(:serial) }
         assigns(:serial).should eq(@serial)
       end
 
-      it 'does not chang @serial attributes' do
+      it 'does not chang @serial attributes.' do
         put :update, params: { id: @serial, serial: FactoryBot.attributes_for(:invalid_serial) }
         @serial.reload
         @serial.title.should eq('Serial title 2')
       end
 
-      it 're-renders :edit template' do
+      it 're-renders :edit template.' do
         put :update, params: { id: @serial, serial: FactoryBot.attributes_for(:invalid_serial) }
         response.should render_template :edit
       end
@@ -112,7 +112,7 @@ RSpec.describe SerialsController, type: :controller do
   # DELETE
 
   describe '#delete' do
-    it 'deletes serial and redirects to #index' do
+    it 'deletes serial and redirects to #index.' do
       expect {
         delete :destroy, params: { id: @serial }
       }.to change(Serial, :count).by(-1)
