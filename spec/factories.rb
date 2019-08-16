@@ -5,7 +5,6 @@ FactoryBot.define do
   end
 
   factory :country do
-    id { 1 }
     country_name { 'Argentina' }
     shortcut { 'AR' }
   end
