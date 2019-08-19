@@ -45,6 +45,10 @@ gem 'elasticsearch-rails'
 # Gem for storing pictures
 gem 'carrierwave', '>= 2.0.0.rc', '< 3.0'
 
+# React
+gem 'webpacker'
+gem 'react-rails'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
