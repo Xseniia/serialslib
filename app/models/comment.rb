@@ -6,4 +6,6 @@ class Comment < ApplicationRecord # :nodoc:
   has_many :comments
 
   validates :content, presence: { message: "musn't be empty." }
+
+  scope :episode_comments_list, ->(episode_id, comment_id) { where episode_id: episode_id, comment_id: comment_id }
 end

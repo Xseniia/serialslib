@@ -38,10 +38,8 @@ class SerialsController < ApplicationController # :nodoc:
     respond_to do |format|
       if @serial.save
         format.html { redirect_to @serial, notice: 'Serial was successfully created.' }
-        format.json { render :show, status: :created, location: @serial }
       else
         format.html { render :new }
-        format.json { render json: @serial.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -49,35 +47,47 @@ class SerialsController < ApplicationController # :nodoc:
   # GENRES
   def add_genre
     @serial.genres << Genre.find_by_id(params[:genre_select]) unless SerialGenre.find_by(serial_id: @serial.id, genre_id: params[:genre_select]).present?
-    redirect_to @serial
+    respond_to do |format|
+      format.html { redirect_to @serial, notice: 'Genre was successfully added.' }
+    end
   end
 
   def delete_genre
     @serial.genres.destroy(Genre.find_by_id(params[:genre_id]))
-    redirect_to @serial
+    respond_to do |format|
+      format.html { redirect_to @serial, notice: 'Genre was successfully deleted.' }
+    end
   end
 
   # ACTORS
   def add_actor
     @serial.actors << Actor.find_by_id(params[:actor_select]) unless SerialActor.find_by(serial_id: @serial.id, actor_id: params[:actor_select]).present?
-    redirect_to @serial
+    respond_to do |format|
+      format.html { redirect_to @serial, notice: 'Actor was successfully added.' }
+    end
   end
 
   def delete_actor
     @serial.actors.destroy(Actor.find_by_id(params[:actor_id]))
-    redirect_to @serial
+    respond_to do |format|
+      format.html { redirect_to @serial, notice: 'Actor was successfully deleted.' }
+    end
   end
 
   # TAGS
   def add_tag
     tag = Tag.find_or_create_by(tag_name: params.dig(:serial, :serial_tags, :tags, :tag))
     @serial.tags << tag unless SerialTag.find_by(serial_id: @serial.id, tag_id: tag.id).present?
-    redirect_to @serial
+    respond_to do |format|
+      format.html { redirect_to @serial, notice: 'Tag was successfully added.' }
+    end
   end
 
   def delete_tag
     @serial.tags.destroy(Tag.find_by_id(params[:tag_id]))
-    redirect_to @serial
+    respond_to do |format|
+      format.html { redirect_to @serial, notice: 'Tag was successfully deleted.' }
+    end
   end
 
   # add serial view status
@@ -87,13 +97,11 @@ class SerialsController < ApplicationController # :nodoc:
     if params[:view_status].empty?
       redirect_to @serial
     else
-
+      @new_status = ViewStatus.new(serial_id: params[:id], user_id: params[:user_id], status: params[:view_status])
       respond_to do |format|
         if @new_status.save
-          format.json { render :show, status: :created, location: @serial, notice: 'View status was updated successfully.' }
-          format.html { redirect_to @serial }
+          format.html { redirect_to @serial, notice: 'View status was successfully updated.' }
         else
-          format.json { render json: @new_status.errors, status: :unprocessable_entity }
           format.html { redirect_to @serial }
         end
       end

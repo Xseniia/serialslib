@@ -15,7 +15,7 @@
 
     <div class="form-group col-md-6">
       <%= form.label :year_of_premiere %>
-      <%= form.date_select :year_of_premiere, start_year: 1980, class: 'form-control' %>
+      <%= form.select :year_of_premiere, options_for_select(1933..2019), class: 'form-control' %>
     </div>
   </div>
 

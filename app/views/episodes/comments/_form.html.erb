@@ -7,6 +7,9 @@
   <p><%= local_assigns[:comment] %></p>
 
   <label for="create-comment-text-area">
+    <% if local_assigns[:comment_id].present? %>
+      <h5>Reply</h5>
+    <% end %>
     <%= current_user.email %>
   </label>
   <p>
@@ -14,6 +17,10 @@
   </p>
 
   <div class="actions">
-    <%= f.submit class: "btn btn-light" %>
+    <% if local_assigns[:comment_id].present? %>
+      <%= f.submit 'Reply', class: "btn btn-light" %>
+    <% else %>
+      <%= f.submit class: "btn btn-light" %>
+    <% end %>
   </div>
 <% end %>

@@ -9,10 +9,8 @@ class FavouritesController < ApplicationController # :nodoc:
     respond_to do |format|
       if @fav.save
         format.html { redirect_to @serial, notice: 'Serial was successfully added to your favourites.' }
-        format.json { render :show, status: :created, location: current_user }
       else
         format.html { rredirect_to @serial, alert: 'Serial is already in your favourites list.' }
-        format.json { render json: @fav.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -23,7 +21,6 @@ class FavouritesController < ApplicationController # :nodoc:
 
     respond_to do |format|
       format.html { redirect_to @serial, notice: 'Serial was successfully removed from favourites.' }
-      format.json { head :no_content }
     end
   end
 end

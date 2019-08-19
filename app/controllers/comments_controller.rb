@@ -20,7 +20,6 @@ class CommentsController < ApplicationController # :nodoc:
 
     respond_to do |format|
       format.html { redirect_to season_episode_path(@episode.season, @episode), notice: 'Comment was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 
