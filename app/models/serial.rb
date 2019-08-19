@@ -67,15 +67,8 @@ class Serial < ApplicationRecord # :nodoc:
   # methods
 
   def filled_stars
-    grades = Rating.where(serial_id: id)
-    sum = 0
-    counter = 0
-    grades.each do |mark|
-      sum += mark.value
-      counter += 1
-    end
-
-    counter.zero? ? 0 : sum / counter
+    grades = Rating.where(serial_id: id).map(&:value)
+    grades.empty? ? 0 : grades.inject(0) { |sum, grade| sum + grade } / grades.length
   end
 
   def empty_stars
