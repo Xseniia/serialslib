@@ -10,7 +10,7 @@ module SerialsHelper # :nodoc:
   end
 
   def fav_button
-    if current_user
+    if current_user.present?
       return link_to 'Remove from favourites', serial_favourite_path(@serial, current_user), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-light' unless Favourite.where(user_id: current_user.id, serial_id: @serial.id).empty?
 
       link_to 'Add to favourites', serial_favourites_path(@serial), method: :create, class: 'btn btn-light'

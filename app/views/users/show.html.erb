@@ -38,7 +38,7 @@
       </p>
     <% end %>
 
-    <% if current_user && current_user.confirmed_at == nil %>
+    <% if current_user.present? && current_user.confirmed_at == nil %>
       <p>Please confirm your email.</p>
       <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(@user) %><br />
     <% end %>
@@ -94,6 +94,6 @@
 <br>
 
 <%= link_to 'Back', users_path %>
-<% if current_user && current_user == @user || current_user&.admin? %>
+<% if current_user.present? && current_user == @user || current_user&.admin? %>
   | <%= link_to 'Edit', edit_user_registration_path(@user) %>
 <% end %>

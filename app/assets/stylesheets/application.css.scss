@@ -22,7 +22,7 @@
 @mixin content-margin {
   margin-left: 13%;
   margin-right: 13%;
-  min-width: 810px;
+  min-width: 825px;
 }
 
 nav {
@@ -32,7 +32,7 @@ nav {
     @include content-margin;
 
     ul {
-      font-size: 16px;
+      font-size: 1.1rem;
     }
   }
 }
@@ -43,12 +43,12 @@ main {
 
 .list {
   padding-left: 0px;
-  font-size: 18px;
+  font-size: 1.1rem;
 }
 
 .list-item {
   list-style-type: none;
-  margin-top: 7px;
+  margin-top: 0.7rem;
 }
 
 .badge {

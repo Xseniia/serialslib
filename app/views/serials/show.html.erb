@@ -6,7 +6,6 @@
     <div class="serial-body">
       <div class="title-block">
         <h2 class="display-5"><%= @serial.title %></h2>
-
         <div class="title-fav">
           <%= fav_button %>
         </div>
@@ -84,7 +83,7 @@
               <span><%= icon('far', 'star') %></span>
             <% end %>
           </div>
-          <% if current_user %>
+          <% if current_user.present? %>
             <div class = 'rating'>
                 <p>My rating </p>
                 <% counter = 0 %>
@@ -104,7 +103,7 @@
           <% end %>
 
           <div class="status">
-            <% if current_user %>
+            <% if current_user.present? %>
               <p>View status: <span><%= user_view_status %></span></p>
               <%= render 'add_user_view_status' %>
             <% end %>
