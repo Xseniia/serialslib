@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  root to: 'serials#index'
+  root to: 'pages#index'
+  
+  match '*path', to: 'pages#index', via: :all
+
   get '/users/:user_id/ratings(.:format)', to: 'ratings#create'
   get 'tags/:tag', to: 'serials#index', as: 'tag'
   get 'genres/:genre', to: 'serials#index', as: 'genre'

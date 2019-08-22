@@ -15,11 +15,8 @@
   </head>
 
   <body>
-    <%= render 'layouts/nav' %>
-    <%= render 'layouts/alert' %>
     <main>
-      <%= yield %>
+      <%= javascript_pack_tag 'index' %>
     </main>
-    <%= render 'layouts/footer' %>
   </body>
 </html>

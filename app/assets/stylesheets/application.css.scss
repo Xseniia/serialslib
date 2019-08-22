@@ -37,7 +37,11 @@ nav {
   }
 }
 
-main {
+.navbar-nav {
+  margin-left: 0;
+}
+
+.main-container {
   @include content-margin;
 }
 
