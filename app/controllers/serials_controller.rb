@@ -16,6 +16,7 @@ class SerialsController < ApplicationController # :nodoc:
     else
       @serials = Serial.all
     end
+    render json: { items: @serials }
   end
 
   # GET /serials/1

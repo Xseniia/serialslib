@@ -5,13 +5,16 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import App from '../App'
 
+import logger from 'redux-logger'
+import thunk from 'redux-thunk'
+
 import reducers from '../redux/reducers'
 
-const store = createStore(reducers);
+const store = createStore(reducers, applyMiddleware(logger, thunk));
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(

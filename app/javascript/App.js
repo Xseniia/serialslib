@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
 import { Route, Switch } from 'react-router-dom'
+import axios from 'axios'
 
 import Navigation from './components/Navigation'
 import Serials from './screens/serials/Serials'
 import Users from './screens/users/Users'
+
+axios.defaults.headers.common['Accept'] = 'application/json'
 
 class App extends Component {
   render () {

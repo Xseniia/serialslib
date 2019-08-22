@@ -2,8 +2,14 @@
 
 Rails.application.routes.draw do
   root to: 'pages#index'
+
+  get 'serials', to: 'serials#index'
+  get 'tags', to: 'tags#index'
+  get 'genres', to: 'genres#index'
   
   match '*path', to: 'pages#index', via: :all
+
+  
 
   get '/users/:user_id/ratings(.:format)', to: 'ratings#create'
   get 'tags/:tag', to: 'serials#index', as: 'tag'
