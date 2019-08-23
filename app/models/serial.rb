@@ -21,9 +21,28 @@ class Serial < ApplicationRecord # :nodoc:
   settings do
     mappings dynamic: false do
       indexes :title, type: :string, analyzer: :english
-      indexes :year_of_premiere, type: :integer
       indexes :description, type: :text, analyzer: :english
     end
+  end
+
+  def self.search(query)
+    __elasticsearch__.search(
+      {
+        query: {
+          multi_match: {
+            query: query,
+            filelds: ['title^10', 'description']
+          }
+        }
+        # highlight: {
+        #   pre_tags: ['<em>'],
+        #   post_tags: ['</em>'],
+        #   fields: {
+        #     title: {}
+        #   }
+        # }
+      }
+    )
   end
 
   index_name([Rails.env, base_class.to_s.pluralize.underscore].join('_'))

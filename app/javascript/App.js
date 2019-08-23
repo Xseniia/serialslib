@@ -4,6 +4,7 @@ import axios from 'axios'
 
 import Navigation from './components/Navigation'
 import Serials from './screens/serials/Serials'
+import SerialItem from './screens/serials/SerialItem'
 import Users from './screens/users/Users'
 
 axios.defaults.headers.common['Accept'] = 'application/json'
@@ -15,8 +16,9 @@ class App extends Component {
         <Navigation />
         <div className='main-container'>
           <Switch>
-            <Route exact path='/serials' component={Serials} />
-            <Route exact path='/users' component={Users} />
+            <Route exact path='/serials_list/:id' component={SerialItem} />
+            <Route exact path='/serials_list' component={Serials} />
+            <Route exact path='/users_list' component={Users} />
             <Route exact path='/' component={Serials} />
           </Switch>
         </div>        

@@ -12,7 +12,7 @@ function SerialsReducer(state=initialState, action) {
     case 'FETCH_ITEMS_SUCCESS':
       return { ...state, [action.itemType]: action.payload, [action.itemType + 'Fetched']: true }
     case 'SEARCH_SERIALS_SUCCESS':
-      return { ...state, serials: action.payload }
+      return { ...state, serials: action.payload, serialsFetched: true }
     default:
       return state;
   }

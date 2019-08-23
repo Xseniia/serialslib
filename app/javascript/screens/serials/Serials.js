@@ -9,7 +9,7 @@ class Serials extends Component {
   componentDidMount() {
     if(this.props.tagsFetched === false) this.props.fetchItems('tags');
     if(this.props.genresFetched === false) this.props.fetchItems('genres');
-    if(this.props.serialsFetched === false) this.props.serialSearch;
+    if(this.props.serialsFetched === false) this.props.searchSerial();
   }
 
   handleSubmit = (e) => {
@@ -20,7 +20,20 @@ class Serials extends Component {
     this.props.searchSerial(e.target.value)
   }
 
+  handleFilter = (e) => {
+    e.preventDefault()
+
+    let name = e.target.getAttribute('name')
+    let value = e.target.getAttribute('value')
+
+    if(name === 'tag') {
+      this.props.searchSerial('', value)
+    } else this.props.searchSerial('', '', value)
+  }
+
   render () {
+    const serials_message = this.props.serialsFetched ? 'No serials found.' : 'Loading serials...'
+
     return (
       <div className='serials-container'>
         <div className='serials-head'>
@@ -30,8 +43,7 @@ class Serials extends Component {
 
           <div className="serials-search">
             <form className='form-row' onSubmit={this.handleSubmit}>
-              <input name='search' type='text' placeholder='Search' className="form-group col-md-11 serials-search-field" onChange={this.handleSearchChange}/>
-              <button type='submit' className="btn btn-light col-md-1">Search</button>
+              <input name='search' type='text' placeholder='Search' className="form-group col-md-12 serials-search-field" onChange={this.handleSearchChange}/>
             </form>
           </div>
 
@@ -41,24 +53,21 @@ class Serials extends Component {
             <div className='filters'>
               <div className='filter tag-filter'>
                 { this.props.tags[0] ? <h3>Tags</h3> : null }
-                <ul>
-                  { this.props.tags.map((tag, index) => <li>{tag.tag_name}</li>) }
-                </ul>
+                { this.props.tags.map((tag, index) => <a href='#' key={index} name='tag' value={tag.tag_name} onClick={this.handleFilter} className='badge badge-light'>{tag.tag_name}</a>) }
+                <a href='#' name='tag' value='' onClick={this.handleFilter} className='badge badge-light'>all</a>
               </div>
+
               <div className='filter genre-filter'>
                 { this.props.genres[0] ? <h3>Genres</h3> : null }
-                <ul>
-                  { this.props.genres.map((genre, index) => <li>{genre.title}</li>) }
-                </ul>
+                { this.props.genres.map((genre, index) => <a href='#' key={index} name='genre' value={genre.title} onClick={this.handleFilter} className='badge badge-light'>{genre.title}</a>) }
               </div>
             </div>
 
-            <div className='serials-container'>
-              { this.props.serials[0] ? 
-                <SerialCards serials={this.props.serials} /> :
-                <h4>Loading serials...</h4>
-              }
-            </div>
+            { 
+              this.props.serials[0] ? 
+              <SerialCards serials={this.props.serials} /> :
+              <h4>{serials_message}</h4>
+            }
           </div>
         </div>
       </div>

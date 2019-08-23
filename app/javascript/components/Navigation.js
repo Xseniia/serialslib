@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 class Navigation extends Component {
   render() {
@@ -7,32 +8,32 @@ class Navigation extends Component {
         <div className="navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item">
-              <a href='#' className='nav-link'>
+              <Link to='/' className='nav-link'>
                 <i className="film-icon fas fa-film"></i>
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a href='#' className='nav-link'>Serials</a>
+              <Link to='/serials_list' className='nav-link'>Serials</Link>
             </li>
             <li className="nav-item">
-              <a href='#' className='nav-link'>Users</a>
+              <Link to='/users_list' className='nav-link'>Users</Link>
             </li>
           </ul>
 
           <ul className="navbar-nav">
 
               <li className="nav-item">
-                <a href='#' className='nav-link'>My account</a>
+                <Link to='#' className='nav-link'>My account</Link>
               </li>
               <li className="nav-item">
-                <a href='#' className='nav-link'>Sign out</a>
+                <Link to='#' className='nav-link'>Sign out</Link>
               </li>
 
               <li className="nav-item">
-                <a href='#' className='nav-link'>Sign in</a>
+                <Link to='#' className='nav-link'>Sign in</Link>
               </li>
               <li className="nav-item">
-                <a href='#' className='nav-link'>Sign up</a>
+                <Link to='#' className='nav-link'>Sign up</Link>
               </li>
 
           </ul>

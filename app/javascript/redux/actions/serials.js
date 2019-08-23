@@ -14,10 +14,9 @@ export const fetchItems = (item_name) => {
 
 const fetchItemsSuccess = (items, item_name) => ({ type: 'FETCH_ITEMS_SUCCESS', itemType: item_name, payload: items });
 
-export const searchSerial = (query) => {
-  if(query == nil) query = '';
+export const searchSerial = (query='', tag='', genre='') => {
   return(dispatch => {
-    axios.get(`http://localhost:3000/serials?query=${query}`)
+    axios.get(`http://localhost:3000/serials?query=${query}&&tag=${tag}&&genre=${genre}`)
       .then(response => {
         dispatch(searchSerialSuccess(response.data.items))
       })
