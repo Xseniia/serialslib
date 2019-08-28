@@ -4,7 +4,9 @@ const initialState = {
   genres: [],
   genresFetched: false,
   serials: [],
-  serialsFetched: false
+  serialsFetched: false,
+  actors: [],
+  actorsFetched: false
 }
 
 function SerialsReducer(state=initialState, action) {

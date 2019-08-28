@@ -25,26 +25,6 @@ class Serial < ApplicationRecord # :nodoc:
     end
   end
 
-  def self.search(query)
-    __elasticsearch__.search(
-      {
-        query: {
-          multi_match: {
-            query: query,
-            filelds: ['title^10', 'description']
-          }
-        }
-        # highlight: {
-        #   pre_tags: ['<em>'],
-        #   post_tags: ['</em>'],
-        #   fields: {
-        #     title: {}
-        #   }
-        # }
-      }
-    )
-  end
-
   index_name([Rails.env, base_class.to_s.pluralize.underscore].join('_'))
 
   # associations

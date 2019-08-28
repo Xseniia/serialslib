@@ -6,9 +6,19 @@ Rails.application.routes.draw do
   get 'serials', to: 'serials#index'
   get 'tags', to: 'tags#index'
   get 'genres', to: 'genres#index'
+  get 'actors', to: 'actors#index'
+  get 'serials/:id', to: 'serials#show'
+  get 'seasons', to: 'seasons#get_serial_seasons'
+
+  post 'serials/:id/add_genre', to: 'genres#add_genre'
+  post 'serials/:id/add_tag', to: 'tags#add_tag'
+  post 'serials/:id/add_actor', to: 'actors#add_actor'
+
+  delete 'serials/:id/delete_genre', to: 'genres#delete_genre'
+  delete 'serials/:id/delete_tag', to: 'tags#delete_tag'
+  delete 'serials/:id/delete_actor', to: 'actors#delete_actor'
   
   match '*path', to: 'pages#index', via: :all
-
   
 
   get '/users/:user_id/ratings(.:format)', to: 'ratings#create'
@@ -19,26 +29,6 @@ Rails.application.routes.draw do
   resources :users do
     resources :ratings
     resources :view_statuses
-  end
-
-  resources :serials do
-    resources :seasons
-    resources :favourites, except: [:index]
-    resources :serial_countries
-
-    member do
-      patch :add_genre
-      delete :delete_genre
-
-      patch :add_actor
-      delete :delete_actor
-
-      patch :add_tag
-      delete :delete_tag
-
-      patch :add_view_status
-      patch :update_view_status
-    end
   end
 
   resources :seasons, only: [:show] do

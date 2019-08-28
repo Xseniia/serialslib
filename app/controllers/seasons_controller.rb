@@ -5,6 +5,10 @@ class SeasonsController < ApplicationController # :nodoc:
 
   def show; end
 
+  def get_serial_seasons
+    render json: { seasons: Season.where(serial_id: params[:serial_id]) }
+  end
+
   private
 
   def set_season

@@ -42,8 +42,13 @@ class Serials extends Component {
           <br/>
 
           <div className="serials-search">
-            <form className='form-row' onSubmit={this.handleSubmit}>
-              <input name='search' type='text' placeholder='Search' className="form-group col-md-12 serials-search-field" onChange={this.handleSearchChange}/>
+            <form className='form-row' 
+                  onSubmit={this.handleSubmit}>
+              <input name='search' 
+                     type='text' 
+                     placeholder='Search' 
+                     className="form-group col-md-12 serials-search-field" 
+                     onChange={this.handleSearchChange}/>
             </form>
           </div>
 
@@ -52,14 +57,36 @@ class Serials extends Component {
           <div className='serials-body'>
             <div className='filters'>
               <div className='filter tag-filter'>
-                { this.props.tags[0] ? <h3>Tags</h3> : null }
-                { this.props.tags.map((tag, index) => <a href='#' key={index} name='tag' value={tag.tag_name} onClick={this.handleFilter} className='badge badge-light'>{tag.tag_name}</a>) }
-                <a href='#' name='tag' value='' onClick={this.handleFilter} className='badge badge-light'>all</a>
+                <h3>Tags</h3>
+                { this.props.tags.map((tag, index) => 
+                  <a href='#' 
+                     key={index} 
+                     name='tag' 
+                     value={tag.tag_name} 
+                     onClick={this.handleFilter} 
+                     className='badge badge-light'>{tag.tag_name}</a>) 
+                }
+                <a href='#' 
+                   name='tag' 
+                   value='' 
+                   onClick={this.handleFilter} 
+                   className='badge badge-light'>all</a>
               </div>
 
               <div className='filter genre-filter'>
-                { this.props.genres[0] ? <h3>Genres</h3> : null }
-                { this.props.genres.map((genre, index) => <a href='#' key={index} name='genre' value={genre.title} onClick={this.handleFilter} className='badge badge-light'>{genre.title}</a>) }
+                <h3>Genres</h3>
+                { this.props.genres.map((genre, index) => 
+                  <a href='#' 
+                     key={index} 
+                     name='genre' 
+                     value={genre.title} 
+                     onClick={this.handleFilter} 
+                     className='badge badge-light'>{genre.title}</a>) }
+                <a href='#' 
+                   name='tag' 
+                   value='' 
+                   onClick={this.handleFilter} 
+                   className='badge badge-light'>all</a>
               </div>
             </div>
 

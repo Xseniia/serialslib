@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class SerialsController < ApplicationController # :nodoc:
-  before_action :set_serial, only: %i[show edit update destroy add_genre delete_genre add_actor delete_actor add_tag delete_tag add_view_status]
+  before_action :set_serial, only: %i[show edit update destroy add_view_status]
   before_action :set_view_status, only: %i[add_view_status]
 
   # GET /serials
@@ -21,7 +21,15 @@ class SerialsController < ApplicationController # :nodoc:
 
   # GET /serials/1
   # GET /serials/1.json
-  def show; end
+  def show
+    render json: { 
+      serial: @serial,
+      seasons: @serial.seasons,
+      tags: @serial.tags,
+      genres: @serial.genres,
+      actors: @serial.actors
+    }
+  end
 
   # GET /serials/new
   def new
@@ -42,52 +50,6 @@ class SerialsController < ApplicationController # :nodoc:
       else
         format.html { render :new }
       end
-    end
-  end
-
-  # GENRES
-  def add_genre
-    @serial.genres << Genre.find_by_id(params[:genre_select]) unless SerialGenre.find_by(serial_id: @serial.id, genre_id: params[:genre_select]).present?
-    respond_to do |format|
-      format.html { redirect_to @serial, notice: 'Genre was successfully added.' }
-    end
-  end
-
-  def delete_genre
-    @serial.genres.destroy(Genre.find_by_id(params[:genre_id]))
-    respond_to do |format|
-      format.html { redirect_to @serial, notice: 'Genre was successfully deleted.' }
-    end
-  end
-
-  # ACTORS
-  def add_actor
-    @serial.actors << Actor.find_by_id(params[:actor_select]) unless SerialActor.find_by(serial_id: @serial.id, actor_id: params[:actor_select]).present?
-    respond_to do |format|
-      format.html { redirect_to @serial, notice: 'Actor was successfully added.' }
-    end
-  end
-
-  def delete_actor
-    @serial.actors.destroy(Actor.find_by_id(params[:actor_id]))
-    respond_to do |format|
-      format.html { redirect_to @serial, notice: 'Actor was successfully deleted.' }
-    end
-  end
-
-  # TAGS
-  def add_tag
-    tag = Tag.find_or_create_by(tag_name: params.dig(:serial, :serial_tags, :tags, :tag))
-    @serial.tags << tag unless SerialTag.find_by(serial_id: @serial.id, tag_id: tag.id).present?
-    respond_to do |format|
-      format.html { redirect_to @serial, notice: 'Tag was successfully added.' }
-    end
-  end
-
-  def delete_tag
-    @serial.tags.destroy(Tag.find_by_id(params[:tag_id]))
-    respond_to do |format|
-      format.html { redirect_to @serial, notice: 'Tag was successfully deleted.' }
     end
   end
 

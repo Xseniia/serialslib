@@ -27,3 +27,4 @@ export const searchSerial = (query='', tag='', genre='') => {
 }
 
 const searchSerialSuccess = (queryResults) => ({ type: 'SEARCH_SERIALS_SUCCESS', payload: queryResults })
+
