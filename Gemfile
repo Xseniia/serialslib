@@ -57,6 +57,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 # Use Devise gem for flexible authentication solutions
 gem 'devise', '~> 4.2'
+gem 'simple_token_authentication', '~> 1.0'
 # Bootstrap
 gem 'bootstrap', '~> 4.3.1'
 gem 'jquery-rails'

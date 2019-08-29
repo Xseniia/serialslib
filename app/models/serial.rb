@@ -90,6 +90,10 @@ class Serial < ApplicationRecord # :nodoc:
   def self.with_genre_filter(name)
     Genre.find_by_title(name).serials
   end
+
+  # def is_favourite?(user)
+  #   user.includes(:serials_fav).where(serial_id: id).present? true : false
+  # end
 end
 
 # Serial.import

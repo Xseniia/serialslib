@@ -17,15 +17,21 @@ Rails.application.routes.draw do
   delete 'serials/:id/delete_genre', to: 'genres#delete_genre'
   delete 'serials/:id/delete_tag', to: 'tags#delete_tag'
   delete 'serials/:id/delete_actor', to: 'actors#delete_actor'
-  
+
+  namespace :user do
+    resources :sessions, only: %i[index create]
+    delete 'session', to: 'sessions#reset'
+  end
+
+  # devise_for :users, controllers: { confirmations: 'confirmations', omniauth_callbacks: 'omniauth_callbacks' }
+
   match '*path', to: 'pages#index', via: :all
-  
+
 
   get '/users/:user_id/ratings(.:format)', to: 'ratings#create'
   get 'tags/:tag', to: 'serials#index', as: 'tag'
   get 'genres/:genre', to: 'serials#index', as: 'genre'
 
-  devise_for :users, controllers: { confirmations: 'confirmations', omniauth_callbacks: 'omniauth_callbacks' }
   resources :users do
     resources :ratings
     resources :view_statuses

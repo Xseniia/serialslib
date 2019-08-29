@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { fetchItems, searchSerial } from '../../redux/actions/'
 import { connect } from 'react-redux';
 
-import SerialCards from '../../components/SerialCards'
+import SerialCards from '../../components/serials/SerialCards'
  
 class Serials extends Component {
   componentDidMount() {

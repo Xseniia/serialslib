@@ -1,5 +1,4 @@
 const initialState = {
-
 }
 
 function UsersReducer(state=initialState, action) {
