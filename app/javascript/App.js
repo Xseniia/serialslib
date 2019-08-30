@@ -12,6 +12,7 @@ import SerialItem from './screens/serials/SerialItem'
 import SeasonItem from './screens/serials/SeasonItem'
 
 import Users from './screens/users/Users'
+import UserPage from './screens/users/UserPage'
 
 import { getCurrentUser } from './redux/actions'
 
@@ -36,6 +37,7 @@ class App extends Component {
             <Route exact path='/serials_list/:id' component={SerialItem} />
             <Route exact path='/serials_list' component={Serials} />
             <Route exact path='/users_list' component={Users} />
+            <Route exact path='/user/:id' component={UserPage} />
             <Route exact path='/' component={Serials} />
           </Switch>
         </div>

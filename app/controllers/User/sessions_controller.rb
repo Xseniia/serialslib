@@ -5,10 +5,8 @@ class User::SessionsController < ApplicationController
   before_action :get_current_user
 
   def index
-    user = @current_user if @current_user.present?
-
     render json: {
-      currentUser: user
+      currentUser: @current_user
     }
   end
 
@@ -30,16 +28,24 @@ class User::SessionsController < ApplicationController
   end
 
   # DELETE /user/session
-  def reset
+  def destroy
     session.delete(:user_id)
     render json: {
-      session: session[user_id],
+      session: session[:user_id],
       status: :deleted,
       notice: 'sessions destroyed'
     }
   end
 
   # protected
+
+  def user_id
+    session[:user_id] ||= nil
+  end
+
+  def get_current_user
+    @current_user = User.find_by_id(user_id)
+  end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_in_params

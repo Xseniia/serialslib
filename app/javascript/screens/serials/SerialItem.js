@@ -12,7 +12,7 @@ class SerialItem extends Component {
   }
 
   componentDidMount = () => {
-    const serialId = this.props.match.params.id 
+    const serialId = this.props.match.params.id
     this.props.collectSerialData(serialId);
     if(this.props.genresFetched === false) this.props.fetchItems('genres');
     if(this.props.actorsFetched === false) this.props.fetchItems('actors')
@@ -24,7 +24,7 @@ class SerialItem extends Component {
     switch(e.target.name) {
       case 'genre':
         value = this.state.genre_id
-        break 
+        break
       case 'tag':
         value = this.state.tag_name
         break
@@ -33,7 +33,7 @@ class SerialItem extends Component {
         break
     }
     this.props.setSerialParams(this.props.match.params.id, e.target.name, value, this.componentDidMount)
-    this.setState({ 
+    this.setState({
       genre_id: '',
       tag_name: '',
       actor_id: ''
@@ -88,67 +88,67 @@ class SerialItem extends Component {
             <div className='serial-info'>
               <div className='main-info info-div'>
                 <p className='serial-info-header'>Genres</p>
-                { genres.length!=0 ? 
-                  genres.map(genre => <p key={genre.id} className='badge badge-light'>{ genre.title } <i name='delete_genre' value={genre.id} className="fas fa-times" onClick={this.handleDeleleSerialParam}></i></p>) : 
+                { genres.length!=0 ?
+                  genres.map(genre => <p key={genre.id} className='badge badge-light'>{ genre.title } <i name='delete_genre' value={genre.id} className="fas fa-times" onClick={this.handleDeleleSerialParam}></i></p>) :
                   <p className='no-info'>No genres</p> }
 
-                <form className='form-row' 
-                      name='genre' 
+                <form className='form-row'
+                      name='genre'
                       onSubmit={ this.handleSetSerialParams }>
-                  <select name='genre_id' 
-                          id='genre_select' 
-                          className='user-dropdown' 
-                          value={this.state.genre_id} 
+                  <select name='genre_id'
+                          id='genre_select'
+                          className='user-dropdown'
+                          value={this.state.genre_id}
                           onChange={this.handleChange}>
                     <option value='' disabled selected>Select genre</option>
                     { genreList.map(genre => <option value={ genre.id }>{ genre.title }</option>) }
                   </select>
-                  <button type='submit' 
+                  <button type='submit'
                           className="btn btn-light user-button">Add</button>
                   <br/>
                 </form>
 
                 <p className='serial-info-header'>Tags</p>
-                { tags.length!=0 ? 
-                  tags.map(tag => <p className='badge badge-light'>{ tag.tag_name } <i name='delete_tag' value={ tag.id } className="fas fa-times" onClick={this.handleDeleleSerialParam}></i></p>) : 
+                { tags.length!=0 ?
+                  tags.map(tag => <p className='badge badge-light'>{ tag.tag_name } <i name='delete_tag' value={ tag.id } className="fas fa-times" onClick={this.handleDeleleSerialParam}></i></p>) :
                   <p className='no-info'>No tags</p> }
 
-                <form name='tag' 
-                      className='form-row' 
+                <form name='tag'
+                      className='form-row'
                       onSubmit={ this.handleSetSerialParams }>
-                  <input type='text' 
-                         name='tag_name' 
-                         className='user-dropdown' 
-                         id='tag_select' 
-                         placeholder='ex: superheroes' 
-                         value={this.state.tag_name} 
+                  <input type='text'
+                         name='tag_name'
+                         className='user-dropdown'
+                         id='tag_select'
+                         placeholder='ex: superheroes'
+                         value={this.state.tag_name}
                          onChange={this.handleChange} />
-                  <button type='submit' 
+                  <button type='submit'
                           className="btn btn-light user-button">Add</button>
                   <br/>
                 </form>
 
                 <p className='serial-info-header'>Actors</p>
-                { actors.length!=0 ? 
-                  actors.map(actor => <p className='badge badge-light'>{ actor.first_name } { actor.last_name } <i name='delete_actor' value={ actor.id } className="fas fa-times" onClick={this.handleDeleleSerialParam}></i></p>) : 
+                { actors.length!=0 ?
+                  actors.map(actor => <p className='badge badge-light'>{ actor.first_name } { actor.last_name } <i name='delete_actor' value={ actor.id } className="fas fa-times" onClick={this.handleDeleleSerialParam}></i></p>) :
                   <p className='no-info'>No actors</p> }
 
-                <form className='form-row' 
-                      name='actor' 
+                <form className='form-row'
+                      name='actor'
                       onSubmit={this.handleSetSerialParams}>
-                  <select name='actor_id' 
-                          id='actor_select' 
-                          className='user-dropdown' 
-                          value={this.state.actor_id} 
+                  <select name='actor_id'
+                          id='actor_select'
+                          className='user-dropdown'
+                          value={this.state.actor_id}
                           onChange={this.handleChange}>
                     <option value='' disabled selected>Select actor</option>
                     { actorsList.map(actor => <option value={ actor.id }>{ actor.first_name } { actor.last_name }</option>) }
                   </select>
-                  <button type='submit' 
+                  <button type='submit'
                           className="btn btn-light user-button">Add</button>
                   <br/>
                 </form>
-                
+
                 </div>
 
                 <div className="serial-rating-status info-div">
@@ -210,7 +210,7 @@ class SerialItem extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { 
+  return {
     serial: state.currentSerial,
     genres: state.serials.genres,
     genresFetched: state.serials.genresFetched,

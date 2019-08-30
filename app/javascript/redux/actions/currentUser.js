@@ -3,10 +3,12 @@ import axios from "axios";
 export const getCurrentUser = () => {
   return(dispatch => {
     axios.get(`http://localhost:3000/user/sessions`)
-      .then(res => { dispatch(userSignedIn(res.data.currentUser)) })
+      .then(res => { return dispatch(getCurrentUserSuccess(res.data.currentUser)) })
       .catch(err => { debugger })
   })
 }
+
+const getCurrentUserSuccess = (user) => ({ type: 'GET_CURRENT_USER_SUCCESS', payload: user })
 
 export const userSignIn = (email, pass) => {
   return(dispatch => {
@@ -25,7 +27,7 @@ const userSignedIn = (user) => ({ type: 'USER_SIGNED_IN', payload: user })
 export const userSignOut = () => {
   return(dispatch => {
     axios.delete(`http://localhost:3000/user/session`)
-      .then(res => { dispatch(userSignedOut(res.data.session)) })
+      .then(res => { return dispatch(userSignedOut(res.data.session)) })
       .catch(err => { debugger })
   })
 }

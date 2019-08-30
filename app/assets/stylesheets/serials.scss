@@ -15,30 +15,38 @@
 
   }
 
-  .serials-content {
+  .serials-content-container {
 
     width: 85%;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
 
-    .serial-card {
-
-      max-width: 320px;
-      height: 570px;
+    .add-serial-btn {
       margin: 15px;
+    }
 
-      .card-body {
+    .serials-content {
 
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+
+      .serial-card {
+
+        max-width: 320px;
         height: 570px;
+        margin: 15px;
 
-        .card-links {
+        .card-body {
 
-          margin-top: 10px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          height: 570px;
 
+          .card-links {
+
+            margin-top: 10px;
+
+          }
         }
       }
     }

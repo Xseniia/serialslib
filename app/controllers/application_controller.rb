@@ -6,14 +6,6 @@ class ApplicationController < ActionController::Base # :nodoc:
   protect_from_forgery with: :null_session
   acts_as_token_authentication_handler_for User, fallback_to_devise: false
 
-  def user_id
-    session[:user_id] ||= nil
-  end
-
-  def get_current_user
-    @current_user = User.find_by_id(user_id)
-  end
-
   protected
 
   def configure_permitted_parameters

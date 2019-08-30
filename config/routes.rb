@@ -20,7 +20,7 @@ Rails.application.routes.draw do
 
   namespace :user do
     resources :sessions, only: %i[index create]
-    delete 'session', to: 'sessions#reset'
+    delete 'session', to: 'sessions#destroy'
   end
 
   # devise_for :users, controllers: { confirmations: 'confirmations', omniauth_callbacks: 'omniauth_callbacks' }

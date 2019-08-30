@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 
 import { userSignIn } from '../../redux/actions/'
@@ -15,7 +16,6 @@ class SignIn extends Component {
   }
 
   handleLogIn = (e) => {
-    e.preventDefault()
     const { email, password } = this.state
     this.props.userSignIn(email, password)
   }
@@ -23,9 +23,8 @@ class SignIn extends Component {
   render() {
     return(
       <div>
-        <form onSubmit={this.handleLogIn}>
+        <form>
           <h2>Log in</h2>
-
           <div className='form-group col-md-7'>
             <label>Email</label>
             <input type='text' name='email' value={this.state.email} autoFocus={true} placeholder='email' autoComplete='email' className='form-control' onChange={this.handleChange}></input>
@@ -35,7 +34,7 @@ class SignIn extends Component {
             <input type='password' name='password' value={this.state.password} placeholder='password' autoComplete='current_password' className='form-control' onChange={this.handleChange}></input>
           </div>
           <div className='actions'>
-            <button type='submit' className='btn btn-secondary'>Log in</button>
+            <Link to='/serials_list' className='btn btn-secondary' onClick={this.handleLogIn}>Log in</Link>
           </div>
         </form>
       </div>

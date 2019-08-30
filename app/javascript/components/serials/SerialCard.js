@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom'
 
 class SerialCard extends Component {
   render() {
-    const serial = this.props.serial
+    const { serial } = this.props
+    const { userSignedIn, userAdmin } = this.props
 
     return(
       <div className="card serial-card">
@@ -18,8 +19,10 @@ class SerialCard extends Component {
 
           <div className="card-links">
             <Link to={`/serials_list/${serial.id}`} className="btn btn-light">Show</Link>
-            <Link to='#' className="btn btn-light">Edit</Link>
-            <Link to='#' className="btn btn-light">Destroy</Link>
+            { userAdmin ?
+                <span><Link to='#' className="btn btn-light">Edit</Link>
+                <Link to='#' className="btn btn-light">Destroy</Link></span> :
+                null }
           </div>
         </div>
       </div>
