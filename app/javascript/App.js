@@ -10,6 +10,7 @@ import SignUp from './screens/users/SignUp'
 import Serials from './screens/serials/Serials'
 import SerialItem from './screens/serials/SerialItem'
 import SeasonItem from './screens/serials/SeasonItem'
+import EpisodeItem from './screens/serials/EpisodeItem'
 
 import Users from './screens/users/Users'
 import UserPage from './screens/users/UserPage'
@@ -33,7 +34,8 @@ class App extends Component {
           <Switch>
             <Route exact path='/sign_in' component={SignIn} />
             <Route exact path='/sign_up' component={SignUp} />
-            <Route exact path='/serials_list/:id/season/:id' component={SeasonItem} />
+          <Route exact path='/serials_list/:serial_id/season/:season_id/episode/:id' component={EpisodeItem} />
+            <Route exact path='/serials_list/:serial_id/season/:id' component={SeasonItem} />
             <Route exact path='/serials_list/:id' component={SerialItem} />
             <Route exact path='/serials_list' component={Serials} />
             <Route exact path='/users_list' component={Users} />

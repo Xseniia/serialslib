@@ -194,7 +194,10 @@ class SerialItem extends Component {
 
         <hr className="my-4"/>
         <h3>Seasons:</h3>
-          { seasons.map((season, index) => <Link to={`/serials_list/${serial.id}/season/${season.id}`} className="list-item badge badge-light">Season {index + 1}</Link>) }
+          { seasons.map((season, index) =>
+            <Link
+              to={`/serials_list/${serial.id}/season/${season.id}`}
+               className="list-item badge badge-light">Season {index + 1}</Link>) }
 
           {/* <% @serial.seasons.ordered_by_count.each do |season| %>
             <li className="list-item">

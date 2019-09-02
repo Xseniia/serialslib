@@ -35,7 +35,7 @@ end
 
 # Rick and Morty
 (1..3).each do |i|
-  Season.create(serial_id: '8')/
+  Season.create(serial_id: '8')
 end
 
 # Game of Thrones season 1

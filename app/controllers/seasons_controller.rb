@@ -1,7 +1,15 @@
 # frozen_string_literal: true
 
 class SeasonsController < ApplicationController # :nodoc:
-  before_action :set_season, only: %i[show destroy]
+  before_action :set_season
+
+  def index
+    render json: {
+      seasonIndex: Season.where(serial_id: @season.serial.id).find_index(@season) + 1,
+      serialTitle: @season.serial.title,
+      episodes: Episode.where(season_id: @season.id)
+    }
+  end
 
   def show; end
 
