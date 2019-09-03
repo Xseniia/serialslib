@@ -215,10 +215,10 @@ class SerialItem extends Component {
 const mapStateToProps = (state) => {
   return {
     serial: state.currentSerial,
-    genres: state.serials.genres,
-    genresFetched: state.serials.genresFetched,
-    actors: state.serials.actors,
-    actorsFetched: state.serials.actorsFetched
+    genres: state.fetchedItems.genres,
+    genresFetched: state.fetchedItems.genresFetched,
+    actors: state.fetchedItems.actors,
+    actorsFetched: state.fetchedItems.actorsFetched
     }
 }
 

@@ -8,9 +8,9 @@ import SerialCards from '../../components/serials/SerialCards'
 
 class Serials extends Component {
   componentDidMount() {
-    if(this.props.tagsFetched === false) this.props.fetchItems('tags');
-    if(this.props.genresFetched === false) this.props.fetchItems('genres');
-    if(this.props.serialsFetched === false) this.props.searchSerial();
+    if(this.props.fetchedItems.tagsFetched === false) this.props.fetchItems('tags');
+    if(this.props.fetchedItems.genresFetched === false) this.props.fetchItems('genres');
+    if(this.props.serials.serialsFetched === false) this.props.searchSerial();
   }
 
   handleSubmit = (e) => {
@@ -33,7 +33,7 @@ class Serials extends Component {
   }
 
   render () {
-    const serials_message = this.props.serialsFetched ? 'No serials found.' : 'Loading serials...'
+    const serials_message = this.props.serials.serialsFetched ? 'No serials found.' : 'Loading serials...'
 
     return (
       <div className='serials-container'>
@@ -59,7 +59,7 @@ class Serials extends Component {
             <div className='filters'>
               <div className='filter tag-filter'>
                 <h3>Tags</h3>
-                { this.props.tags.map((tag, index) =>
+                { this.props.fetchedItems.tags.map((tag, index) =>
                   <a href='#'
                      key={index}
                      name='tag'
@@ -76,7 +76,7 @@ class Serials extends Component {
 
               <div className='filter genre-filter'>
                 <h3>Genres</h3>
-                { this.props.genres.map((genre, index) =>
+                { this.props.fetchedItems.genres.map((genre, index) =>
                   <a href='#'
                      key={index}
                      name='genre'
@@ -92,8 +92,8 @@ class Serials extends Component {
             </div>
 
             {
-              this.props.serials[0] ?
-              <SerialCards serials={this.props.serials} /> :
+              this.props.serials.serials[0] ?
+              <SerialCards serials={this.props.serials.serials} /> :
               <h4>{serials_message}</h4>
             }
           </div>
@@ -104,7 +104,10 @@ class Serials extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return state.serials
+  return {
+    serials: state.serials,
+    fetchedItems: state.fetchedItems
+  }
 }
 
 export default connect(mapStateToProps, { fetchItems, searchSerial })(Serials)

@@ -40,7 +40,7 @@ class User::SessionsController < ApplicationController
   # protected
 
   def user_id
-    session[:user_id] ||= nil
+    session[:user_id]
   end
 
   def get_current_user

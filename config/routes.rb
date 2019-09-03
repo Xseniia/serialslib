@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get 'tags', to: 'tags#index'
   get 'genres', to: 'genres#index'
   get 'actors', to: 'actors#index'
+  get 'countries', to: 'countries#index'
   get 'serials/:id', to: 'serials#show'
   get 'seasons', to: 'seasons#get_serial_seasons'
   get 'season/:id', to: 'seasons#index'
