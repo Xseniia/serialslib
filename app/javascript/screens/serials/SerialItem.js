@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { collectSerialData, fetchItems, setSerialParams, deleteSerialParams } from '../../redux/actions/'
+import { collectSerialData, fetchItems, setSerialParams, deleteSerialParams, addToFavourite } from '../../redux/actions/'
+
+import FavButton from '../../components/serials/FavButton'
 
 class SerialItem extends Component {
   state = {
@@ -11,9 +13,10 @@ class SerialItem extends Component {
     actor_id: ''
   }
 
-  componentDidMount() {
-    const serialId = this.props.match.params.id
-    this.props.collectSerialData(serialId);
+  componentDidMount = () => {
+    const serialId = this.props.match.params.id;
+    const { currentUser } = this.props;
+    this.props.collectSerialData(serialId, currentUser);
     if(this.props.genresFetched === false) this.props.fetchItems('genres');
     if(this.props.actorsFetched === false) this.props.fetchItems('actors')
   }
@@ -31,8 +34,9 @@ class SerialItem extends Component {
       case 'actor':
         value = this.state.actor_id
         break
-    }
-    this.props.setSerialParams(this.props.match.params.id, e.target.name, value, this.componentDidMount)
+    };
+
+    this.props.setSerialParams(this.props.match.params.id, e.target.name, value, this.componentDidMount);
     this.setState({
       genre_id: '',
       tag_name: '',
@@ -50,10 +54,26 @@ class SerialItem extends Component {
     console.log(this.props)
   }
 
+  handleFavourite = (e) => {
+    console.log(this.props.currentUser)
+    switch(e.target.name) {
+      case 'add':
+        this.props.addToFavourite(this.props.serial.serial.id, this.props.currentUser, 'add_to_favourite');
+        break;
+      case 'remove':
+        this.props.addToFavourite(this.props.serial.serial.id, this.props.currentUser, 'remove_from_favourite');
+        break;
+      default:
+        return
+    }
+
+  }
+
   render() {
     const { serial, seasons, tags, genres, actors } = this.props.serial,
           genreList = this.props.genres,
-          actorsList = this.props.actors;
+          actorsList = this.props.actors,
+          { currentUser } = this.props;
 
 
     return(
@@ -66,11 +86,7 @@ class SerialItem extends Component {
           <div className="serial-body">
             <div className='title-block'>
               <h2 className="display-5">{serial.title}</h2>
-              <div className="title-fav">
-                <div className="title-fav">
-                  <button className='btn btn-light'>Add to favourites</button>
-                </div>
-              </div>
+            <FavButton currentUser={currentUser} isFav={this.props.isFav} handleFavourite={this.handleFavourite} />
             </div>
 
             <p>
@@ -163,23 +179,27 @@ class SerialItem extends Component {
                     <% end %> */}
                   </div>
 
-                  <div className='rating'>
-                    <p>My rating </p>
+                  { currentUser ?
+                    <div className='rating'>
+                      <p>My rating </p>
 
-                      {/* <% counter = 0 %>
-                      <% @serial.current_user_stars(current_user).times do |i| %>
-                      <% counter += 1 %>
-                        <%= button_to user_ratings_path(user_id: current_user.id, serial_id: @serial.id, value: counter), method: :post, class: 'star-btn', value: "#{ counter }" do %>
-                          <%= icon('fas', 'star', class: 'rating-star', id: "#{ counter }") %>
+                        {/* <% counter = 0 %>
+                        <% @serial.current_user_stars(current_user).times do |i| %>
+                        <% counter += 1 %>
+                          <%= button_to user_ratings_path(user_id: current_user.id, serial_id: @serial.id, value: counter), method: :post, class: 'star-btn', value: "#{ counter }" do %>
+                            <%= icon('fas', 'star', class: 'rating-star', id: "#{ counter }") %>
+                          <% end %>
                         <% end %>
-                      <% end %>
-                      <% @serial.current_user_empty_stars(current_user).times do |i| %>
-                      <% counter += 1 %>
-                        <%= button_to user_ratings_path(user_id: current_user, serial_id: @serial, value: counter), method: :post, action: 'create', class: 'star-btn', value: "#{ counter }" do %>
-                          <%= icon('far', 'star', class: 'rating-star', id: "#{ counter }") %>
-                        <% end %>
-                      <% end %> */}
-                  </div>
+                        <% @serial.current_user_empty_stars(current_user).times do |i| %>
+                        <% counter += 1 %>
+                          <%= button_to user_ratings_path(user_id: current_user, serial_id: @serial, value: counter), method: :post, action: 'create', class: 'star-btn', value: "#{ counter }" do %>
+                            <%= icon('far', 'star', class: 'rating-star', id: "#{ counter }") %>
+                          <% end %>
+                        <% end %> */}
+                    </div> : null
+                  }
+
+
 
                   {/* <div className="status">
                     <% if current_user.present? %>
@@ -213,13 +233,17 @@ class SerialItem extends Component {
 }
 
 const mapStateToProps = (state) => {
+  const currUserId = state.currentUser.user != null ? state.currentUser.user.id : null
+
   return {
     serial: state.currentSerial,
     genres: state.fetchedItems.genres,
     genresFetched: state.fetchedItems.genresFetched,
     actors: state.fetchedItems.actors,
-    actorsFetched: state.fetchedItems.actorsFetched
+    actorsFetched: state.fetchedItems.actorsFetched,
+    currentUser: currUserId,
+    isFav: state.currentSerial.isFav
     }
 }
 
-export default connect(mapStateToProps, { collectSerialData, fetchItems, setSerialParams, deleteSerialParams })(SerialItem)
+export default connect(mapStateToProps, { collectSerialData, fetchItems, setSerialParams, deleteSerialParams, addToFavourite })(SerialItem)

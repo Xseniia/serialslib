@@ -22,12 +22,15 @@ class SerialsController < ApplicationController # :nodoc:
   # GET /serials/1
   # GET /serials/1.json
   def show
-    render json: { 
+    is_fav = @serial.users_fav.where(id: params[:user_id]).present?
+
+    render json: {
       serial: @serial,
       seasons: @serial.seasons,
       tags: @serial.tags,
       genres: @serial.genres,
-      actors: @serial.actors
+      actors: @serial.actors,
+      isFav: is_fav
     }
   end
 

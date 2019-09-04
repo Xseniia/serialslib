@@ -1,9 +1,10 @@
 import axios from "axios";
 
-export const collectSerialData = (serialId) => {
+export const collectSerialData = (serialId, userId) => {
   return(dispatch => {
-    axios.get(`http://localhost:3000/serials/${serialId}`)
+    axios.get(`http://localhost:3000/serials/${serialId}?user_id=${userId}`)
       .then(response => {
+        debugger;
         dispatch(collectSerialDataSuccess(response.data))
       })
       .catch(error => {
@@ -49,3 +50,19 @@ export const deleteSerialParams = (serialId, param_name, param_id, refresher) =>
     .catch(err => { debugger })
   )
 }
+
+export const addToFavourite = (serialId, userId, action) => {
+  return(dispatch => {
+    axios.post(`http://localhost:3000/serials/${serialId}/${action}`, {
+      user_id: userId
+    })
+    .then(res => {
+      return dispatch(addToFavouriteSuccess(res.data.res))
+    })
+    .catch(err => {
+      debugger
+    })
+  })
+}
+
+const addToFavouriteSuccess = (res) => ({ type: 'ADD_TO_FAVOURITE_SUCCESS', payload: res })
