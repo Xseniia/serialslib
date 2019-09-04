@@ -19,10 +19,12 @@ class UsersController < ApplicationController # :nodoc:
     @user_serials = User.user_serials(params[:need], @user.id)
 
     country = @user.country_id.present? ? Country.find_by_id(@user.country_id).country_name : nil
+    favourites = @user.serials_fav.records
 
     render json: {
       user: @user,
-      country: country
+      country: country,
+      favourites: favourites
     }
   end
 

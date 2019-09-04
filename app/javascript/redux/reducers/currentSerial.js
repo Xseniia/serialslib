@@ -24,7 +24,7 @@ function CurrentSerialReducer(state=initialState, action) {
       return { ...state, serial: action.payload.serial, seasons: action.payload.seasons, tags: action.payload.tags, genres: action.payload.genres, actors: action.payload.actors, isFav: action.payload.isFav }
     case 'GET_SERIAL_SEASONS_SUCCESS':
       return { ...state, seasons: action.payload }
-    case 'ADD_TO_FAVOURITE_SUCCESS':
+    case 'SWITCH_FAVOURITE_SUCCESS':
       return { ...state, isFav: action.payload }
     default:
       return state;

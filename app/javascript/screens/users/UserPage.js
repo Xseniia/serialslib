@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 
 import { getUserById } from '../../redux/actions'
 
+import FavList from '../../components/users/FavList'
+
 class UserPage extends Component {
   componentDidMount() {
     const id = this.props.match.params.id
@@ -10,7 +12,7 @@ class UserPage extends Component {
   }
 
   render () {
-    const { currentUserId, user, country } = this.props
+    const { currentUserId, user, country, favourites } = this.props
     return(
       <div className="user-card">
         <div className="user-avatar">
@@ -46,8 +48,14 @@ class UserPage extends Component {
           { country ?
             <p>
               <strong>Country: </strong>
-            {country}
-          </p> : null}
+              {country}
+            </p> : null
+          }
+
+          <p>
+            <strong>Favourite serials: </strong>
+          { favourites.length > 0 ? <FavList favourites={favourites} /> : <p>Nothing was added to favourites yet. </p> }
+          </p>
         </div>
       </div>
     )
@@ -58,7 +66,8 @@ const mapStateToProps = (state) => {
   return {
     currentUserId: state.currentUser.user,
     user: state.users.user,
-    country: state.users.userCountry
+    country: state.users.userCountry,
+    favourites: state.users.favourites
   }
 }
 

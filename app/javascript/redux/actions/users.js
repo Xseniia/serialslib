@@ -18,4 +18,4 @@ export const getUserById = (id) => {
   })
 }
 
-const getUserByIdSuccess = (userData) => ({ type: 'GET_USER_BY_ID_SUCCESS', payload: userData.user, country: userData.country })
+const getUserByIdSuccess = (userData) => ({ type: 'GET_USER_BY_ID_SUCCESS', payload: userData.user, country: userData.country, favourites: userData.favourites })

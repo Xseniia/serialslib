@@ -4,7 +4,6 @@ export const collectSerialData = (serialId, userId) => {
   return(dispatch => {
     axios.get(`http://localhost:3000/serials/${serialId}?user_id=${userId}`)
       .then(response => {
-        debugger;
         dispatch(collectSerialDataSuccess(response.data))
       })
       .catch(error => {
@@ -34,7 +33,7 @@ export const setSerialParams = (serialId, param_name, param_value, refresher) =>
     axios.post(`http://localhost:3000/serials/${serialId}/add_${param_name}`, {
       payload: param_value
     })
-    .then(res => { return refresher() })
+    .then(res => { return refresher()})
     .catch(err => {
       debugger
     })
@@ -51,13 +50,13 @@ export const deleteSerialParams = (serialId, param_name, param_id, refresher) =>
   )
 }
 
-export const addToFavourite = (serialId, userId, action) => {
+export const switchFavourite = (serialId, userId, action) => {
   return(dispatch => {
     axios.post(`http://localhost:3000/serials/${serialId}/${action}`, {
       user_id: userId
     })
     .then(res => {
-      return dispatch(addToFavouriteSuccess(res.data.res))
+      return dispatch(switchFavouriteSuccess(res.data.res))
     })
     .catch(err => {
       debugger
@@ -65,4 +64,4 @@ export const addToFavourite = (serialId, userId, action) => {
   })
 }
 
-const addToFavouriteSuccess = (res) => ({ type: 'ADD_TO_FAVOURITE_SUCCESS', payload: res })
+const switchFavouriteSuccess = (res) => ({ type: 'SWITCH_FAVOURITE_SUCCESS', payload: res })

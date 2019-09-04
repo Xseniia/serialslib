@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { collectSerialData, fetchItems, setSerialParams, deleteSerialParams, addToFavourite } from '../../redux/actions/'
+import { collectSerialData, fetchItems, setSerialParams, deleteSerialParams, switchFavourite } from '../../redux/actions/'
 
 import FavButton from '../../components/serials/FavButton'
 
@@ -58,10 +58,10 @@ class SerialItem extends Component {
     console.log(this.props.currentUser)
     switch(e.target.name) {
       case 'add':
-        this.props.addToFavourite(this.props.serial.serial.id, this.props.currentUser, 'add_to_favourite');
+        this.props.switchFavourite(this.props.serial.serial.id, this.props.currentUser, 'add_to_favourite');
         break;
       case 'remove':
-        this.props.addToFavourite(this.props.serial.serial.id, this.props.currentUser, 'remove_from_favourite');
+        this.props.switchFavourite(this.props.serial.serial.id, this.props.currentUser, 'remove_from_favourite');
         break;
       default:
         return
@@ -246,4 +246,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { collectSerialData, fetchItems, setSerialParams, deleteSerialParams, addToFavourite })(SerialItem)
+export default connect(mapStateToProps, { collectSerialData, fetchItems, setSerialParams, deleteSerialParams, switchFavourite })(SerialItem)
