@@ -11,7 +11,7 @@ class SerialItem extends Component {
     actor_id: ''
   }
 
-  componentDidMount = () => {
+  componentDidMount() {
     const serialId = this.props.match.params.id
     this.props.collectSerialData(serialId);
     if(this.props.genresFetched === false) this.props.fetchItems('genres');

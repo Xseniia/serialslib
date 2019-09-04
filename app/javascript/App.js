@@ -22,7 +22,7 @@ axios.defaults.headers.common['X-CSRF-TOKEN'] = csrfToken
 axios.defaults.headers.common['Accept'] = 'application/json'
 
 class App extends Component {
-  componentDidMount = () => {
+  componentDidMount() {
     this.props.getCurrentUser()
   }
 
@@ -34,7 +34,7 @@ class App extends Component {
           <Switch>
             <Route exact path='/sign_in' component={SignIn} />
             <Route exact path='/sign_up' component={SignUp} />
-          <Route exact path='/serials_list/:serial_id/season/:season_id/episode/:id' component={EpisodeItem} />
+            <Route exact path='/serials_list/:serial_id/season/:season_id/episode/:id' component={EpisodeItem} />
             <Route exact path='/serials_list/:serial_id/season/:id' component={SeasonItem} />
             <Route exact path='/serials_list/:id' component={SerialItem} />
             <Route exact path='/serials_list' component={Serials} />

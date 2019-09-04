@@ -3,7 +3,7 @@
 class ApplicationController < ActionController::Base # :nodoc:
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-  protect_from_forgery with: :null_session
+  skip_before_action :verify_authenticity_token
   acts_as_token_authentication_handler_for User, fallback_to_devise: false
 
   protected

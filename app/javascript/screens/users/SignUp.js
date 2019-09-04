@@ -23,7 +23,7 @@ class SignUp extends Component {
 
   }
 
-  componentDidMount = () => {
+  componentDidMount() {
     if(this.props.countriesFetched == false) this.props.fetchItems('countries')
   }
 

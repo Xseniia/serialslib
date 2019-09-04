@@ -8,12 +8,22 @@ class UsersController < ApplicationController # :nodoc:
   # GET /users.json
   def index
     @users = params[:need] == 'adm' ? User.admins : User.all
+    render json: {
+      users: @users
+    }
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
     @user_serials = User.user_serials(params[:need], @user.id)
+
+    country = @user.country_id.present? ? Country.find_by_id(@user.country_id).country_name : nil
+
+    render json: {
+      user: @user,
+      country: country
+    }
   end
 
   # GET /users/new

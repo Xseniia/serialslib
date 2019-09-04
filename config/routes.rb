@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   root to: 'pages#index'
 
   get 'serials', to: 'serials#index'
+  get 'users', to: 'users#index'
+  get 'users/:id', to: 'users#show'
   get 'tags', to: 'tags#index'
   get 'genres', to: 'genres#index'
   get 'actors', to: 'actors#index'
@@ -23,6 +25,7 @@ Rails.application.routes.draw do
   namespace :user do
     resources :sessions, only: %i[index create]
     delete 'session', to: 'sessions#destroy'
+    post 'signup', to: 'registrations#create'
   end
 
   # devise_for :users, controllers: { confirmations: 'confirmations', omniauth_callbacks: 'omniauth_callbacks' }
@@ -30,21 +33,21 @@ Rails.application.routes.draw do
   match '*path', to: 'pages#index', via: :all
 
 
-  get '/users/:user_id/ratings(.:format)', to: 'ratings#create'
-  get 'tags/:tag', to: 'serials#index', as: 'tag'
-  get 'genres/:genre', to: 'serials#index', as: 'genre'
-
-  resources :users do
-    resources :ratings
-    resources :view_statuses
-  end
-
-  resources :seasons, only: [:show] do
-    resources :episodes
-  end
-
-  resources :episodes, only: [:show] do
-    resources :comments
-  end
+  # get '/users/:user_id/ratings(.:format)', to: 'ratings#create'
+  # get 'tags/:tag', to: 'serials#index', as: 'tag'
+  # get 'genres/:genre', to: 'serials#index', as: 'genre'
+  #
+  # resources :users do
+  #   resources :ratings
+  #   resources :view_statuses
+  # end
+  #
+  # resources :seasons, only: [:show] do
+  #   resources :episodes
+  # end
+  #
+  # resources :episodes, only: [:show] do
+  #   resources :comments
+  # end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

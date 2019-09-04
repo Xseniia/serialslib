@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { collectSeasonData } from '../../redux/actions/'
 
 class SeasonItem extends Component {
-  componentDidMount = () => {
+  componentDidMount() {
     const { id, serial_id } = this.props.match.params
     this.props.collectSeasonData(id)
   }
