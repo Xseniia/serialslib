@@ -9,10 +9,38 @@ class User::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # POST /resource
-  # def create
-  #   super
-  # end
+  # POST /users
+  def create
+    if params[:password] == params[:password_confirmation]
+      user = User.new(
+                        email: params[:email],
+                        password: params[:password],
+                        first_name: params[:first_name],
+                        last_name: params[:last_name],
+                        date_of_birth: params[:date_of_birth],
+                        gender: params[:gender],
+                        country_id: params[:country_id]
+                      )
+
+      if user.save
+        session[:user_id] = user.id
+        render json: {
+          message: 'created',
+          user_id: user.id
+        }, status: :ok
+      else
+        render json: {
+          message: 'error',
+          err: user.errors.full_messages
+        }, status: 406
+      end
+    else
+      render json: {
+        message: 'user can\'t be created',
+        err: 'incorrect password confirmation'
+      }, status: 406
+    end
+  end
 
   # GET /resource/edit
   # def edit

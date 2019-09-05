@@ -33,3 +33,26 @@ export const userSignOut = () => {
 }
 
 const userSignedOut = (user) => ({ type: 'USER_SIGNED_OUT', payload: user })
+
+export const authenticateUser = (newUser) => {
+  return(dispatch => {
+    axios.post(`http://localhost:3000/users/new`,
+      {
+        first_name: newUser.firstName,
+        last_name: newUser.lastName,
+        date_of_birth: newUser.dateOfBirth,
+        gender: newUser.gender,
+        country_id: newUser.countryId,
+        email: newUser.email,
+        password: newUser.password,
+        password_confirmation: newUser.passwordConfirmation
+      })
+      .then(res => {
+        dispatch(authenticateUserSuccess(res.data.user_id))
+       })
+      .catch(err => { dispatch(authenticateUserError(err)) })
+  })
+}
+
+const authenticateUserSuccess = (res) => ({ type: 'AUTHENTICATE_USER_SUCCESS', payload: res })
+const authenticateUserError = (err) => ({ type: 'AUTHENTICATE_USER_ERROR', payload: err })

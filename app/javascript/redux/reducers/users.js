@@ -5,7 +5,7 @@ const initialState = {
     email: null
   },
   userCountry: null,
-  favourites: []
+  favourites: [],
 }
 
 function UsersReducer(state=initialState, action) {

@@ -1,5 +1,6 @@
 const initialState = {
-  user: null
+  user: null,
+  registrationErrors: []
 }
 
 function CurrentUserReducer(state=initialState, action) {
@@ -11,6 +12,8 @@ function CurrentUserReducer(state=initialState, action) {
       return { ...state, user: action.payload }
     case 'USER_SIGNED_OUT':
       return { ...state, user: action.payload }
+    case 'AUTHENTICATE_USER_SUCCESS':
+      return { ...state, newUserId: action.payload }
     default:
       return { ...state };
   }

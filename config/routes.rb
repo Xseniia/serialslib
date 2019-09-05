@@ -31,6 +31,14 @@ Rails.application.routes.draw do
     post 'signup', to: 'registrations#create'
   end
 
+  devise_for :users,
+    controllers: {
+      registrations: 'user/registrations'
+    },
+    path_names: {
+      registration: 'new'
+    }
+
   # devise_for :users, controllers: { confirmations: 'confirmations', omniauth_callbacks: 'omniauth_callbacks' }
 
   match '*path', to: 'pages#index', via: :all

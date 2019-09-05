@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { fetchItems } from '../../redux/actions/'
+import { fetchItems, authenticateUser } from '../../redux/actions/'
 
 class SignUp extends Component {
   state = {
@@ -19,20 +19,22 @@ class SignUp extends Component {
     this.setState({[e.target.name]: e.target.value})
   }
 
-  handdleSubmit = () => {
-
-  }
-
   componentDidMount() {
     if(this.props.countriesFetched == false) this.props.fetchItems('countries')
   }
 
+  handleRegistration = (e) => {
+    e.preventDefault()
+    const newUser = this.state
+    this.props.authenticateUser(newUser)
+  }
+
   render() {
-    const { countries } = this.props
+    const { countries, errors } = this.props
 
     return(
       <div>
-        <form>
+        <form onSubmit={this.handleRegistration}>
           <br/>
           <h2>Sign up</h2>
 
@@ -51,7 +53,7 @@ class SignUp extends Component {
           <div className="form-row">
             <div className="form-group col-md-6">
               <label>Date of birth: </label>
-              <input type='date' name='dateOfBirth' value={this.state.dateOfBirth} onChange={this.handleChange} />
+              <input type='date' name='dateOfBirth' value={this.state.dateOfBirth} min='1970-01-01' max='2010-12-12' onChange={this.handleChange} />
             </div>
 
             <div className="form-group col-md-3">
@@ -86,7 +88,7 @@ class SignUp extends Component {
               <input type="password" className="form-control" name="passwordConfirmation" value={this.state.passwordConfirmation} minlength='6' onChange={this.handleChange} required></input>
             </div>
 
-            <button className="btn btn-secondary">Sign up</button>
+            <button type="submit" className="btn btn-secondary">Sign up</button>
 
           </div>
         </form>
@@ -98,8 +100,9 @@ class SignUp extends Component {
 const mapStateToProps = (state) => {
   return {
     countries: state.fetchedItems.countries,
-    countriesFetched: state.fetchedItems.countriesFetched
+    countriesFetched: state.fetchedItems.countriesFetched,
+    errors: state.currentUser.registrationErrors
   }
 }
 
-export default connect(mapStateToProps, { fetchItems })(SignUp)
+export default connect(mapStateToProps, { fetchItems, authenticateUser })(SignUp)
