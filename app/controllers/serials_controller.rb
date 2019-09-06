@@ -30,7 +30,9 @@ class SerialsController < ApplicationController # :nodoc:
       tags: @serial.tags,
       genres: @serial.genres,
       actors: @serial.actors,
-      isFav: is_fav
+      isFav: is_fav,
+      overall_rating: @serial.filled_stars,
+      user_rating: @serial.current_user_stars(params[:user_id])
     }
   end
 

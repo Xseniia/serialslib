@@ -13,16 +13,16 @@ class User < ApplicationRecord # :nodoc:
   # associations declaration
 
   has_many :favourites
-  has_many :serials_fav, through: :favourites, source: :serial
+  has_many :serials_fav, through: :favourites, source: :serial, dependent: :destroy
 
   has_many :ratings
-  has_many :serials_rating, through: :ratings, source: :serial
+  has_many :serials_rating, through: :ratings, source: :serial, dependent: :destroy
 
   has_many :view_statuses
-  has_many :serials_status, through: :view_statuses, source: :serial
+  has_many :serials_status, through: :view_statuses, source: :serial, dependent: :destroy
 
   has_many :comments
-  has_many :episodes, through: :comments
+  has_many :episodes, through: :comments, dependent: :destroy
 
   belongs_to :countries, optional: true
 

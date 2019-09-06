@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { collectSerialData, fetchItems, setSerialParams, deleteSerialParams, switchFavourite } from '../../redux/actions/'
+import { collectSerialData, fetchItems, setSerialParams, deleteSerialParams, switchFavourite, changeUserRate } from '../../redux/actions/'
 
 import FavButton from '../../components/serials/FavButton'
 
@@ -15,8 +15,8 @@ class SerialItem extends Component {
 
   componentDidMount = () => {
     const serialId = this.props.match.params.id;
-    const { currentUser } = this.props;
-    this.props.collectSerialData(serialId, currentUser);
+
+    this.props.collectSerialData(serialId, this.props.currentUser);
     if(this.props.genresFetched === false) this.props.fetchItems('genres');
     if(this.props.actorsFetched === false) this.props.fetchItems('actors')
   }
@@ -45,17 +45,14 @@ class SerialItem extends Component {
   }
 
   handleDeleleSerialParam = (e) => {
-    console.log(e.target.getAttribute('name'), e.target.getAttribute('value'))
     this.props.deleteSerialParams(this.props.match.params.id, e.target.getAttribute('name'), e.target.getAttribute('value'), this.componentDidMount)
   }
 
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value })
-    console.log(this.props)
   }
 
   handleFavourite = (e) => {
-    console.log(this.props.currentUser)
     switch(e.target.name) {
       case 'add':
         this.props.switchFavourite(this.props.serial.serial.id, this.props.currentUser, 'add_to_favourite');
@@ -66,15 +63,55 @@ class SerialItem extends Component {
       default:
         return
     }
+  }
 
+  handleChangeRate = (e) => {
+    const ratingStars = document.querySelectorAll('.rating-star')
+    console.log(ratingStars)
+    const currentStar = e.target;
+
+    ratingStars.forEach(star => {
+      if (star.id <= currentStar.id) {
+        star.classList.remove('far');
+        star.classList.add('fas')
+      } else if (star.id > currentStar.id) {
+        star.classList.add('far');
+        star.classList.remove('fas');
+      }
+    })
+
+    this.props.changeUserRate(this.props.serial.serial.id, this.props.currentUser, currentStar.id, this.props.collectSerialData)
   }
 
   render() {
     const { serial, seasons, tags, genres, actors } = this.props.serial,
           genreList = this.props.genres,
           actorsList = this.props.actors,
-          { currentUser } = this.props;
+          { currentUser, overallRating, userRating } = this.props;
 
+    const overallFilledStars = [];
+    for (let i = 0; i < overallRating; i++) {
+      overallFilledStars.push(<span><i className='fas fa-star' ></i></span>)
+    }
+
+    const overallEmptyStars = [];
+    for (let i = overallRating; i < 5 ; i++) {
+      overallEmptyStars.push(<span><i className='far fa-star' ></i></span>)
+    }
+
+    const userFilledStars = [];
+    for (let i = 0; i < userRating; i++) {
+      userFilledStars.push(
+        <span><i className='fas fa-star rating-star' id={i + 1} onClick={this.handleChangeRate} ></i></span>
+      )
+    }
+
+    const userEmptyStars = [];
+    for (let i = userRating; i < 5; i++) {
+      userEmptyStars.push(
+        <span><i className='far fa-star rating-star' id={i + 1} onClick={this.handleChangeRate} ></i></span>
+      )
+    }
 
     return(
       <div className="serial-container">
@@ -171,31 +208,16 @@ class SerialItem extends Component {
                   <div className='rating'>
                     <p>Overall rating </p>
 
-                    {/* <% @serial.filled_stars.times do %>
-                      <span><%= icon('fas', 'star') %></span>
-                    <% end %>
-                    <% @serial.empty_stars.times do %>
-                      <span><%= icon('far', 'star') %></span>
-                    <% end %> */}
+                  { overallFilledStars}{ overallEmptyStars }
+
                   </div>
 
                   { currentUser ?
                     <div className='rating'>
                       <p>My rating </p>
 
-                        {/* <% counter = 0 %>
-                        <% @serial.current_user_stars(current_user).times do |i| %>
-                        <% counter += 1 %>
-                          <%= button_to user_ratings_path(user_id: current_user.id, serial_id: @serial.id, value: counter), method: :post, class: 'star-btn', value: "#{ counter }" do %>
-                            <%= icon('fas', 'star', class: 'rating-star', id: "#{ counter }") %>
-                          <% end %>
-                        <% end %>
-                        <% @serial.current_user_empty_stars(current_user).times do |i| %>
-                        <% counter += 1 %>
-                          <%= button_to user_ratings_path(user_id: current_user, serial_id: @serial, value: counter), method: :post, action: 'create', class: 'star-btn', value: "#{ counter }" do %>
-                            <%= icon('far', 'star', class: 'rating-star', id: "#{ counter }") %>
-                          <% end %>
-                        <% end %> */}
+                    { userFilledStars }{ userEmptyStars }
+
                     </div> : null
                   }
 
@@ -242,8 +264,10 @@ const mapStateToProps = (state) => {
     actors: state.fetchedItems.actors,
     actorsFetched: state.fetchedItems.actorsFetched,
     currentUser: currUserId,
-    isFav: state.currentSerial.isFav
+    isFav: state.currentSerial.isFav,
+    overallRating: state.currentSerial.overallRating,
+    userRating: state.currentSerial.userRating
     }
 }
 
-export default connect(mapStateToProps, { collectSerialData, fetchItems, setSerialParams, deleteSerialParams, switchFavourite })(SerialItem)
+export default connect(mapStateToProps, { collectSerialData, fetchItems, setSerialParams, deleteSerialParams, switchFavourite, changeUserRate })(SerialItem)

@@ -2,16 +2,20 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { fetchUsers } from '../../redux/actions'
+import { fetchUsers, deleteUser } from '../../redux/actions'
 
 class Users extends Component {
   componentDidMount() {
       this.props.fetchUsers()
   }
 
+  handleDeleteUser = (e) => {
+    const userId = e.target.getAttribute('value')
+    this.props.deleteUser(userId, this.props.fetchUsers())
+  }
+
   render() {
     const { users, userAdmin } = this.props;
-    console.log(users)
 
     return (
       <div>
@@ -33,15 +37,14 @@ class Users extends Component {
                   {userAdmin ?
                     <span>
                       <Link to='#' className='btn btn-light'>Edit</Link>
-                      <Link to='#' className='btn btn-light'>Destroy</Link>
-                    </span> : null}
-
+                      <Link to='#' value={user.id} className='btn btn-light' onClick={this.handleDeleteUser}>Destroy</Link>
+                    </span> : null
+                  }
                 </div>
               </div>
             )
           })}
         </div>
-
       </div>
     )
   }
@@ -61,4 +64,4 @@ const mapStateToProps = (state) => {
    }
 }
 
-export default connect(mapStateToProps, { fetchUsers })(Users)
+export default connect(mapStateToProps, { fetchUsers, deleteUser })(Users)

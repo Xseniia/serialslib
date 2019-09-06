@@ -74,8 +74,8 @@ class Serial < ApplicationRecord # :nodoc:
     5 - filled_stars
   end
 
-  def current_user_stars(user)
-    mark = Rating.find_by(serial_id: id, user_id: user.id)
+  def current_user_stars(user_id)
+    mark = Rating.find_by(serial_id: id, user_id: user_id)
     mark.nil? ? 0 : mark.value
   end
 

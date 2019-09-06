@@ -15,13 +15,24 @@ const initialState = {
   tags: [],
   genres: [],
   actors: [],
-  isFav: false
+  isFav: false,
+  overallRating: null,
+  userRating: null
 }
 
 function CurrentSerialReducer(state=initialState, action) {
   switch(action.type) {
     case 'COLLECT_SERIAL_DATA_SUCCESS':
-      return { ...state, serial: action.payload.serial, seasons: action.payload.seasons, tags: action.payload.tags, genres: action.payload.genres, actors: action.payload.actors, isFav: action.payload.isFav }
+      return {
+        ...state,
+        serial: action.payload.serial,
+        seasons: action.payload.seasons,
+        tags: action.payload.tags,
+        genres: action.payload.genres,
+        actors: action.payload.actors,
+        isFav: action.payload.isFav,
+        overallRating: action.payload.overall_rating,
+        userRating: action.payload.user_rating }
     case 'GET_SERIAL_SEASONS_SUCCESS':
       return { ...state, seasons: action.payload }
     case 'SWITCH_FAVOURITE_SUCCESS':

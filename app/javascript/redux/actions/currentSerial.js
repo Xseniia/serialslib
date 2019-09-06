@@ -1,10 +1,10 @@
 import axios from "axios";
 
-export const collectSerialData = (serialId, userId) => {
+export const collectSerialData = (serialId, userId, refresher) => {
   return(dispatch => {
     axios.get(`http://localhost:3000/serials/${serialId}?user_id=${userId}`)
-      .then(response => {
-        dispatch(collectSerialDataSuccess(response.data))
+      .then(
+        response => { dispatch(collectSerialDataSuccess(response.data))
       })
       .catch(error => {
         debugger
@@ -65,3 +65,14 @@ export const switchFavourite = (serialId, userId, action) => {
 }
 
 const switchFavouriteSuccess = (res) => ({ type: 'SWITCH_FAVOURITE_SUCCESS', payload: res })
+
+export const changeUserRate = (serialId, userId, value, refreshSerialData) => {
+  return(dispatch => {
+    axios.post(`http://localhost:3000/serials/${serialId}/change_rate`, {
+      user_id: userId,
+      value: Number(value)
+    })
+    .then(res => { debugger; refreshSerialData(serialId, userId) })
+    .catch(err => { debugger })
+  })
+}

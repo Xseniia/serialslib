@@ -19,3 +19,11 @@ export const getUserById = (id) => {
 }
 
 const getUserByIdSuccess = (userData) => ({ type: 'GET_USER_BY_ID_SUCCESS', payload: userData.user, country: userData.country, favourites: userData.favourites })
+
+export const deleteUser = (userId, refresher) => {
+  return (dispatch => {
+    axios.delete(`http://localhost:3000/users/${userId}/delete_user`)
+      .then(res => { return refresher() })
+      .catch(err => { debugger })
+  })
+}

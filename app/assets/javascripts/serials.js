@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   star_click_listener = (star, star_arr) => {
     star.addEventListener('click', (e) => {
+      console.log('click!')
       let currentStar = e.target;
       for(let i = 1; i <= 5; i++) {
         if (i <= currentStar.id) {
