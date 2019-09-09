@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   get 'seasons', to: 'seasons#get_serial_seasons'
   get 'season/:id', to: 'seasons#index'
 
+  get 'users/:id/serials_by_status', to: 'users#fetch_user_serials'
+
   post 'serials/:id/add_genre', to: 'genres#add_genre'
   post 'serials/:id/add_tag', to: 'tags#add_tag'
   post 'serials/:id/add_actor', to: 'actors#add_actor'

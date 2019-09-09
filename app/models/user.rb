@@ -68,16 +68,16 @@ class User < ApplicationRecord # :nodoc:
 
   # methods
 
-  def self.user_serials(need, user_id)
+  def user_serials(need)
     case need
     when 'will'
-      Serial.joins(:view_statuses).where(view_statuses: { user_id: user_id, status: 'Will be watching' })
+      Serial.joins(:view_statuses).where(view_statuses: { user_id: id, status: 'Will be watching' })
     when 'now'
-      Serial.joins(:view_statuses).where(view_statuses: { user_id: user_id, status: 'Watching right now' })
+      Serial.joins(:view_statuses).where(view_statuses: { user_id: id, status: 'Watching right now' })
     when 'done'
-      Serial.joins(:view_statuses).where(view_statuses: { user_id: user_id, status: 'Finished watching' })
+      Serial.joins(:view_statuses).where(view_statuses: { user_id: id, status: 'Finished watching' })
     else
-      Serial.joins(:view_statuses).where(view_statuses: { user_id: user_id })
+      Serial.joins(:view_statuses).where(view_statuses: { user_id: id })
     end
   end
 end

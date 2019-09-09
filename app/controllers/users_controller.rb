@@ -2,7 +2,7 @@
 
 class UsersController < ApplicationController # :nodoc:
   # before_action :authenticate_user!
-  before_action :set_user, only: %i[show edit update destroy]
+  before_action :set_user, only: %i[show edit update destroy fetch_user_serials]
 
   # GET /users
   # GET /users.json
@@ -16,8 +16,6 @@ class UsersController < ApplicationController # :nodoc:
   # GET /users/1
   # GET /users/1.json
   def show
-    @user_serials = User.user_serials(params[:need], @user.id)
-
     country = @user.country_id.present? ? Country.find_by_id(@user.country_id).country_name : nil
     favourites = @user.serials_fav.records
 
@@ -25,6 +23,15 @@ class UsersController < ApplicationController # :nodoc:
       user: @user,
       country: country,
       favourites: favourites
+    }
+  end
+
+  def fetch_user_serials
+    serials = @user.user_serials(params[:status])
+
+    render json: {
+      status: params[:status],
+      serials: serials
     }
   end
 

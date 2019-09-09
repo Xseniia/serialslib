@@ -27,3 +27,15 @@ export const deleteUser = (userId, refresher) => {
       .catch(err => { debugger })
   })
 }
+
+export const fetchSerialsByStatus = (userId, status) => {
+  return (dispatch => {
+    axios.get(`http://localhost:3000/users/${userId}/serials_by_status`, { params: {
+      status: status
+    }})
+    .then(res => { dispatch(fetchSerialsByStatusSuccess(res.data)) })
+    .catch(err => { debugger })
+  })
+}
+
+const fetchSerialsByStatusSuccess = (fetched) => ({ type: 'FETCH_SERIALS_BY_STATUS_SUCCESS', payload: fetched.serials })
