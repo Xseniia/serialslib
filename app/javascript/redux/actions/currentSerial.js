@@ -76,3 +76,14 @@ export const changeUserRate = (serialId, userId, value, refreshSerialData) => {
     .catch(err => { debugger })
   })
 }
+
+export const changeViewStatus = (serialId, userId, status, refreshSerialData) => {
+  return(dispatch => {
+    axios.post(`http://localhost:3000/serials/${serialId}/update_view_status`, {
+      user_id: userId,
+      view_status: status
+    })
+    .then(res => { debugger; refreshSerialData(serialId, userId) })
+    .catch(err => { debugger })
+  })
+}

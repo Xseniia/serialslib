@@ -22,6 +22,8 @@ Rails.application.routes.draw do
   post 'serials/:id/add_to_favourite', to: 'favourites#create'
   post 'serials/:id/remove_from_favourite', to: 'favourites#destroy'
 
+  post 'serials/:id/update_view_status', to: 'serials#add_view_status'
+
   delete 'serials/:id/delete_genre', to: 'genres#delete_genre'
   delete 'serials/:id/delete_tag', to: 'tags#delete_tag'
   delete 'serials/:id/delete_actor', to: 'actors#delete_actor'

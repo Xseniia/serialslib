@@ -23,6 +23,7 @@ class SerialsController < ApplicationController # :nodoc:
   # GET /serials/1.json
   def show
     is_fav = @serial.users_fav.where(id: params[:user_id]).present?
+    view_status = null ||= ViewStatus.find_by(serial_id: @serial.id, user_id: params[:user_id])
 
     render json: {
       serial: @serial,
@@ -32,7 +33,8 @@ class SerialsController < ApplicationController # :nodoc:
       actors: @serial.actors,
       isFav: is_fav,
       overall_rating: @serial.filled_stars,
-      user_rating: @serial.current_user_stars(params[:user_id])
+      user_rating: @serial.current_user_stars(params[:user_id]),
+      view_status: view_status
     }
   end
 
@@ -63,15 +65,17 @@ class SerialsController < ApplicationController # :nodoc:
     @serial.users_status.destroy(User.find_by_id(params[:user_id])) unless @status.nil?
 
     if params[:view_status].empty?
-      redirect_to @serial
+      render json: { message: 'err' }
     else
-      @new_status = ViewStatus.new(serial_id: params[:id], user_id: params[:user_id], status: params[:view_status])
-      respond_to do |format|
-        if @new_status.save
-          format.html { redirect_to @serial, notice: 'View status was successfully updated.' }
-        else
-          format.html { redirect_to @serial }
-        end
+      @new_status = ViewStatus.new(serial_id: @serial.id, user_id: params[:user_id], status: params[:view_status])
+      if @new_status.save
+        render json: {
+          message: 'view status changed'
+        }, status: 200
+      else
+        render json: {
+          message: 'err'
+        }, status: 400
       end
     end
   end

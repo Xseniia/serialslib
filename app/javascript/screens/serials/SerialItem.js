@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { collectSerialData, fetchItems, setSerialParams, deleteSerialParams, switchFavourite, changeUserRate } from '../../redux/actions/'
+import { collectSerialData, fetchItems, setSerialParams, deleteSerialParams, switchFavourite, changeUserRate, changeViewStatus } from '../../redux/actions/'
 
 import FavButton from '../../components/serials/FavButton'
 
@@ -10,7 +10,8 @@ class SerialItem extends Component {
   state = {
     genre_id: '',
     tag_name: '',
-    actor_id: ''
+    actor_id: '',
+    viewStatus: ''
   }
 
   componentDidMount = () => {
@@ -83,11 +84,16 @@ class SerialItem extends Component {
     this.props.changeUserRate(this.props.serial.serial.id, this.props.currentUser, currentStar.id, this.props.collectSerialData)
   }
 
+  handleChangeStatus = (e) => {
+    this.handleChange(e)
+    this.props.changeViewStatus(this.props.serial.serial.id, this.props.currentUser, e.target.value, this.props.collectSerialData)
+  }
+
   render() {
     const { serial, seasons, tags, genres, actors } = this.props.serial,
           genreList = this.props.genres,
           actorsList = this.props.actors,
-          { currentUser, overallRating, userRating } = this.props;
+          { currentUser, overallRating, userRating, viewStatus } = this.props;
 
     const overallFilledStars = [];
     for (let i = 0; i < overallRating; i++) {
@@ -221,14 +227,26 @@ class SerialItem extends Component {
                     </div> : null
                   }
 
-
-
-                  {/* <div className="status">
-                    <% if current_user.present? %>
-                      <p>View status: <span><%= user_view_status %></span></p>
-                      <%= render 'add_user_view_status' %>
-                    <% end %>
-                  </div> */}
+                  <div className="status">
+                    { currentUser ?
+                      <p>
+                        View status:
+                        <span>
+                          { viewStatus ?
+                            viewStatus :
+                            'You didn\'t mention your view status on this serial yet.'
+                          }
+                        </span>
+                        <select name='viewStatus' value={this.state.viewStatus} onChange={this.handleChangeStatus}>
+                          <option value="" disabled>Select view status</option>
+                          <option value="Will be watching">Will be watching</option>
+                          <option value="Watching right now">Watching right now</option>
+                          <option value="Finished watching">Finished watching</option>
+                          <option value=''>none</option>
+                        </select>
+                      </p> : null
+                    }
+                  </div>
               </div>
             </div>
           </div>
@@ -240,15 +258,6 @@ class SerialItem extends Component {
             <Link
               to={`/serials_list/${serial.id}/season/${season.id}`}
                className="list-item badge badge-light">Season {index + 1}</Link>) }
-
-          {/* <% @serial.seasons.ordered_by_count.each do |season| %>
-            <li className="list-item">
-              <%= link_to serial_season_path(@serial, season), class: "badge badge-light" do %>
-                Season <%= season.season_number %>
-              <% end %>
-            </li>
-          <% end %> */}
-
       </div>
     )
   }
@@ -266,8 +275,9 @@ const mapStateToProps = (state) => {
     currentUser: currUserId,
     isFav: state.currentSerial.isFav,
     overallRating: state.currentSerial.overallRating,
-    userRating: state.currentSerial.userRating
+    userRating: state.currentSerial.userRating,
+    viewStatus: state.currentSerial.viewStatus,
     }
 }
 
-export default connect(mapStateToProps, { collectSerialData, fetchItems, setSerialParams, deleteSerialParams, switchFavourite, changeUserRate })(SerialItem)
+export default connect(mapStateToProps, { collectSerialData, fetchItems, setSerialParams, deleteSerialParams, switchFavourite, changeUserRate, changeViewStatus })(SerialItem)
