@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   get 'serials/:id', to: 'serials#show'
   get 'seasons', to: 'seasons#get_serial_seasons'
   get 'season/:id', to: 'seasons#index'
+  get 'episode/:id', to: 'episodes#index'
+  get 'episode/:id/comments', to: 'episodes#episode_comments'
 
   get 'users/:id/serials_by_status', to: 'users#fetch_user_serials'
 
@@ -25,6 +27,8 @@ Rails.application.routes.draw do
   post 'serials/:id/remove_from_favourite', to: 'favourites#destroy'
 
   post 'serials/:id/update_view_status', to: 'serials#add_view_status'
+
+  post 'episode/:id/create_comment', to: 'comments#create'
 
   delete 'serials/:id/delete_genre', to: 'genres#delete_genre'
   delete 'serials/:id/delete_tag', to: 'tags#delete_tag'

@@ -5,7 +5,7 @@ import { collectSeasonData } from '../../redux/actions/'
 
 class SeasonItem extends Component {
   componentDidMount() {
-    const { id, serial_id } = this.props.match.params
+    const { id } = this.props.match.params
     this.props.collectSeasonData(id)
   }
 

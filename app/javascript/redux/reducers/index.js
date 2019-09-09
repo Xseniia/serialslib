@@ -5,7 +5,7 @@ import SerialsReducer from './serials'
 import CurrentSerialReducer from './currentSerial'
 import CurrentUserReducer from './currentUser'
 import CurrentSeasonReducer from './currentSeason'
-import CurrentEpisodeReducer from './currentSeason'
+import CurrentEpisodeReducer from './currentEpisode'
 import FetchItemsReducer from './fetchItems'
 
 const rootReducer = combineReducers({

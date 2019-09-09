@@ -8,9 +8,10 @@ class CommentsController < ApplicationController # :nodoc:
   end
 
   def create
-    @comment = @commentable.comments.create(comment_params)
-    @episode = Episode.find_by id: params[:episode_id]
-    redirect_to season_episode_path(@episode.season, @episode)
+    comment = Comment.create(user_id: params[:user_id], episode_id: params[:id], comment_id: params[:comment_id], content: params[:content])
+    render json: {
+      message: 'comment created'
+    }
   end
 
   def destroy
@@ -26,7 +27,7 @@ class CommentsController < ApplicationController # :nodoc:
   private
 
   def comment_params
-    params[:comment].permit(:user_id, :episode_id, :content, :comment_id, :created_at)
+    params[:comment].permit(:user_id, :episode_id, :content, :comment_id)
   end
 
   def find_commentable
