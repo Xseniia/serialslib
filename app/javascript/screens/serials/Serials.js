@@ -4,12 +4,15 @@ import { Link } from 'react-router-dom'
 import { fetchItems, searchSerial } from '../../redux/actions/'
 import { connect } from 'react-redux';
 
+import Search from '../../components/serials/Search'
 import SerialCards from '../../components/serials/SerialCards'
+import Tags from '../../components/serials/Tags'
+import Genres from '../../components/serials/Genres'
 
 class Serials extends Component {
   componentDidMount() {
-    if(this.props.fetchedItems.tagsFetched === false) this.props.fetchItems('tags');
-    if(this.props.fetchedItems.genresFetched === false) this.props.fetchItems('genres');
+    if(this.props.tagsFetched === false) this.props.fetchItems('tags');
+    if(this.props.genresFetched === false) this.props.fetchItems('genres');
     if(this.props.serials.serialsFetched === false) this.props.searchSerial();
   }
 
@@ -42,53 +45,14 @@ class Serials extends Component {
           <h1>Serials</h1>
           <br/>
 
-          <div className="serials-search">
-            <form className='form-row'
-                  onSubmit={this.handleSubmit}>
-              <input name='search'
-                     type='text'
-                     placeholder='Search'
-                     className="form-group col-md-12 serials-search-field"
-                     onChange={this.handleSearchChange}/>
-            </form>
-          </div>
+          <Search submit={this.handleSubmit} searchChange={this.handleSearchChange} />
 
           <br/>
 
           <div className='serials-body'>
             <div className='filters'>
-              <div className='filter tag-filter'>
-                <h3>Tags</h3>
-                { this.props.fetchedItems.tags.map((tag, index) =>
-                  <a href='#'
-                     key={index}
-                     name='tag'
-                     value={tag.tag_name}
-                     onClick={this.handleFilter}
-                     className='badge badge-light'>{tag.tag_name}</a>)
-                }
-                <a href='#'
-                   name='tag'
-                   value=''
-                   onClick={this.handleFilter}
-                   className='badge badge-light'>all</a>
-              </div>
-
-              <div className='filter genre-filter'>
-                <h3>Genres</h3>
-                { this.props.fetchedItems.genres.map((genre, index) =>
-                  <a href='#'
-                     key={index}
-                     name='genre'
-                     value={genre.title}
-                     onClick={this.handleFilter}
-                     className='badge badge-light'>{genre.title}</a>) }
-                <a href='#'
-                   name='tag'
-                   value=''
-                   onClick={this.handleFilter}
-                   className='badge badge-light'>all</a>
-              </div>
+              <Tags filter={this.handleFilter} />
+              <Genres filter={this.handleFilter} />
             </div>
 
             {
@@ -106,7 +70,8 @@ class Serials extends Component {
 const mapStateToProps = (state) => {
   return {
     serials: state.serials,
-    fetchedItems: state.fetchedItems
+    tagsFetched: state.fetchedItems.tagsFetched,
+    genresFetched: state.fetchedItems.genresFetched
   }
 }
 

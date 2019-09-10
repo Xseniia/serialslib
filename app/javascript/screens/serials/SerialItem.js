@@ -2,7 +2,13 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { collectSerialData, fetchItems, setSerialParams, deleteSerialParams, switchFavourite, changeUserRate, changeViewStatus } from '../../redux/actions/'
+import { collectSerialData,
+         fetchItems,
+         setSerialParams,
+         deleteSerialParams,
+         switchFavourite,
+         changeUserRate, 
+         changeViewStatus } from '../../redux/actions/'
 
 import FavButton from '../../components/serials/FavButton'
 
