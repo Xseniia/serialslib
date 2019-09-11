@@ -78,9 +78,11 @@ class UserPage extends Component {
           </div>
           <br/>
           <div>
-            { userSerials.length > 0 ? userSerials.map(serial =>
-              <Link to={`/serials_list/${serial.id}`}>{serial.title}</Link>
-            ) : 'There is nothing in the list.' }
+            <ul>
+              { userSerials.length > 0 ? userSerials.map(serial =>
+                <li><Link to={`/serials_list/${serial.id}`}>{serial.title}</Link></li>
+              ) : 'There is nothing in the list.' }
+            </ul>
           </div>
         </div>
       </div>

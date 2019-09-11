@@ -58,12 +58,11 @@ class EpisodeItem extends Component {
                   </div>
                 </div>
 
-                <p className="card-text">{ comment.content }</p>
+                <p>{ comment.content }</p>
                 <div className="">
                   <div>{ comment.created_at }</div>
-                  <div><button name='replyId' value={comment.id} onClick={this.handleReply}>Reply</button></div>
-                  <br />
                   <div>
+                    <br />
                     { comments.filter(comment1 =>
                         comment1.comment_id == comment.id
                     ).map(comment1 =>
@@ -77,12 +76,13 @@ class EpisodeItem extends Component {
                           </div>
                         </div>
 
-                        <p className="card-text">{ comment1.content }</p>
+                        <p>{ comment1.content }</p>
                         <div>{ comment1.created_at }</div>
                       </div>
                     )
                      }
                   </div>
+                  <div><button className="btn btn-light" name='replyId' value={comment.id} onClick={this.handleReply}>Reply</button></div>
                 </div>
             </div>
 

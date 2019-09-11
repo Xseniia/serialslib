@@ -8,8 +8,8 @@ class Reply extends Component {
     console.log(commentToReply)
 
     return(
-      <div>
-        <p>Reply to {commentToReply.user.email}</p>
+      <div className="card card-body">
+        <p>Reply to <strong>{commentToReply.user.email}</strong></p>
         <p>{commentToReply.content}</p>
       </div>
     )

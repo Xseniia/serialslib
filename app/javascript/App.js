@@ -30,6 +30,7 @@ class App extends Component {
     return (
       <div>
         <Navigation />
+        <br />
         <div className='main-container'>
           <Switch>
             <Route exact path='/sign_in' component={SignIn} />
