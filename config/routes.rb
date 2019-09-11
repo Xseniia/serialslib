@@ -3,6 +3,11 @@
 Rails.application.routes.draw do
   root to: 'pages#index'
 
+  namespace :user do
+    resources :sessions, only: %i[index create]
+    delete 'session', to: 'sessions#destroy'
+  end
+
   get 'serials', to: 'serials#index'
   get 'users', to: 'users#index'
   get 'users/:id', to: 'users#show'
@@ -35,11 +40,7 @@ Rails.application.routes.draw do
   delete 'serials/:id/delete_actor', to: 'actors#delete_actor'
   delete 'users/:id/delete_user', to: 'users#destroy'
 
-  namespace :user do
-    resources :sessions, only: %i[index create]
-    delete 'session', to: 'sessions#destroy'
-    post 'signup', to: 'registrations#create'
-  end
+
 
   devise_for :users,
     controllers: {

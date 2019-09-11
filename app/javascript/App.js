@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import Navigation from './components/Navigation'
 import SignIn from './screens/users/SignIn'
 import SignUp from './screens/users/SignUp'
+import Edit from './screens/users/Edit'
 
 import Serials from './screens/serials/Serials'
 import SerialItem from './screens/serials/SerialItem'
@@ -40,6 +41,7 @@ class App extends Component {
             <Route exact path='/serials_list/:id' component={SerialItem} />
             <Route exact path='/serials_list' component={Serials} />
             <Route exact path='/users_list' component={Users} />
+            <Route exact path='/user/edit' component={Edit} />
             <Route exact path='/user/:id' component={UserPage} />
             <Route exact path='/' component={Serials} />
           </Switch>

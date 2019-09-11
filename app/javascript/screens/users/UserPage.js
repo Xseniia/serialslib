@@ -84,6 +84,7 @@ class UserPage extends Component {
               ) : 'There is nothing in the list.' }
             </ul>
           </div>
+          <Link to='/user/edit' className="btn btn-secondary">Edit</Link>
         </div>
       </div>
     )
