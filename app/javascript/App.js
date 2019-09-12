@@ -41,8 +41,8 @@ class App extends Component {
             <Route exact path='/serials_list/:id' component={SerialItem} />
             <Route exact path='/serials_list' component={Serials} />
             <Route exact path='/users_list' component={Users} />
-            <Route exact path='/user/edit' component={Edit} />
-            <Route exact path='/user/:id' component={UserPage} />
+            <Route exact path='/user_profile/edit' component={Edit} />
+            <Route exact path='/user_profile/:id' component={UserPage} />
             <Route exact path='/' component={Serials} />
           </Switch>
         </div>

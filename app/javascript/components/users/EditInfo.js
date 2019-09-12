@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { fetchItems, authenticateUser } from '../../redux/actions/'
+import { fetchItems, editUser } from '../../redux/actions/'
 
 class EditInfo extends Component {
   state = {
+    id: '',
     firstName: '',
     lastName: '',
     dateOfBirth: '',
@@ -19,13 +20,30 @@ class EditInfo extends Component {
 
   componentDidMount() {
     if(this.props.countriesFetched == false) this.props.fetchItems('countries')
+
+    const { user } = this.props
+    this.setState({
+      id: user.id,
+      firstName: user.first_name,
+      lastName: user.last_name,
+      dateOfBirth: user.date_of_birth,
+      gender: user.gender,
+      countryId: user.country_id,
+      email: user.email
+    })
+  }
+
+  handleEditUser = (e) => {
+    e.preventDefault()
+    const user = this.state
+    this.props.editUser(user)
   }
 
   render() {
-    const { countries, errors } = this.props
+    const { countries, errors, user } = this.props
 
     return(
-        <form onSubmit={this.handleRegistration}>
+        <form onSubmit={this.handleEditUser}>
           <br/>
           <h2>Edit</h2>
 
@@ -57,7 +75,7 @@ class EditInfo extends Component {
             </div>
           </div>
 
-          <div>
+          <div className="form-row">
             <div className="form-group col-md-6">
               <label>Country: </label>
               <select name="countryId" onChange={this.handleChange}>
@@ -80,10 +98,11 @@ class EditInfo extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    user: state.currentUser.user,
     countries: state.fetchedItems.countries,
     countriesFetched: state.fetchedItems.countriesFetched,
     errors: state.currentUser.registrationErrors
   }
 }
 
-export default connect(mapStateToProps, { fetchItems, authenticateUser })(EditInfo)
+export default connect(mapStateToProps, { fetchItems, editUser })(EditInfo)

@@ -9,6 +9,7 @@ export const getCurrentUser = () => {
 }
 
 const getCurrentUserSuccess = (user) => ({ type: 'GET_CURRENT_USER_SUCCESS', payload: user })
+const getCurrentUserError = () => ({ type: 'GET_CURRENT_USER_ERROR'})
 
 export const userSignIn = (email, pass) => {
   return(dispatch => {
@@ -48,11 +49,29 @@ export const authenticateUser = (newUser) => {
         password_confirmation: newUser.passwordConfirmation
       })
       .then(res => {
-        dispatch(authenticateUserSuccess(res.data.user_id))
+        dispatch(authenticateUserSuccess(res.data.user))
        })
       .catch(err => { dispatch(authenticateUserError(err)) })
   })
 }
 
-const authenticateUserSuccess = (res) => ({ type: 'AUTHENTICATE_USER_SUCCESS', payload: res })
+const authenticateUserSuccess = (user) => ({ type: 'AUTHENTICATE_USER_SUCCESS', payload: user })
 const authenticateUserError = (err) => ({ type: 'AUTHENTICATE_USER_ERROR', payload: err })
+
+export const editUser = (user) => {
+  return(dispatch => {
+    axios.patch(`http://localhost:3000/user/edit`, {
+      id: user.id,
+      first_name: user.firstName,
+      last_name: user.lastName,
+      date_of_birth: user.dateOfBirth,
+      gender: user.gender,
+      country_id: user.countryId,
+      email: user.email
+    })
+    .then(res => { dispatch(editUserSuccess(res.data.user)) })
+    .catch(err => { debugger })
+  })
+}
+
+const editUserSuccess = (user) => ({ type: 'EDIT_USER_SUCCESS', payload: user })

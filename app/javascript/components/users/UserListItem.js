@@ -15,7 +15,7 @@ class UserListItem extends Component {
           <p className="mb-1">{user.email}</p>
         </div>
         <div>
-          <Link to={`/user/${user.id}`} className='btn btn-light'>Show</Link>
+          <Link to={`/user_profile/${user.id}`} className='btn btn-light'>Show</Link>
           {userAdmin ?
             <span>
               <Link to='#' className='btn btn-light'>Edit</Link>

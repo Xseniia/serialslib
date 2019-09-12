@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class UsersController < ApplicationController # :nodoc:
+class User::UsersController < ApplicationController # :nodoc:
   # before_action :authenticate_user!
   before_action :set_user, only: %i[show edit update destroy fetch_user_serials]
 
@@ -60,12 +60,29 @@ class UsersController < ApplicationController # :nodoc:
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
-    respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
-      else
-        format.html { render :edit }
+    user = User.find_by_id(params[:id])
+    emailChanged = user.email != params[:email] ? true : false
+
+    if user.update(
+                    email: params[:email],
+                    first_name: params[:first_name],
+                    last_name: params[:last_name],
+                    date_of_birth: params[:date_of_birth],
+                    gender: params[:gender],
+                    country_id: params[:country_id]
+                  )
+      render json: {
+        message: 'User was successfully updated.',
+        user: user
+      }
+      if emailChanged
+        user.send_email_changed_notification
+        user.send_confirmation_instructions
       end
+    else
+      render json: {
+        message: 'something went wrong.'
+      }
     end
   end
 

@@ -5,9 +5,15 @@ class User::SessionsController < ApplicationController
   before_action :get_current_user
 
   def index
-    render json: {
-      currentUser: @current_user
-    }
+    if @current_user == nil
+      render json: {
+        message: 'user session not found'
+      }, status: :not_found
+    else
+      render json: {
+        currentUser: @current_user
+      }, status: 200
+    end
   end
 
   # GET /resource/sign_in

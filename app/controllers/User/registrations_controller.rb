@@ -26,7 +26,7 @@ class User::RegistrationsController < Devise::RegistrationsController
         session[:user_id] = user.id
         render json: {
           message: 'created',
-          user_id: user.id
+          user: user
         }, status: :ok
       else
         render json: {

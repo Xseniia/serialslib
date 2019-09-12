@@ -7,7 +7,7 @@ class AuthorizedNav extends Component {
     return(
       <ul className="navbar-nav">
         <li className="nav-item">
-          <Link to={`/user/${this.props.userId}`} className='nav-link'>My account</Link>
+          <Link to={`/user_profile/${this.props.userId}`} className='nav-link'>My account</Link>
         </li>
         <li className="nav-item">
           <Link to='/serials_list' className='nav-link' onClick = { this.props.handleDestroySession }>Sign out</Link>

@@ -6,11 +6,16 @@ Rails.application.routes.draw do
   namespace :user do
     resources :sessions, only: %i[index create]
     delete 'session', to: 'sessions#destroy'
+
+    get 'all', to: 'users#index'
+    get ':id', to: 'users#show'
+    get ':id/serials_by_status', to: 'users#fetch_user_serials'
+    patch 'edit', to: 'users#update'
+    delete ':id/delete', to: 'users#destroy'
   end
 
   get 'serials', to: 'serials#index'
-  get 'users', to: 'users#index'
-  get 'users/:id', to: 'users#show'
+
   get 'tags', to: 'tags#index'
   get 'genres', to: 'genres#index'
   get 'actors', to: 'actors#index'
@@ -21,7 +26,7 @@ Rails.application.routes.draw do
   get 'episode/:id', to: 'episodes#index'
   get 'episode/:id/comments', to: 'episodes#episode_comments'
 
-  get 'users/:id/serials_by_status', to: 'users#fetch_user_serials'
+
 
   post 'serials/:id/add_genre', to: 'genres#add_genre'
   post 'serials/:id/add_tag', to: 'tags#add_tag'
@@ -35,11 +40,11 @@ Rails.application.routes.draw do
 
   post 'episode/:id/create_comment', to: 'comments#create'
 
+
+
   delete 'serials/:id/delete_genre', to: 'genres#delete_genre'
   delete 'serials/:id/delete_tag', to: 'tags#delete_tag'
   delete 'serials/:id/delete_actor', to: 'actors#delete_actor'
-  delete 'users/:id/delete_user', to: 'users#destroy'
-
 
 
   devise_for :users,
@@ -50,26 +55,5 @@ Rails.application.routes.draw do
       registration: 'new'
     }
 
-  # devise_for :users, controllers: { confirmations: 'confirmations', omniauth_callbacks: 'omniauth_callbacks' }
-
   match '*path', to: 'pages#index', via: :all
-
-
-  # get '/users/:user_id/ratings(.:format)', to: 'ratings#create'
-  # get 'tags/:tag', to: 'serials#index', as: 'tag'
-  # get 'genres/:genre', to: 'serials#index', as: 'genre'
-  #
-  # resources :users do
-  #   resources :ratings
-  #   resources :view_statuses
-  # end
-  #
-  # resources :seasons, only: [:show] do
-  #   resources :episodes
-  # end
-  #
-  # resources :episodes, only: [:show] do
-  #   resources :comments
-  # end
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

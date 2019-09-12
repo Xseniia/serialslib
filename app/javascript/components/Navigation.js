@@ -40,7 +40,7 @@ class Navigation extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const signedIn = state.currentUser.user != null ? true : false
+  const signedIn = state.currentUser.user.id != '' ? true : false
   return { signedIn }
 }
 
