@@ -5,7 +5,6 @@ class Reply extends Component {
   render() {
     const { comments } = this.props
     const commentToReply = comments.find(comment => comment.id == this.props.commentId)
-    console.log(commentToReply)
 
     return(
       <div className="card card-body">

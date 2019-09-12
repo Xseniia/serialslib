@@ -26,21 +26,14 @@ Rails.application.routes.draw do
   get 'episode/:id', to: 'episodes#index'
   get 'episode/:id/comments', to: 'episodes#episode_comments'
 
-
-
   post 'serials/:id/add_genre', to: 'genres#add_genre'
   post 'serials/:id/add_tag', to: 'tags#add_tag'
   post 'serials/:id/add_actor', to: 'actors#add_actor'
   post 'serials/:id/change_rate', to: 'ratings#create'
-
   post 'serials/:id/add_to_favourite', to: 'favourites#create'
   post 'serials/:id/remove_from_favourite', to: 'favourites#destroy'
-
   post 'serials/:id/update_view_status', to: 'serials#add_view_status'
-
   post 'episode/:id/create_comment', to: 'comments#create'
-
-
 
   delete 'serials/:id/delete_genre', to: 'genres#delete_genre'
   delete 'serials/:id/delete_tag', to: 'tags#delete_tag'
@@ -49,7 +42,8 @@ Rails.application.routes.draw do
 
   devise_for :users,
     controllers: {
-      registrations: 'user/registrations'
+      registrations: 'user/registrations',
+      passwords: 'user/passwords'
     },
     path_names: {
       registration: 'new'

@@ -7,7 +7,7 @@ import { collectSerialData,
          setSerialParams,
          deleteSerialParams,
          switchFavourite,
-         changeUserRate, 
+         changeUserRate,
          changeViewStatus } from '../../redux/actions/'
 
 import FavButton from '../../components/serials/FavButton'
@@ -74,7 +74,6 @@ class SerialItem extends Component {
 
   handleChangeRate = (e) => {
     const ratingStars = document.querySelectorAll('.rating-star')
-    console.log(ratingStars)
     const currentStar = e.target;
 
     ratingStars.forEach(star => {

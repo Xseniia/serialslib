@@ -75,3 +75,16 @@ export const editUser = (user) => {
 }
 
 const editUserSuccess = (user) => ({ type: 'EDIT_USER_SUCCESS', payload: user })
+
+export const changePassword = (userId, passData) => {
+  return(dispatch => {
+    axios.patch(`http://localhost:3000/users/password`, {
+      id: userId,
+      password: passData.currentPassword,
+      new_password: passData.newPassword,
+      new_password_confirmation: passData.newPasswordConfirm
+    })
+    .then(res => { debugger })
+    .catch(err => { debugger })
+  })
+}

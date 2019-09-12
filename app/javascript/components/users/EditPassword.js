@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { fetchItems, authenticateUser } from '../../redux/actions/'
+import { changePassword } from '../../redux/actions/'
 
 class EditPassword extends Component {
   state = {
@@ -14,11 +14,23 @@ class EditPassword extends Component {
     this.setState({[e.target.name]: e.target.value})
   }
 
+  handleChangePassword = (e) => {
+    e.preventDefault()
+    const newPassData = this.state,
+          { user } = this.props
+    this.props.changePassword(user, newPassData)
+    this.setState({
+      currentPassword: '',
+      newPassword: '',
+      newPasswordConfirm: ''
+    })
+  }
+
   render() {
     const { errors } = this.props
 
     return(
-        <form>
+        <form onSubmit={this.handleChangePassword}>
           <h2>Change password</h2>
           <div className="form-row">
             <div className="form-group col-md-6">
@@ -31,12 +43,12 @@ class EditPassword extends Component {
             <div className='form-group col-md-6'>
               <div>
                 <label>New password: </label>
-                <input type="password" className="form-control" name="newPassword" value={this.state.passwordConfirmation} minlength='6' onChange={this.handleChange} required></input>
+                <input type="password" className="form-control" name="newPassword" value={this.state.newPassword} minlength='6' onChange={this.handleChange} required></input>
               </div>
               { this.state.newPassword.length > 0 ?
                 <div>
                   <label>New password confirmation: </label>
-                  <input type="password" className="form-control" name="newPasswordConfirm" value={this.state.passwordConfirmation} minlength='6' onChange={this.handleChange} required></input>
+                  <input type="password" className="form-control" name="newPasswordConfirm" value={this.state.newPasswordConfirm} minlength='6' onChange={this.handleChange} required></input>
                 </div> : null
                }
             </div>
@@ -49,8 +61,9 @@ class EditPassword extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    user: state.currentUser.user.id,
     errors: state.currentUser.registrationErrors
   }
 }
 
-export default connect(mapStateToProps, { fetchItems, authenticateUser })(EditPassword)
+export default connect(mapStateToProps, { changePassword })(EditPassword)
