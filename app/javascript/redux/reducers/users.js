@@ -2,7 +2,16 @@ const initialState = {
   users: [],
   user: {
     id: null,
-    email: null
+    email: null,
+    avatar: {
+      url: '',
+      thumb: {
+        url: ''
+      },
+      large: {
+        url: ''
+      }
+    }
   },
   userCountry: null,
   favourites: [],

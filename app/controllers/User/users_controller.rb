@@ -86,6 +86,24 @@ class User::UsersController < ApplicationController # :nodoc:
     end
   end
 
+  def update_avatar
+    user = User.find_by_id(params[:id])
+
+    if params[:avatar] == 'undefined'
+      nil
+    else
+      if user.update(avatar: params[:avatar])
+        render json: {
+          message: 'Avatar was successfully loaded.'
+        }, status: :ok
+      else
+        render json: {
+          message: 'Avatar could not be updated.'
+        }, status: 400
+      end
+    end
+  end
+
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy

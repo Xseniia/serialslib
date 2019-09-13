@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     get 'all', to: 'users#index'
     get ':id', to: 'users#show'
     get ':id/serials_by_status', to: 'users#fetch_user_serials'
+    post 'update_avatar', to: 'users#update_avatar'
     patch 'edit', to: 'users#update'
     delete ':id/delete', to: 'users#destroy'
   end

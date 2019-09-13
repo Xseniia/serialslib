@@ -29,7 +29,7 @@ class UserPage extends Component {
     return(
       <div className="user-card">
         <div className="user-avatar">
-          <img src='#' />
+          <img src={user.avatar.thumb.url} />
         </div>
 
         <div className="user-body">

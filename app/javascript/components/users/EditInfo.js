@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { fetchItems, editUser } from '../../redux/actions/'
+import { fetchItems, getCurrentUser, editUser, changeAvatar } from '../../redux/actions/'
 
 class EditInfo extends Component {
   state = {
     id: '',
+    avatar: null,
     firstName: '',
     lastName: '',
     dateOfBirth: '',
@@ -16,6 +17,15 @@ class EditInfo extends Component {
 
   handleChange = (e) => {
     this.setState({[e.target.name]: e.target.value})
+  }
+
+  handleImageChange = (e) => {
+    this.setState({avatar: e.target.files[0]})
+    let data = new FormData()
+        data.append('id', this.state.id)
+        data.append('avatar', e.target.files[0])
+
+    this.props.changeAvatar(data, this.props.getCurrentUser)
   }
 
   componentDidMount() {
@@ -36,6 +46,8 @@ class EditInfo extends Component {
   handleEditUser = (e) => {
     e.preventDefault()
     const user = this.state
+    let image = new FormData()
+        image.append('avatar', this.state.avatar)
     this.props.editUser(user)
   }
 
@@ -46,6 +58,10 @@ class EditInfo extends Component {
         <form onSubmit={this.handleEditUser}>
           <br/>
           <h2>Edit</h2>
+
+        <div className="form-group">
+          <input type="file" name='avatar' accept="image/png image/gif image/jpeg" onChange={this.handleImageChange} />
+        </div>
 
           <div className="form-row">
             <div className="form-group col-md-6">
@@ -105,4 +121,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { fetchItems, editUser })(EditInfo)
+export default connect(mapStateToProps, { fetchItems, getCurrentUser, editUser, changeAvatar })(EditInfo)

@@ -6,7 +6,16 @@ const initialState = {
     date_of_birth: '',
     gender: '',
     country_id: null,
-    email: ''
+    email: '',
+    avatar: {
+      url: '',
+      thumb: {
+        url: ''
+      },
+      large: {
+        url: ''
+      }
+    }
   },
   registrationErrors: []
 }
@@ -19,7 +28,16 @@ function CurrentUserReducer(state=initialState, action) {
     date_of_birth: '',
     gender: '',
     country_id: null,
-    email: ''
+    email: '',
+    avatar: {
+      url: '',
+      thumb: {
+        url: ''
+      },
+      large: {
+        url: ''
+      }
+    }
   }
   switch(action.type) {
     case 'GET_CURRENT_USER_SUCCESS':

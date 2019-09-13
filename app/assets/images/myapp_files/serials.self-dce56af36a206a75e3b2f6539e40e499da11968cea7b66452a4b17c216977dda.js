@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
   star_click_listener = (star, star_arr) => {
     star.addEventListener('click', (e) => {
       let currentStar = e.target;
-      console.log(star.id, currentStar);
       for(let i = 1; i <= 5; i++) {
         if (i <= currentStar.id) {
           star_arr[i - 1].classList.remove('far');

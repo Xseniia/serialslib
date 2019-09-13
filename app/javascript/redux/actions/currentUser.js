@@ -76,6 +76,14 @@ export const editUser = (user) => {
 
 const editUserSuccess = (user) => ({ type: 'EDIT_USER_SUCCESS', payload: user })
 
+export const changeAvatar = (data, refetchUser) => {
+  return (dispatch => {
+    axios.post(`http://localhost:3000/user/update_avatar`, data)
+    .then(res => { debugger; refetchUser() })
+    .catch(err => { debugger })
+  })
+}
+
 export const changePassword = (userId, passData) => {
   return(dispatch => {
     axios.patch(`http://localhost:3000/users/password`, {
