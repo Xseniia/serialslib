@@ -4,7 +4,9 @@ export const collectSerialData = (serialId, userId, refresher) => {
   return(dispatch => {
     axios.get(`http://localhost:3000/serials/${serialId}?user_id=${userId}`)
       .then(
-        response => { dispatch(collectSerialDataSuccess(response.data))
+        response => {
+          dispatch(collectSerialDataSuccess(response.data));
+          refresher ? refresher(response.data.serial) : null
       })
       .catch(error => {
         debugger
@@ -86,4 +88,13 @@ export const changeViewStatus = (serialId, userId, status, refreshSerialData) =>
     .then(res => { debugger; refreshSerialData(serialId, userId) })
     .catch(err => { debugger })
   })
+}
+
+export const updateSerial = (serialId, data) => {
+  return(dispatch => {
+    axios.patch(`http://localhost:3000/serials/${serialId}/edit`, data)
+      .then(res => { debugger })
+      .catch(err => { debugger })
+  })
+
 }

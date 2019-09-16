@@ -20,7 +20,7 @@ class SerialCard extends Component {
           <div className="card-links">
             <Link to={`/serials_list/${serial.id}`} className="btn btn-light">Show</Link>
             { userAdmin ?
-                <span><Link to='#' className="btn btn-light">Edit</Link>
+                <span><Link to={`/serials_list/${serial.id}/edit`} className="btn btn-light">Edit</Link>
                 <Link to='#' className="btn btn-light">Destroy</Link></span> :
                 null }
           </div>

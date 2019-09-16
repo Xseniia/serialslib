@@ -13,7 +13,7 @@ class Serials extends Component {
   componentDidMount() {
     if(this.props.tagsFetched === false) this.props.fetchItems('tags');
     if(this.props.genresFetched === false) this.props.fetchItems('genres');
-    if(this.props.serials.serialsFetched === false) this.props.searchSerial();
+    this.props.searchSerial();
   }
 
   handleSubmit = (e) => {

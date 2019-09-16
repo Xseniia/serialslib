@@ -24,7 +24,7 @@ class UserPage extends Component {
   }
 
   render () {
-    const { currentUserId, user, country, favourites, userSerials } = this.props
+    const { currentUserId, user, country, favourites, userSerials, userAdmin } = this.props
 
     return(
       <div className="user-card">
@@ -84,6 +84,7 @@ class UserPage extends Component {
               ) : 'There is nothing in the list.' }
             </ul>
           </div>
+
           <Link to='/user_profile/edit' className="btn btn-secondary">Edit</Link>
         </div>
       </div>
@@ -92,7 +93,15 @@ class UserPage extends Component {
 }
 
 const mapStateToProps = (state) => {
+  const userSignedIn = state.currentUser.user != null ? true : false
+  let userAdmin = false
+
+  if(userSignedIn && state.currentUser.user.admin) {
+    userAdmin = true
+  }
+
   return {
+    userAdmin,
     currentUserId: state.currentUser.user,
     user: state.users.user,
     country: state.users.userCountry,

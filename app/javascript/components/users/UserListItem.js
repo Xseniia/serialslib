@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom'
 
 class UserListItem extends Component {
   render() {
-    const { user, userAdmin, deleteUser } = this.props
+    const { user, userAdmin, deleteUser, currUser } = this.props
+    console.log(currUser)
 
     return(
       <div className="list-group-item user-container">
@@ -16,7 +17,7 @@ class UserListItem extends Component {
         </div>
         <div>
           <Link to={`/user_profile/${user.id}`} className='btn btn-light'>Show</Link>
-          {userAdmin ?
+          {(userAdmin || currUser == user.id) ?
             <span>
               <Link to='#' className='btn btn-light'>Edit</Link>
               <Link to='#' value={user.id} className='btn btn-light' onClick={deleteUser}>Destroy</Link>
@@ -36,7 +37,7 @@ const mapStateToProps = (state) => {
     userAdmin = true
   }
 
-  return { userAdmin }
+  return { userAdmin, currUser: state.currentUser.user.id }
 }
 
 export default connect(mapStateToProps)(UserListItem)

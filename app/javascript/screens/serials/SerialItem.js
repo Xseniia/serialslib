@@ -263,6 +263,12 @@ class SerialItem extends Component {
             <Link
               to={`/serials_list/${serial.id}/season/${season.id}`}
                className="list-item badge badge-light">Season {index + 1}</Link>) }
+
+        <div className="serial-links">
+          <Link to='/serials_list' className="btn btn-light">Back</Link>
+          <Link to={`/serials_list/${serial.id}/edit`} className="btn btn-light">Edit</Link>
+          <Link to='#' className="btn btn-light">Destroy</Link>
+        </div>
       </div>
     )
   }

@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import EditInfo from '../../components/users/EditInfo'
 import EditPassword from '../../components/users/EditPassword'
 
-class SignUp extends Component {
+class EditUser extends Component {
   render() {
     return(
       <div>
@@ -16,4 +16,4 @@ class SignUp extends Component {
   }
 }
 
-export default SignUp
+export default EditUser

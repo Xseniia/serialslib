@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   post 'serials/:id/remove_from_favourite', to: 'favourites#destroy'
   post 'serials/:id/update_view_status', to: 'serials#add_view_status'
   post 'episode/:id/create_comment', to: 'comments#create'
+  patch 'serials/:id/edit', to: 'serials#update'
 
   delete 'serials/:id/delete_genre', to: 'genres#delete_genre'
   delete 'serials/:id/delete_tag', to: 'tags#delete_tag'

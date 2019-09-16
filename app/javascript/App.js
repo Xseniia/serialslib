@@ -6,15 +6,17 @@ import { connect } from 'react-redux';
 import Navigation from './components/Navigation'
 import SignIn from './screens/users/SignIn'
 import SignUp from './screens/users/SignUp'
-import Edit from './screens/users/Edit'
+import EditUser from './screens/users/Edit'
+import Users from './screens/users/Users'
+import UserPage from './screens/users/UserPage'
 
 import Serials from './screens/serials/Serials'
 import SerialItem from './screens/serials/SerialItem'
 import SeasonItem from './screens/serials/SeasonItem'
 import EpisodeItem from './screens/serials/EpisodeItem'
+import EditSerial from './screens/serials/Edit'
 
-import Users from './screens/users/Users'
-import UserPage from './screens/users/UserPage'
+
 
 import { getCurrentUser } from './redux/actions'
 
@@ -39,9 +41,10 @@ class App extends Component {
             <Route exact path='/serials_list/:serial_id/season/:season_id/episode/:id' component={EpisodeItem} />
             <Route exact path='/serials_list/:serial_id/season/:id' component={SeasonItem} />
             <Route exact path='/serials_list/:id' component={SerialItem} />
+          <Route exact path='/serials_list/:id/edit' component={EditSerial} />
             <Route exact path='/serials_list' component={Serials} />
             <Route exact path='/users_list' component={Users} />
-            <Route exact path='/user_profile/edit' component={Edit} />
+            <Route exact path='/user_profile/edit' component={EditUser} />
             <Route exact path='/user_profile/:id' component={UserPage} />
             <Route exact path='/' component={Serials} />
           </Switch>

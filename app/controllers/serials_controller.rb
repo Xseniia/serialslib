@@ -83,14 +83,20 @@ class SerialsController < ApplicationController # :nodoc:
   # PATCH/PUT /serials/1
   # PATCH/PUT /serials/1.json
   def update
-    respond_to do |format|
-      if @serial.update(serial_params)
-        format.html { redirect_to @serial, notice: 'Serial was successfully updated.' }
-        format.json { render :show, status: :ok, location: @serial }
-      else
-        format.html { render :edit }
-        format.json { render json: @serial.errors, status: :unprocessable_entity }
-      end
+    if @serial.update(
+      country_id: params[:countryId],
+      image: params[:serialImage],
+      title: params[:title],
+      year_of_premiere: params[:yearOfPremiere],
+      description: params[:description]
+    )
+      render json: {
+        message: 'Successfully updated.'
+      }
+    else
+      render json: {
+        message: 'Failed to update.'
+      }, status: 400
     end
   end
 
