@@ -1,8 +1,10 @@
 import axios from "axios";
 
+const url = 'http://localhost:3000/'
+
 export const getCurrentUser = () => {
   return(dispatch => {
-    axios.get(`http://localhost:3000/user/sessions`)
+    axios.get(`${url}user/sessions`)
       .then(res => { return dispatch(getCurrentUserSuccess(res.data.currentUser)) })
       .catch(err => { debugger })
   })
@@ -13,7 +15,7 @@ const getCurrentUserError = () => ({ type: 'GET_CURRENT_USER_ERROR'})
 
 export const userSignIn = (email, pass) => {
   return(dispatch => {
-    axios.post(`http://localhost:3000/user/sessions`,
+    axios.post(`${url}user/sessions`,
               {
                 email: email,
                 password: pass
@@ -27,7 +29,7 @@ const userSignedIn = (user) => ({ type: 'USER_SIGNED_IN', payload: user })
 
 export const userSignOut = () => {
   return(dispatch => {
-    axios.delete(`http://localhost:3000/user/session`)
+    axios.delete(`${url}user/session`)
       .then(res => { return dispatch(userSignedOut(res.data.session)) })
       .catch(err => { debugger })
   })
@@ -37,7 +39,7 @@ const userSignedOut = (user) => ({ type: 'USER_SIGNED_OUT', payload: user })
 
 export const authenticateUser = (newUser) => {
   return(dispatch => {
-    axios.post(`http://localhost:3000/users/new`,
+    axios.post(`${url}users/new`,
       {
         first_name: newUser.firstName,
         last_name: newUser.lastName,
@@ -60,7 +62,7 @@ const authenticateUserError = (err) => ({ type: 'AUTHENTICATE_USER_ERROR', paylo
 
 export const editUser = (user) => {
   return(dispatch => {
-    axios.patch(`http://localhost:3000/user/edit`, {
+    axios.patch(`${url}user/edit`, {
       id: user.id,
       first_name: user.firstName,
       last_name: user.lastName,
@@ -78,7 +80,7 @@ const editUserSuccess = (user) => ({ type: 'EDIT_USER_SUCCESS', payload: user })
 
 export const changeAvatar = (data, refetchUser) => {
   return (dispatch => {
-    axios.post(`http://localhost:3000/user/update_avatar`, data)
+    axios.post(`${url}user/update_avatar`, data)
     .then(res => { debugger; refetchUser() })
     .catch(err => { debugger })
   })
@@ -86,7 +88,7 @@ export const changeAvatar = (data, refetchUser) => {
 
 export const changePassword = (userId, passData) => {
   return(dispatch => {
-    axios.patch(`http://localhost:3000/users/password`, {
+    axios.patch(`${url}users/password`, {
       id: userId,
       password: passData.currentPassword,
       new_password: passData.newPassword,

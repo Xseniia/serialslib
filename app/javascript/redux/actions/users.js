@@ -1,8 +1,10 @@
 import axios from "axios";
 
+const url = 'http://localhost:3000/'
+
 export const fetchUsers = () => {
   return(dispatch => {
-    axios.get(`http://localhost:3000/user/all`)
+    axios.get(`${url}user/all`)
       .then(res => { return dispatch(fetchUsersSuccess(res.data.users)) })
       .catch(err => { debugger })
   })
@@ -12,7 +14,7 @@ const fetchUsersSuccess = (users) => ({ type: 'FETCH_USERS_SUCCESS', payload: us
 
 export const getUserById = (id) => {
   return(dispatch => {
-    axios.get(`http://localhost:3000/user/${id}`)
+    axios.get(`${url}user/${id}`)
       .then(res => { return dispatch(getUserByIdSuccess(res.data)) })
       .catch(err => { debugger })
   })
@@ -22,7 +24,7 @@ const getUserByIdSuccess = (userData) => ({ type: 'GET_USER_BY_ID_SUCCESS', payl
 
 export const deleteUser = (userId, refresher) => {
   return (dispatch => {
-    axios.delete(`http://localhost:3000/user/${userId}/delete`)
+    axios.delete(`${url}user/${userId}/delete`)
       .then(res => { return refresher() })
       .catch(err => { debugger })
   })
@@ -30,7 +32,7 @@ export const deleteUser = (userId, refresher) => {
 
 export const fetchSerialsByStatus = (userId, status) => {
   return (dispatch => {
-    axios.get(`http://localhost:3000/user/${userId}/serials_by_status`, { params: {
+    axios.get(`${url}user/${userId}/serials_by_status`, { params: {
       status: status
     }})
     .then(res => { dispatch(fetchSerialsByStatusSuccess(res.data)) })

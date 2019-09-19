@@ -1,8 +1,10 @@
 import axios from "axios";
 
+const url = 'http://localhost:3000/'
+
 export const collectSeasonData = (id) => {
   return(dispatch => {
-    axios.get(`http://localhost:3000/season/${id}`)
+    axios.get(`${url}season/${id}`)
       .then(res => { return dispatch(collectSeasonDataSuccess(res.data)) })
       .catch(err => { debugger })
   })

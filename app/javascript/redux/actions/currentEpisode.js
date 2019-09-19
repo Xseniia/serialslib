@@ -1,8 +1,10 @@
 import axios from "axios";
 
+const url = 'http://localhost:3000/'
+
 export const collectEpisodeData = (episodeId) => {
   return(dispatch => {
-    axios.get(`http://localhost:3000/episode/${episodeId}`)
+    axios.get(`${url}episode/${episodeId}`)
       .then(res => { dispatch(collectEpisodeDataSuccess(res.data)) })
       .catch(err => { debugger })
   })
@@ -12,7 +14,7 @@ const collectEpisodeDataSuccess = (episodeData) => ({ type: 'COLLECT_EPISODE_DAT
 
 export const fetchEpisodeComments = (episodeId) => {
   return(dispatch => {
-    axios.get(`http://localhost:3000/episode/${episodeId}/comments`)
+    axios.get(`${url}episode/${episodeId}/comments`)
       .then(res => { dispatch(fetchEpisodeCommentsSuccess(res.data.comments)) })
       .catch(err => { debugger })
   })
@@ -22,7 +24,7 @@ const fetchEpisodeCommentsSuccess = (comments) => ({ type: 'FETCH_EPISODE_COMMEN
 
 export const createComment = (userId, episodeId, commentId, content, refreshComments) => {
   return(dispatch => {
-    axios.post(`http://localhost:3000/episode/${episodeId}/create_comment`, {
+    axios.post(`${url}episode/${episodeId}/create_comment`, {
       user_id: userId,
       comment_id: commentId,
       content: content

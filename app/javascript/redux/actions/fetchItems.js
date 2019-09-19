@@ -1,8 +1,10 @@
 import axios from "axios";
 
+const url = 'http://localhost:3000/'
+
 export const fetchItems = (item_name) => {
   return(dispatch => {
-    axios.get(`http://localhost:3000/${item_name}`)
+    axios.get(`${url}${item_name}`)
       .then(response => {
         dispatch(fetchItemsSuccess(response.data.items, item_name))
       })
