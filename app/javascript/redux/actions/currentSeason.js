@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = 'http://localhost:3000/'
+const url = 'https://serialslib.herokuapp.com'
 
 export const collectSeasonData = (id) => {
   return(dispatch => {
