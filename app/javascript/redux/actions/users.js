@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = 'https://serialslib.herokuapp.com'
+const url = 'https://serialslib.herokuapp.com/'
 
 export const fetchUsers = () => {
   return(dispatch => {

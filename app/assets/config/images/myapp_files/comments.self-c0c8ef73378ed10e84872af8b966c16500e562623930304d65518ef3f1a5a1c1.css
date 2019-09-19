@@ -1,0 +1,15 @@
+/* line 5, app/assets/stylesheets/comments.scss */
+.card-user-info {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+          justify-content: space-between;
+}
+
+/* line 11, app/assets/stylesheets/comments.scss */
+.comments-disabled {
+  font-size: 15px;
+}

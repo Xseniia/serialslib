@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = 'https://serialslib.herokuapp.com'
+const url = 'https://serialslib.herokuapp.com/'
 
 export const searchSerial = (query='', tag='', genre='') => {
   return(dispatch => {
